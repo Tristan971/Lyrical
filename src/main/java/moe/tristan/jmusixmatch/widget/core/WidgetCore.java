@@ -16,7 +16,7 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.JMusixmatch;
+package moe.tristan.jmusixmatch.widget.core;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.

@@ -16,18 +16,15 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.jmusixmatch;
+package moe.tristan.jmusixmatch.model.language;
 
-import moe.tristan.jmusixmatch.widget.core.WidgetCore;
+import moe.tristan.jmusixmatch.model.lyricsservices.LyricsService;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public class Main {
-    @Gettter
-    private static final WidgetCore INSTANCE = new WidgetCore();
-
-    public static void main(String... args) {
-        INSTANCE.run();
+public class ErrorMessages {
+    public static String notFoundFor(LyricsService service) {
+        return "Song wasn't found in "+service.getServiceName()+"'s database";
     }
 }

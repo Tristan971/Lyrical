@@ -16,18 +16,11 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.jmusixmatch;
-
-import moe.tristan.jmusixmatch.widget.core.WidgetCore;
+package moe.tristan.jmusixmatch.model.lyricsservices.services.configuration;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public class Main {
-    @Gettter
-    private static final WidgetCore INSTANCE = new WidgetCore();
-
-    public static void main(String... args) {
-        INSTANCE.run();
-    }
+public interface ServiceConfiguration<T> {
+    String getServiceName();
 }
