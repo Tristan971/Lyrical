@@ -16,10 +16,13 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.jmusixmatch.widget.utilities;
+package moe.tristan.Lyrical.model.system;
+
+import moe.tristan.Lyrical.model.players.Player;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public class Windows {
+public interface OperatingSystem {
+    String getDataFromPlayer(Player player);
 }

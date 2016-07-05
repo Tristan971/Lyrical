@@ -16,11 +16,17 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.jmusixmatch.model.lyricsservices.services.configuration;
+package moe.tristan.Lyrical.model.lyricsproviders;
+
+import org.jmusixmatch.MusixMatch;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public interface ServiceConfiguration<T> {
-    String getServiceName();
+
+public class MusixMatchService {
+    public static MusixMatch getDefault() {
+        String apiKey = "Your MusixMatch API Key";
+        return new MusixMatch(apiKey);
+    }
 }

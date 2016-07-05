@@ -23,10 +23,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="JMusixmatch" />
+        <module name="Lyrical" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="JMusixmatch" target="1.8" />
+      <module name="Lyrical" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

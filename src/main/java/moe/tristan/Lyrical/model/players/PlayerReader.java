@@ -16,20 +16,17 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.jmusixmatch.model.lyricsservices.services.configuration;
+package moe.tristan.Lyrical.model.players;
+
+import moe.tristan.Lyrical.model.entity.Song;
+import moe.tristan.Lyrical.model.system.OperatingSystem;
+
+import java.util.HashMap;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-
-public class MusixmatchConfiguration implements ServiceConfiguration<MusixmatchConfiguration> {
-    private static final String SERVICE_NAME = "Musixmatch";
-
-    public static final String APIKEY = "";
-    public static final String ENDPOINT = "http://api.musixmatch.com/ws/1.1/";
-
-    @Override
-    public String getServiceName() {
-        return SERVICE_NAME;
-    }
+public interface PlayerReader {
+    Song getCurrentlyPlayedSong(OperatingSystem system);
+    HashMap<String, String> parseDataReceivedFromPlayer(String data);
 }

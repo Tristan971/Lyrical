@@ -16,18 +16,32 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.jmusixmatch;
+package moe.tristan.Lyrical.model.players.iTunes;
 
-import moe.tristan.jmusixmatch.widget.core.WidgetCore;
+import moe.tristan.Lyrical.model.entity.Song;
+import moe.tristan.Lyrical.model.players.PlayerReader;
+import moe.tristan.Lyrical.model.system.OperatingSystem;
+
+import java.util.HashMap;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public class Main {
-    @Gettter
-    private static final WidgetCore INSTANCE = new WidgetCore();
+public class iTunesReader implements PlayerReader {
+    @Override
+    public Song getCurrentlyPlayedSong(OperatingSystem system) {
+        system.getDataFromPlayer(new iTunes());
 
-    public static void main(String... args) {
-        INSTANCE.run();
+        //TODO parse data received
+        return Song.builder()
+                .album("")
+                .artist("")
+                .title("")
+                .build();
+    }
+
+    @Override
+    public HashMap<String, String> parseDataReceivedFromPlayer(String data) {
+        return null;
     }
 }

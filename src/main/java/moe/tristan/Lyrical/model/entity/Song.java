@@ -16,15 +16,16 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.jmusixmatch.model.language;
+package moe.tristan.Lyrical.model.entity;
 
-import moe.tristan.jmusixmatch.model.lyricsservices.LyricsService;
+import lombok.Builder;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public class ErrorMessages {
-    public static String notFoundFor(LyricsService service) {
-        return "Song wasn't found in "+service.getServiceName()+"'s database";
-    }
+@Builder
+public class Song {
+    private final String title;
+    private final String artist;
+    private final String album;
 }

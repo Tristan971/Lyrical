@@ -16,10 +16,13 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.jmusixmatch.widget.utilities;
+package moe.tristan.Lyrical.widget.core;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public class macOS {
+public class WidgetCore implements Runnable {
+    public void run() {
+
+    }
 }

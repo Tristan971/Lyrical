@@ -16,18 +16,25 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.jmusixmatch.model.lyricsservices;
+package moe.tristan.Lyrical.model.system;
+
+import moe.tristan.Lyrical.model.players.Player;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public interface LyricsService {
-    default String getLyricsForCurrentSong() {
-        return "Lyrics not found";
+public class macOS implements OperatingSystem {
+    @Override
+    public String getDataFromPlayer(Player player) {
+        if (player.getName().equals("iTunes")) {
+            return readFromiTunes();
+        }
+
+        return "";
     }
 
-    String getServiceName();
-
-    String findSongUniqueIdentifier(String... songDescription);
-    String findSongLyrics(String identifier);
+    private static String readFromiTunes() {
+        //TODO implement itunes handling on macOS
+        return "idk yet";
+    }
 }
