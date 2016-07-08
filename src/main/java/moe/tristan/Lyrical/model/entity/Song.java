@@ -28,4 +28,6 @@ public class Song {
     private final String title;
     private final String artist;
     private final String album;
+
+    private final String lyrics;
 }

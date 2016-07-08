@@ -18,15 +18,35 @@
 
 package moe.tristan.Lyrical.model.lyricsproviders;
 
+import moe.tristan.Lyrical.model.configuration.ApplicationConfiguration;
+import moe.tristan.Lyrical.model.configuration.ApplicationConfiguration.ConfigurationKey;
+import moe.tristan.Lyrical.model.entity.Song;
+import org.jetbrains.annotations.NotNull;
 import org.jmusixmatch.MusixMatch;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
 
-public class MusixMatchService {
-    public static MusixMatch getDefault() {
-        String apiKey = "Your MusixMatch API Key";
+public class MusixMatchService implements Service {
+
+    private final MusixMatch musixMatch;
+
+    public MusixMatchService() {
+        this(ApplicationConfiguration.get(ConfigurationKey.MUSIXMATCH_API_KEY));
+    }
+
+    public MusixMatchService(String apiKey) {
+        musixMatch = registerWithKey(apiKey);
+    }
+
+    @NotNull
+    private MusixMatch registerWithKey(String apiKey) {
         return new MusixMatch(apiKey);
+    }
+
+    @Override
+    public Song identifySong() {
+        return null;
     }
 }

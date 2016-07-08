@@ -16,13 +16,13 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.system;
+package moe.tristan.Lyrical.model.lyricsproviders;
 
-import moe.tristan.Lyrical.model.players.Player;
+import moe.tristan.Lyrical.model.entity.Song;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public interface OperatingSystem {
-    String getDataFromPlayer(Player player);
+public interface Service {
+    Song identifySong();
 }

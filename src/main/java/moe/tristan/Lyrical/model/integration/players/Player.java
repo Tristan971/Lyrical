@@ -16,13 +16,11 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.widget.core;
+package moe.tristan.Lyrical.model.integration.players;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public class WidgetCore implements Runnable {
-    public void run() {
-
-    }
+public interface Player {
+    String getName();
 }

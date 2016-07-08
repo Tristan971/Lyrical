@@ -16,11 +16,13 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.players;
+package moe.tristan.Lyrical.model.integration.system;
+
+import moe.tristan.Lyrical.model.integration.players.Player;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public interface Player {
-    String getName();
+public interface OperatingSystem {
+    String getDataFromPlayer(Player player);
 }

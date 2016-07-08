@@ -16,11 +16,25 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.lyricsproviders;
+package moe.tristan.Lyrical.model.integration.system;
+
+import moe.tristan.Lyrical.model.integration.players.Player;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public interface Provider {
-    
+public class macOS implements OperatingSystem {
+    private static String readFromiTunes() {
+        //TODO implement itunes handling on macOS
+        return "idk yet";
+    }
+
+    @Override
+    public String getDataFromPlayer(Player player) {
+        if (player.getName().equals("iTunes")) {
+            return readFromiTunes();
+        }
+
+        return "";
+    }
 }

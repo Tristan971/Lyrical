@@ -16,17 +16,16 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.players;
+package moe.tristan.Lyrical.model.integration.players.iTunes;
 
-import moe.tristan.Lyrical.model.entity.Song;
-import moe.tristan.Lyrical.model.system.OperatingSystem;
-
-import java.util.HashMap;
+import moe.tristan.Lyrical.model.integration.players.Player;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public interface PlayerReader {
-    Song getCurrentlyPlayedSong(OperatingSystem system);
-    HashMap<String, String> parseDataReceivedFromPlayer(String data);
+public class iTunes implements Player {
+    @Override
+    public String getName() {
+        return "iTunes";
+    }
 }

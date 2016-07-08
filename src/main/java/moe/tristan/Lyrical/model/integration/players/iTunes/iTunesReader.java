@@ -16,25 +16,32 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.system;
+package moe.tristan.Lyrical.model.integration.players.iTunes;
 
-import moe.tristan.Lyrical.model.players.Player;
+import moe.tristan.Lyrical.model.entity.Song;
+import moe.tristan.Lyrical.model.integration.players.PlayerReader;
+import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
+
+import java.util.HashMap;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public class macOS implements OperatingSystem {
+public class iTunesReader implements PlayerReader {
     @Override
-    public String getDataFromPlayer(Player player) {
-        if (player.getName().equals("iTunes")) {
-            return readFromiTunes();
-        }
+    public Song getCurrentlyPlayedSong(OperatingSystem system) {
+        system.getDataFromPlayer(new iTunes());
 
-        return "";
+        //TODO parse data received
+        return Song.builder()
+                .album("")
+                .artist("")
+                .title("")
+                .build();
     }
 
-    private static String readFromiTunes() {
-        //TODO implement itunes handling on macOS
-        return "idk yet";
+    @Override
+    public HashMap<String, String> parseDataReceivedFromPlayer(String data) {
+        return null;
     }
 }

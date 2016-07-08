@@ -18,16 +18,19 @@
 
 package moe.tristan.Lyrical;
 
-import moe.tristan.Lyrical.widget.core.WidgetCore;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public class Main {
-    @Gettter
-    private static final WidgetCore INSTANCE = new WidgetCore();
-
+public class Main extends Application {
     public static void main(String... args) {
-        INSTANCE.run();
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
     }
 }
