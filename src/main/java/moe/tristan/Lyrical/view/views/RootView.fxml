@@ -23,6 +23,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="moe.tristan.Lyrical.view.views.RootViewController">
@@ -58,5 +59,11 @@
          </LinearGradient>
       </textFill>
    </Label>
-   <Label fx:id="lyrics_label" alignment="TOP_LEFT" layoutX="14.0" layoutY="71.0" prefHeight="419.0" prefWidth="230.0" text="Label" textOverrun="CLIP" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="71.0" />
+   <Label fx:id="lyrics_label" alignment="TOP_LEFT" layoutX="14.0" layoutY="71.0" prefHeight="392.0" prefWidth="230.0" text="Label" textOverrun="CLIP" wrapText="true" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="71.0" />
+   <Rectangle fill="#0000005b" height="20.0" layoutY="480.0" stroke="BLACK" strokeWidth="0.0" width="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="480.0" />
+   <Label layoutX="23.0" layoutY="483.0" text="These lyrics are not for commercial use" textFill="WHITE">
+      <font>
+         <Font size="11.0" />
+      </font>
+   </Label>
 </AnchorPane>

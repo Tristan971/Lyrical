@@ -25,6 +25,7 @@ import moe.tristan.Lyrical.model.lyricsproviders.Service;
 import org.jetbrains.annotations.NotNull;
 import org.jmusixmatch.MusixMatch;
 import org.jmusixmatch.MusixMatchException;
+import org.jmusixmatch.entity.lyrics.Lyrics;
 import org.jmusixmatch.entity.track.TrackData;
 
 /**
@@ -63,7 +64,10 @@ public final class MusixMatchService implements Service {
 
         if (!(bestGuess == null) && bestGuess.getHas_lyrics() == 1) {
             try {
-                lyrics = musixMatch.getLyrics(bestGuess.getTrackId()).getLyricsBody();
+                Lyrics lyrics_mm = musixMatch.getLyrics(bestGuess.getTrackId());
+                String raw_lyrics = lyrics_mm.getLyricsBody();
+                lyrics = raw_lyrics.split("\\.\\.\\.\\n")[0];
+
             } catch (MusixMatchException e) {
                 e.printStackTrace();
             }
