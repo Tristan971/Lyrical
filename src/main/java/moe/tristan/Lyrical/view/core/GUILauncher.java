@@ -51,6 +51,7 @@ public class GUILauncher {
         primaryStage.setResizable(false);
         primaryStage.setScene(mainScene);
         primaryStage.initStyle(StageStyle.UTILITY);
+        primaryStage.setTitle("Lyrical - v0.1 alpha");
         primaryStage.show();
     }
 }
