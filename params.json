@@ -1,0 +1,6 @@
+{
+  "name": "Lyrical",
+  "tagline": "A Java widget for live lyrics. Will support iTunes on macOS at first ; then extend to other players and systems.",
+  "body": "# Lyrical : The lyrics companion app for your desktop\r\n\r\n## Features\r\n### - Live refresh of the lyrics of your song, using Musixmatch service\r\n### - Compatible only with macOS and iTunes so far, on 64-bits system.\r\n\r\n## Future goals\r\n### - Using a plugin system that is already implemented, support more platforms and players\r\n### - Offer other lyrics service if you wish\r\n\r\n## Legalese\r\n### This is FREE software. If you bought it, please ask for a refund. It is open-source and available under the GNU GPL v3 license, which means you can do whatever you wish out of this software (preferraly contribute to the source code though :)\r\n### The lyrics provided are NOT intended for commercial use, in ANY way. Please see Musixmatch's legal terms for more informations on that matter.\r\n\r\n## Contact\r\n### [@_tristan971_](https://twitter.com/_tristan971_)\r\n### [Website](http://tristan.moe) (nothing there yet, I'll get to it, one day...)\r\n\r\n## Misc\r\nI hope you love this little tool :)",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
