@@ -21,7 +21,7 @@ package moe.tristan.Lyrical;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import moe.tristan.Lyrical.model.lyricsproviders.LyricsServicesManager;
-import moe.tristan.Lyrical.model.lyricsproviders.MusixMatchService;
+import moe.tristan.Lyrical.model.lyricsproviders.services.MusixMatchService;
 
 import java.util.Arrays;
 

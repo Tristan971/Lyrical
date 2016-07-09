@@ -20,12 +20,14 @@ package moe.tristan.Lyrical.model.integration.players;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
 @Builder
 @Data
+@EqualsAndHashCode
 public final class PlayerSong {
     private final String title;
     private final String artist;

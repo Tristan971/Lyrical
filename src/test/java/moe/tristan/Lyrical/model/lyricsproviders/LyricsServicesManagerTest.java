@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.model.lyricsproviders;
 
+import moe.tristan.Lyrical.model.lyricsproviders.services.MusixMatchService;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.hasItem;

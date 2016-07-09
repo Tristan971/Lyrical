@@ -37,11 +37,16 @@ public final class ApplicationConfiguration {
 
     private final HashMap<String, String> configMap;
 
+    private ApplicationConfiguration(HashMap<String, String> configMap) {
+        this.configMap = configMap;
+    }
+
     @NotNull
     public String get(ConfigurationKey key) {
         return getImpl(key.value);
     }
 
+    @NotNull
     private String getImpl(String key) {
         String a = configMap.get(key);
 

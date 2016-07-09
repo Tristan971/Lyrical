@@ -16,31 +16,18 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.entity;
+package moe.tristan.Lyrical.model.integration.system;
 
-import lombok.Builder;
-import lombok.Data;
-import org.jetbrains.annotations.Contract;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
- * Created by Tristan Deloche on 05/07/2016.
+ * Created by Tristan Deloche on 09/07/2016.
  */
-@Builder
-@Data
-public final class Song {
-    private final String title;
-    private final String artist;
-    private final String album;
-
-    private final String lyrics;
-
-    @Contract(" -> !null")
-    public static Song emptySong() {
-        return Song.builder()
-                .artist("")
-                .title("")
-                .album("")
-                .lyrics("")
-                .build();
+public class SystemUtilitiesTest {
+    @Test
+    public void getCurrentOperatingSystem() throws Exception {
+        Assert.assertEquals(macOS.getINSTANCE(), SystemUtilities.getCurrentOperatingSystem());
     }
+
 }

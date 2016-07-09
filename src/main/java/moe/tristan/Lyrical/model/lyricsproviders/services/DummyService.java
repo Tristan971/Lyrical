@@ -16,31 +16,17 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.entity;
+package moe.tristan.Lyrical.model.lyricsproviders.services;
 
-import lombok.Builder;
-import lombok.Data;
-import org.jetbrains.annotations.Contract;
+import moe.tristan.Lyrical.model.entity.Song;
+import moe.tristan.Lyrical.model.lyricsproviders.Service;
 
 /**
- * Created by Tristan Deloche on 05/07/2016.
+ * Created by Tristan Deloche on 09/07/2016.
  */
-@Builder
-@Data
-public final class Song {
-    private final String title;
-    private final String artist;
-    private final String album;
-
-    private final String lyrics;
-
-    @Contract(" -> !null")
-    public static Song emptySong() {
-        return Song.builder()
-                .artist("")
-                .title("")
-                .album("")
-                .lyrics("")
-                .build();
+public class DummyService implements Service {
+    @Override
+    public Song identifySong(String title, String artist) {
+        return Song.emptySong();
     }
 }

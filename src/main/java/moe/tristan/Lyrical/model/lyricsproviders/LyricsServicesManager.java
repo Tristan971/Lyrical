@@ -18,6 +18,10 @@
 
 package moe.tristan.Lyrical.model.lyricsproviders;
 
+import moe.tristan.Lyrical.model.entity.Song;
+import moe.tristan.Lyrical.model.lyricsproviders.services.DummyService;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Optional;
@@ -29,8 +33,13 @@ import java.util.stream.Collectors;
  */
 public final class LyricsServicesManager {
     private static final LyricsServicesManager INSTANCE = new LyricsServicesManager();
+    public static LyricsServicesManager getInstance() {
+        return INSTANCE;
+    }
 
     private Set<Service> registeredServices = new HashSet<>();
+
+    private LyricsServicesManager() {}
 
     public void registerService(Class<? extends Service> serviceClass) {
 
@@ -73,11 +82,14 @@ public final class LyricsServicesManager {
 
     }
 
-    public static LyricsServicesManager getInstance() {
-        return INSTANCE;
-    }
-
+    @NotNull
     public Set<Service> getRegisteredServices() {
         return Collections.unmodifiableSet(new HashSet<>(registeredServices));
+    }
+
+    @NotNull
+    public Song identifySong(String title, String artist) {
+        Service service = registeredServices.stream().findAny().orElse(new DummyService());
+        return service.identifySong(title, artist);
     }
 }

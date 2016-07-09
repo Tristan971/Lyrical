@@ -16,11 +16,12 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.lyricsproviders;
+package moe.tristan.Lyrical.model.lyricsproviders.services;
 
 import moe.tristan.Lyrical.model.configuration.ApplicationConfiguration;
 import moe.tristan.Lyrical.model.configuration.ApplicationConfiguration.ConfigurationKey;
 import moe.tristan.Lyrical.model.entity.Song;
+import moe.tristan.Lyrical.model.lyricsproviders.Service;
 import org.jetbrains.annotations.NotNull;
 import org.jmusixmatch.MusixMatch;
 import org.jmusixmatch.MusixMatchException;

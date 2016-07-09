@@ -16,31 +16,22 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.entity;
+package moe.tristan.Lyrical.view;
 
-import lombok.Builder;
-import lombok.Data;
-import org.jetbrains.annotations.Contract;
+import moe.tristan.Lyrical.model.entity.Song;
 
 /**
- * Created by Tristan Deloche on 05/07/2016.
+ * Created by Tristan Deloche on 09/07/2016.
  */
-@Builder
-@Data
-public final class Song {
-    private final String title;
-    private final String artist;
-    private final String album;
+public class UIBridge {
+    private static final UIBridge INSTANCE = new UIBridge();
+    public static UIBridge getInstance() {
+        return INSTANCE;
+    }
 
-    private final String lyrics;
+    private UIBridge() {}
 
-    @Contract(" -> !null")
-    public static Song emptySong() {
-        return Song.builder()
-                .artist("")
-                .title("")
-                .album("")
-                .lyrics("")
-                .build();
+    public void songChanged(Song newSong) {
+
     }
 }

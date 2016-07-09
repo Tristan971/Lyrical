@@ -19,6 +19,7 @@
 package moe.tristan.Lyrical.model.lyricsproviders;
 
 import moe.tristan.Lyrical.model.entity.Song;
+import moe.tristan.Lyrical.model.lyricsproviders.services.MusixMatchService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

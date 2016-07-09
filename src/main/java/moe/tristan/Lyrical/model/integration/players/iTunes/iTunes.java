@@ -22,16 +22,21 @@ import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.model.integration.players.PlayerSong;
 import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
 import moe.tristan.Lyrical.model.integration.system.macOS;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
 public final class iTunes implements Player {
+    @NotNull
+    @Contract(pure = true)
     public String getName() {
         return "iTunes";
     }
 
+    @Contract("null -> fail")
     @Override
     public PlayerSong getCurrentlyPlayedSong(OperatingSystem system) {
         if (system instanceof macOS) {
@@ -41,6 +46,7 @@ public final class iTunes implements Player {
         }
     }
 
+    @NotNull
     public static PlayerSong getSong_macOS() {
         final String scriptForName =
                 "on run\n"
