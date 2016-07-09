@@ -19,13 +19,20 @@
 package moe.tristan.Lyrical.model.integration.players.iTunes;
 
 import moe.tristan.Lyrical.model.integration.players.Player;
+import moe.tristan.Lyrical.model.integration.players.PlayerSong;
+import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public class iTunes implements Player {
-    @Override
+public class iTunes_macOS implements Player {
     public String getName() {
-        return "iTunes";
+        return "iTunes_macOS";
+    }
+
+    @Override
+    public PlayerSong getCurrentlyPlayedSong(OperatingSystem system) {
+
+        return PlayerSong.builder().title("").artist("").build();
     }
 }

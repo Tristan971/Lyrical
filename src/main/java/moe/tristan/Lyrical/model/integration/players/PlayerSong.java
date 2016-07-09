@@ -18,16 +18,15 @@
 
 package moe.tristan.Lyrical.model.integration.players;
 
-import moe.tristan.Lyrical.model.entity.Song;
-import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
-
-import java.util.HashMap;
+import lombok.Builder;
+import lombok.Data;
 
 /**
- * Created by Tristan Deloche on 05/07/2016.
+ * Created by Tristan Deloche on 09/07/2016.
  */
-public interface PlayerReader {
-    Song getCurrentlyPlayedSong(OperatingSystem system);
-
-    HashMap<String, String> parseDataReceivedFromPlayer(String data);
+@Builder
+@Data
+public class PlayerSong {
+    private final String title;
+    private final String artist;
 }

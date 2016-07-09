@@ -18,11 +18,8 @@
 
 package moe.tristan.Lyrical.model.integration.system;
 
-import moe.tristan.Lyrical.model.integration.players.Player;
-
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
 public interface OperatingSystem {
-    String getDataFromPlayer(Player player);
 }

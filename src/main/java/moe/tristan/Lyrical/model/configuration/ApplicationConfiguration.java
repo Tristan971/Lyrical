@@ -29,14 +29,13 @@ import java.util.HashMap;
  */
 @Builder
 public class ApplicationConfiguration {
-
-    private HashMap<String, String> configMap;
-
     @Getter
     private static final ApplicationConfiguration INSTANCE;
     static {
         INSTANCE = readConfiguration();
     }
+
+    private final HashMap<String, String> configMap;
 
     @NotNull
     public String get(ConfigurationKey key) {
