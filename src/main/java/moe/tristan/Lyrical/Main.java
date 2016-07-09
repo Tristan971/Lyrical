@@ -20,17 +20,32 @@ package moe.tristan.Lyrical;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import moe.tristan.Lyrical.model.lyricsproviders.LyricsServicesManager;
+import moe.tristan.Lyrical.model.lyricsproviders.MusixMatchService;
+
+import java.util.Arrays;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
 public final class Main extends Application {
-    public static void main(String[] args) {
+    public static boolean DEV_MODE = false;
+    public static Stage MAIN_STAGE = null;
+
+    public static void main(String... args) {
+        DEV_MODE = Arrays.stream(args)
+                .filter(s -> s.equals("DEV"))
+                .findAny()
+                .isPresent();
+
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
+        MAIN_STAGE = primaryStage;
+        primaryStage.show();
 
+        LyricsServicesManager.getInstance().registerService(MusixMatchService.class);
     }
 }

@@ -20,7 +20,9 @@ package moe.tristan.Lyrical.model.lyricsproviders;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by Tristan Deloche on 08/07/2016.
@@ -33,9 +35,10 @@ public final class LyricsServicesManager {
     public void registerService(Class<? extends Service> serviceClass) {
 
         try {
-            if (registeredServices.stream().filter(service -> service.getClass() == serviceClass).count() != 0) {
+            Optional<? extends Service> possibleDuplicate = registeredServices.stream().filter(service -> service.getClass() == serviceClass).findAny();
+            if (!possibleDuplicate.isPresent()) {
                 registeredServices.add(serviceClass.newInstance());
-                System.out.println("Correctly registered the "+serviceClass.getName()+" service.");
+                System.out.println("Correctly registered the "+serviceClass.getSimpleName()+" service.");
             } else {
                 System.err.println(
                         "A " + serviceClass.getName() + " service is already "
@@ -43,6 +46,7 @@ public final class LyricsServicesManager {
                                 + "Registered services are : " +
                                 registeredServices.stream()
                                         .map(service -> service.getClass().getName())
+                                        .collect(Collectors.toList())
                 );
             }
         } catch (IllegalAccessException | InstantiationException e) {
@@ -51,9 +55,22 @@ public final class LyricsServicesManager {
         }
     }
 
-    public void unregisterService(Class<Service> serviceClass) {
+    public void unregisterService(Class<? extends Service> serviceClass) {
         final String serviceClassToUnregister = serviceClass.getCanonicalName();
-        registeredServices.removeIf(service -> service.getClass().getCanonicalName().equals(serviceClassToUnregister));
+        boolean unregistered = registeredServices.removeIf(service -> service.getClass().getCanonicalName().equals(serviceClassToUnregister));
+        if (unregistered) {
+            System.out.println("Correctly unregistered the "+serviceClass.getSimpleName()+" service.");
+        } else {
+            System.err.println(
+                    "There was no "
+                    +serviceClass.getSimpleName()
+                    +" service registered. "
+                    + "Therefore no service could be unregistered. "
+                    + "The currently registered services are : "
+                    +registeredServices
+            );
+        }
+
     }
 
     public static LyricsServicesManager getInstance() {

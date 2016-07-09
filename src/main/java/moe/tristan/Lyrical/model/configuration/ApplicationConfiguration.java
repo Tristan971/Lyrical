@@ -55,13 +55,12 @@ public final class ApplicationConfiguration {
 
     @NotNull
     private static ApplicationConfiguration readConfiguration() {
-        //TODO ACTUAL CONFIG FILE READING
         return defaultConfiguration();
     }
 
     @NotNull
     private static ApplicationConfiguration defaultConfiguration() {
-        return ApplicationConfigurationReader.dummy();
+        return ApplicationConfigurationReader.readDefaultConfiguration();
     }
 
     public enum ConfigurationKey {
