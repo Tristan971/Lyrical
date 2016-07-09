@@ -1,10 +1,23 @@
-# Lyrical
-This is an application aiming for easier lyrics consultation when you play songs.
+# Lyrical : The lyrics companion app for your desktop
 
-It uses the Musixmatch service and works only on iTunes on macOS for now, but compatibility will be further expanded in the future.
+![screenshot](http://tristan.moe/lyrical-0.1.png)
 
-Please keep in mind that this is a very early stage of the development and (almost) everything is yet to be done.
+### Features
+- Live refresh of the lyrics of your song, using Musixmatch service
+- Compatible only with macOS and iTunes so far, on 64-bits system.
 
-That said, if you're interested, you can compile and run it using maven. Install it then use 'mvn package' to create a jar file that can be executed.
+### Future goals
+- Using a plugin system that is already implemented, support more platforms and players
+- Offer other lyrics service if you wish
 
-Thanks for your interest.
+### Legalese
+- This is FREE software. If you bought it, please ask for a refund. It is open-source and available under the GNU GPL v3 license, which means you can do whatever you wish out of this software (preferraly contribute to the source code though :)
+- The lyrics provided are NOT intended for commercial use, in ANY way. Please see Musixmatch's legal terms for more informations on that matter.
+
+### Contact
+Twitter : [@_tristan971_](https://twitter.com/_tristan971_)
+
+[Website](http://tristan.moe) (nothing there yet, I'll get to it, one day...)
+
+### Misc
+I hope you love this little tool :)
