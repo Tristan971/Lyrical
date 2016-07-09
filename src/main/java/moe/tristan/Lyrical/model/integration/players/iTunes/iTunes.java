@@ -20,11 +20,10 @@ package moe.tristan.Lyrical.model.integration.players.iTunes;
 
 import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.model.integration.players.PlayerSong;
-import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
 import moe.tristan.Lyrical.model.integration.system.macOS;
+import moe.tristan.Lyrical.model.monitoring.PlayerMonitorService;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
@@ -36,13 +35,16 @@ public final class iTunes implements Player {
         return "iTunes";
     }
 
-    @Contract("null -> fail")
     @Override
-    public PlayerSong getCurrentlyPlayedSong(OperatingSystem system) {
-        if (system instanceof macOS) {
+    public PlayerSong getCurrentlyPlayedSong() {
+        if (PlayerMonitorService.PLATFORM instanceof macOS) {
             return getSong_macOS();
         } else {
-            throw new NotImplementedException();
+            System.err.println("UNSUPPORTED PLATFORM.");
+            return PlayerSong.builder()
+                    .title("Unsupported")
+                    .artist("Platform")
+                    .build();
         }
     }
 

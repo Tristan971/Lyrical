@@ -41,7 +41,7 @@ public class Monitor<T extends Player> {
 
     private void checkSong() {
         PlayerSong currentSong = monitoredPlayer
-                .getCurrentlyPlayedSong(PlayerMonitorService.PLATFORM);
+                .getCurrentlyPlayedSong();
 
         if (!currentSong.equals(lastKnownSong)) {
             songChangedTo(currentSong);
@@ -61,7 +61,7 @@ public class Monitor<T extends Player> {
 
     public void beginMonitoring() {
         shouldMonitor = true;
-        new Timer().scheduleAtFixedRate(
+        new Timer(true).scheduleAtFixedRate(
                 new TimerTask() {
                     @Override
                     public void run() {

@@ -21,24 +21,9 @@ package moe.tristan.Lyrical.model.integration.system;
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
-public class SystemUtilities {
-    public static OperatingSystem getCurrentOperatingSystem() {
-        return getCurrentOperatingSystemImpl(System.getProperty("os.name"));
-    }
-
-    private static OperatingSystem getCurrentOperatingSystemImpl(String platformName) {
-        System.out.println("Current platform is : "+platformName);
-        if (isOSX(platformName))
-        {
-            return macOS.getINSTANCE();
-        } else {
-            throw new RuntimeException("This platform is unsupported at this stage. Sorry.");
-        }
-    }
-
-    private static boolean isOSX(String platformName) {
-        return  platformName.toLowerCase().contains("mac") ||
-                platformName.toLowerCase().contains("darwin") ||
-                platformName.toLowerCase().contains("osx");
+public class DummySystem implements OperatingSystem {
+    @Override
+    public void updateSystemDisplay() {
+        System.err.println("UNSUPPORTED PLATFORM.");
     }
 }

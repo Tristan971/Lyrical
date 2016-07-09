@@ -18,12 +18,10 @@
 
 package moe.tristan.Lyrical.model.integration.players;
 
-import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
-
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
 public interface Player {
     String getName();
-    PlayerSong getCurrentlyPlayedSong(OperatingSystem system);
+    PlayerSong getCurrentlyPlayedSong();
 }

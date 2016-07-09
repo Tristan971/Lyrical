@@ -30,7 +30,8 @@ public final class macOS implements OperatingSystem {
     @Getter
     private static final macOS INSTANCE = new macOS();
 
-    private static final AppleScriptEngine appleScriptEngine = new AppleScriptEngine();
+    private static final AppleScriptEngine appleScriptEngine =
+            new AppleScriptEngine();
 
     public String runApplescript(String script) {
         try {

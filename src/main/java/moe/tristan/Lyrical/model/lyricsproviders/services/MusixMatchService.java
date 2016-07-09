@@ -50,7 +50,7 @@ public final class MusixMatchService implements Service {
 
     @Override
     public Song identifySong(String title, String artist) {
-        TrackData bestGuess = null;
+        TrackData bestGuess;
         title = title.equals("NOT_FOUND") ? "iTunes not running !" : title;
         artist = artist.equals("NOT_FOUND") ? "Please start iTunes" : artist;
         String lyrics = "";
