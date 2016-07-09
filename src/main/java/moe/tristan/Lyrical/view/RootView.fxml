@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~     <DESCRIPTION>
+  ~     Copyright (C) 2016 Tristan Deloche
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="moe.tristan.Lyrical.view.RootViewController">
+   <children>
+      <Label fx:id="title_label" layoutX="13.0" layoutY="14.0" prefHeight="36.0" prefWidth="230.0" text="Lose yourself" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="450.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <font>
+            <Font name="Helvetica Neue Bold" size="26.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="GAUSSIAN" color="WHITE" height="1.0" offsetX="1.0" offsetY="1.0" radius="0.0" width="0.0" />
+         </effect>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="#7c7c7c" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label fx:id="artist_label" layoutX="10.0" layoutY="50.0" prefHeight="20.0" prefWidth="230.0" text="Eminem" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="430.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+         <font>
+            <Font name="Helvetica Neue Bold" size="15.0" />
+         </font>
+         <effect>
+            <DropShadow blurType="GAUSSIAN" color="WHITE" height="1.0" offsetX="1.0" offsetY="1.0" radius="0.0" width="0.0" />
+         </effect>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="#7c7c7c" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label fx:id="lyrics_label" alignment="TOP_LEFT" layoutX="14.0" layoutY="83.0" prefHeight="409.0" prefWidth="230.0" text="Label" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0" />
+   </children>
+</AnchorPane>

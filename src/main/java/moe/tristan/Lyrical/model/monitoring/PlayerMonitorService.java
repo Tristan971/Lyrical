@@ -19,11 +19,11 @@
 package moe.tristan.Lyrical.model.monitoring;
 
 import lombok.Getter;
-import lombok.Setter;
 import moe.tristan.Lyrical.model.entity.Song;
 import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
 import moe.tristan.Lyrical.model.integration.system.SystemUtilities;
+import moe.tristan.Lyrical.view.UIBridge;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
@@ -39,8 +39,12 @@ public final class PlayerMonitorService {
     private Player trackedPlayer = null;
 
     @Getter
-    @Setter
     private Song currentSong = Song.emptySong();
+
+    public void setCurrentSong(Song newSong) {
+        this.currentSong = newSong;
+        UIBridge.getInstance().songChanged(currentSong);
+    }
 
     private PlayerMonitorService() {}
 

@@ -18,28 +18,36 @@
 
 package moe.tristan.Lyrical.view;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import moe.tristan.Lyrical.model.entity.Song;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
-public class UIBridge {
-    private static final UIBridge INSTANCE = new UIBridge();
-    public static UIBridge getInstance() {
-        return INSTANCE;
+public class RootViewController extends AnchorPane {
+    @FXML
+    private Label title_label;
+
+    @FXML
+    private Label artist_label;
+
+    @FXML
+    private Label lyrics_label;
+
+    public RootViewController() {
     }
 
-    public StringProperty title = new SimpleStringProperty("");
-    public StringProperty artist = new SimpleStringProperty("");
-    public StringProperty lyrics = new SimpleStringProperty("");
-
-    private UIBridge() {}
-
-    public void songChanged(Song newSong) {
-        title.setValue(newSong.getTitle());
-        artist.setValue(newSong.getArtist());
-        lyrics.setValue(newSong.getLyrics());
+    public void initialize() {
+        UIBridge.getInstance().title.addListener((observable, oldValue, newValue) -> {
+            title_label.setText(newValue);
+        });
+        UIBridge.getInstance().artist.addListener((observable, oldValue, newValue) -> {
+            artist_label.setText(newValue);
+        });
+        UIBridge.getInstance().lyrics.addListener((observable, oldValue, newValue) -> {
+            lyrics_label.setText(newValue);
+        });
     }
+
 }
