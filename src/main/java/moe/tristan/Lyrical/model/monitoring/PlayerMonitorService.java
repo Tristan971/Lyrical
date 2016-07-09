@@ -42,6 +42,7 @@ public final class PlayerMonitorService {
     private Song currentSong = Song.emptySong();
 
     public void setCurrentSong(Song newSong) {
+        System.out.println("The song changed to : "+newSong.getTitle()+" - "+newSong.getArtist());
         this.currentSong = newSong;
         UIBridge.getInstance().songChanged(currentSong);
     }

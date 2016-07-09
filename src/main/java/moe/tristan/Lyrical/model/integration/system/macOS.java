@@ -35,8 +35,6 @@ public final class macOS implements OperatingSystem {
 
     public String runApplescript(String script) {
         try {
-            System.out.println(appleScriptEngine);
-
             String returnedData;
             if ((returnedData = (String) appleScriptEngine.eval(script)) != null) {
                 return returnedData;

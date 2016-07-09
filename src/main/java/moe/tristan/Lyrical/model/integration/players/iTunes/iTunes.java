@@ -82,13 +82,6 @@ public final class iTunes implements Player {
 
         String artist = macOS.getINSTANCE().runApplescript(scriptForArtist);
 
-        if (!name.equals("NOT_FOUND")) {
-            System.out.println("Name of currently playing song : "+name);
-        }
-        if (!artist.equals("NOT_FOUND")) {
-            System.out.println("Name of currently playing artist : "+artist);
-        }
-
         return PlayerSong.builder()
                 .title(name)
                 .artist(artist)
