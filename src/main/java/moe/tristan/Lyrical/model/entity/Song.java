@@ -26,7 +26,7 @@ import lombok.Data;
  */
 @Builder
 @Data
-public class Song {
+public final class Song {
     private final String title;
     private final String artist;
     private final String album;

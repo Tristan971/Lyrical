@@ -25,7 +25,7 @@ import java.util.Set;
 /**
  * Created by Tristan Deloche on 08/07/2016.
  */
-public class LyricsServicesManager {
+public final class LyricsServicesManager {
     private static final LyricsServicesManager INSTANCE = new LyricsServicesManager();
 
     private Set<Service> registeredServices = new HashSet<>();
@@ -35,6 +35,7 @@ public class LyricsServicesManager {
         try {
             if (registeredServices.stream().filter(service -> service.getClass() == serviceClass).count() != 0) {
                 registeredServices.add(serviceClass.newInstance());
+                System.out.println("Correctly registered the "+serviceClass.getName()+" service.");
             } else {
                 System.err.println(
                         "A " + serviceClass.getName() + " service is already "

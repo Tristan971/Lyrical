@@ -16,17 +16,17 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.integration.players;
+package moe.tristan.Lyrical.model.integration.players.iTunes;
 
-import lombok.Builder;
-import lombok.Data;
+import org.junit.Test;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
-@Builder
-@Data
-public final class PlayerSong {
-    private final String title;
-    private final String artist;
+public class iTunesTest {
+    @Test
+    public void getSong_macOS() throws Exception {
+        System.out.println(iTunes.getSong_macOS());
+    }
+
 }

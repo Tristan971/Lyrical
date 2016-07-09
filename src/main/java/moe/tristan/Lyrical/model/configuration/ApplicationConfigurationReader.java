@@ -26,7 +26,7 @@ import java.util.HashMap;
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
-public class ApplicationConfigurationReader {
+public final class ApplicationConfigurationReader {
     public static ApplicationConfiguration dummy() {
         HashMap<String, String> config = new HashMap<>();
         Arrays.stream(ConfigurationKey.values())

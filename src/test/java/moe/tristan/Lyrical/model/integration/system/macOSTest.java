@@ -16,23 +16,33 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.integration.players.iTunes;
+package moe.tristan.Lyrical.model.integration.system;
 
-import moe.tristan.Lyrical.model.integration.players.Player;
-import moe.tristan.Lyrical.model.integration.players.PlayerSong;
-import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
- * Created by Tristan Deloche on 05/07/2016.
+ * Created by Tristan Deloche on 09/07/2016.
  */
-public class iTunes_macOS implements Player {
-    public String getName() {
-        return "iTunes_macOS";
+public class macOSTest {
+    private macOS macOSInstance;
+
+    @Before
+    public void setup() {
+        macOSInstance = macOS.getINSTANCE();
+        assertNotNull(macOS.getINSTANCE());
     }
 
-    @Override
-    public PlayerSong getCurrentlyPlayedSong(OperatingSystem system) {
-
-        return PlayerSong.builder().title("").artist("").build();
+    @Test
+    public void runApplescript() throws Exception {
+        macOSInstance.runApplescript("say \"Hello from Java\"");
     }
+
+    @Test
+    public void updateSystemDisplay() throws Exception {
+
+    }
+
 }

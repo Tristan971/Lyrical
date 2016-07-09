@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public class Main extends Application {
+public final class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }

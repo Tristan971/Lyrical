@@ -18,9 +18,36 @@
 
 package moe.tristan.Lyrical.model.integration.system;
 
+import apple.applescript.AppleScriptEngine;
+import lombok.Getter;
+
+import javax.script.ScriptException;
+
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public class macOS implements OperatingSystem {
+public final class macOS implements OperatingSystem {
+    @Getter
+    private static final macOS INSTANCE = new macOS();
 
+    private static final AppleScriptEngine appleScriptEngine = new AppleScriptEngine();
+
+    public String runApplescript(String script) {
+        try {
+            System.out.println(appleScriptEngine);
+
+            String returnedData;
+            if ((returnedData = (String) appleScriptEngine.eval(script)) != null) {
+                return returnedData;
+            }
+        } catch (ScriptException e) {
+            System.err.println("Script returned void instead of an instance of Object");
+        }
+        return "NOT_FOUND";
+    }
+
+    @Override
+    public void updateSystemDisplay() {
+
+    }
 }

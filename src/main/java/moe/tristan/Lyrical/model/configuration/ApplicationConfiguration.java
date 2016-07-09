@@ -28,7 +28,7 @@ import java.util.HashMap;
  * Created by Tristan Deloche on 08/07/2016.
  */
 @Builder
-public class ApplicationConfiguration {
+public final class ApplicationConfiguration {
     @Getter
     private static final ApplicationConfiguration INSTANCE;
     static {

@@ -22,4 +22,5 @@ package moe.tristan.Lyrical.model.integration.system;
  * Created by Tristan Deloche on 05/07/2016.
  */
 public interface OperatingSystem {
+    void updateSystemDisplay();
 }

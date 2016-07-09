@@ -30,7 +30,7 @@ import org.jmusixmatch.entity.track.TrackData;
  * Created by Tristan Deloche on 05/07/2016.
  */
 
-public class MusixMatchService implements Service {
+public final class MusixMatchService implements Service {
 
     private final MusixMatch musixMatch;
 
