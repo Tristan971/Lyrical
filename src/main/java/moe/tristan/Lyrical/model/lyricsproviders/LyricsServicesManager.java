@@ -37,7 +37,7 @@ public final class LyricsServicesManager {
         return INSTANCE;
     }
 
-    private Set<Service> registeredServices = new HashSet<>();
+    private final Set<Service> registeredServices = new HashSet<>();
 
     private LyricsServicesManager() {}
 

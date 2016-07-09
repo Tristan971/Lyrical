@@ -31,9 +31,9 @@ public class UIBridge {
         return INSTANCE;
     }
 
-    public StringProperty title = new SimpleStringProperty("");
-    public StringProperty artist = new SimpleStringProperty("");
-    public StringProperty lyrics = new SimpleStringProperty("");
+    public final StringProperty title = new SimpleStringProperty("");
+    public final StringProperty artist = new SimpleStringProperty("");
+    public final StringProperty lyrics = new SimpleStringProperty("");
 
     private UIBridge() {}
 
