@@ -18,12 +18,10 @@
 
 package moe.tristan.Lyrical;
 
-import javafx.application.Platform;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -38,14 +36,10 @@ public class MainTest {
     public void main() throws Exception {
         Main.main("DEV");
         assertThat(Main.DEV_MODE, is(true));
-        Platform.runLater(() -> Main.MAIN_STAGE.close());
     }
 
     @Test
     public void start() throws Exception {
-        main();
-        assertNotNull(Main.MAIN_STAGE);
-        assertThat(Main.MAIN_STAGE.showingProperty().get(), is(true));
     }
 
 }

@@ -16,11 +16,13 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.view;
+package moe.tristan.Lyrical.view.views;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import moe.tristan.Lyrical.view.UIBridge;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
@@ -39,14 +41,17 @@ public class RootViewController extends AnchorPane {
     }
 
     public void initialize() {
+        title_label.setText(UIBridge.getInstance().title.get());
         UIBridge.getInstance().title.addListener((observable, oldValue, newValue) -> {
-            title_label.setText(newValue);
+            Platform.runLater(() -> title_label.setText(newValue));
         });
+        artist_label.setText(UIBridge.getInstance().artist.get());
         UIBridge.getInstance().artist.addListener((observable, oldValue, newValue) -> {
-            artist_label.setText(newValue);
+            Platform.runLater(() -> artist_label.setText(newValue));
         });
+        lyrics_label.setText(UIBridge.getInstance().lyrics.get());
         UIBridge.getInstance().lyrics.addListener((observable, oldValue, newValue) -> {
-            lyrics_label.setText(newValue);
+            Platform.runLater(() -> lyrics_label.setText(newValue));
         });
     }
 

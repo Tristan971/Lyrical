@@ -50,22 +50,25 @@ public final class MusixMatchService implements Service {
 
     @Override
     public Song identifySong(String title, String artist) {
-        TrackData bestGuess = new TrackData();
+        TrackData bestGuess = null;
+        title = title.equals("NOT_FOUND") ? "iTunes not running !" : title;
+        artist = artist.equals("NOT_FOUND") ? "Please start iTunes" : artist;
+        String lyrics = "";
+
         try {
             bestGuess = musixMatch.getMatchingTrack(title, artist).getTrack();
+            try {
+                lyrics = musixMatch.getLyrics(bestGuess.getTrackId()).getLyricsBody();
+            } catch (MusixMatchException e) {
+                lyrics = "Lyrics not available for this song.";
+            }
         } catch (MusixMatchException e) {
-            e.printStackTrace();
+            System.err.println("Song not found : ["+title+","+artist+"]");
         }
 
-        String lyrics = "Lyrics couldn't be fetched. Please verify your internet connection !";
-        try {
-            lyrics = musixMatch.getLyrics(bestGuess.getTrackId()).getLyricsBody();
-        } catch (MusixMatchException e) {
-            e.printStackTrace();
-        }
         return Song.builder()
-                .title(bestGuess.getTrackName())
-                .artist(bestGuess.getArtistName())
+                .title(title)
+                .artist(artist)
                 .lyrics(lyrics)
                 .build();
     }

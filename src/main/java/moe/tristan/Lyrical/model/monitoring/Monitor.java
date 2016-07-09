@@ -57,7 +57,6 @@ public class Monitor<T extends Player> {
                 );
 
         PlayerMonitorService.getInstance().setCurrentSong(lyricizedSong);
-        PlayerMonitorService.getInstance().getCurrentSong().notifyAll();
     }
 
     public void beginMonitoring() {
@@ -76,5 +75,8 @@ public class Monitor<T extends Player> {
                 0,
                 1000
         );
+    }
+    public void stopMonitoring() {
+        shouldMonitor = false;
     }
 }

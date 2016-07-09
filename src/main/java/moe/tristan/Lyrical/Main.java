@@ -20,8 +20,11 @@ package moe.tristan.Lyrical;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import moe.tristan.Lyrical.model.integration.players.iTunes.iTunes;
 import moe.tristan.Lyrical.model.lyricsproviders.LyricsServicesManager;
 import moe.tristan.Lyrical.model.lyricsproviders.services.MusixMatchService;
+import moe.tristan.Lyrical.model.monitoring.PlayerMonitorService;
+import moe.tristan.Lyrical.view.core.GUILauncher;
 
 import java.util.Arrays;
 
@@ -30,7 +33,6 @@ import java.util.Arrays;
  */
 public final class Main extends Application {
     public static boolean DEV_MODE = false;
-    public static Stage MAIN_STAGE = null;
 
     public static void main(String... args) {
         DEV_MODE = Arrays.stream(args)
@@ -43,9 +45,8 @@ public final class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        MAIN_STAGE = primaryStage;
-        primaryStage.show();
-
         LyricsServicesManager.getInstance().registerService(MusixMatchService.class);
+        PlayerMonitorService.getInstance().startMonitoringPlayer(iTunes.class);
+        GUILauncher.startWithStage(primaryStage);
     }
 }

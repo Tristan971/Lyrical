@@ -36,7 +36,7 @@ public final class PlayerMonitorService {
 
     public static final OperatingSystem PLATFORM = SystemUtilities.getCurrentOperatingSystem();
 
-    private Player trackedPlayer = null;
+    private Monitor<Player> trackedPlayer;
 
     @Getter
     private Song currentSong = Song.emptySong();
@@ -52,26 +52,18 @@ public final class PlayerMonitorService {
         try {
             boolean alreadyMonitoringPlayer = trackedPlayer != null && trackedPlayer.getClass().equals(playerClass);
             if (!alreadyMonitoringPlayer) {
-                trackedPlayer = playerClass.newInstance();
+                Player playerToTrack = playerClass.newInstance();
+                trackedPlayer = new Monitor<>(playerToTrack);
+                trackedPlayer.beginMonitoring();
                 System.out.println("Correctly started monitoring "+playerClass.getSimpleName());
             } else {
-                System.err.println("Already monitoring "+playerClass.getSimpleName());
+                System.err.println("Already monitoring "+playerClass.getSimpleName()+". Will switch now.");
+                trackedPlayer.stopMonitoring();
+                startMonitoringPlayer(playerClass);
             }
         } catch (IllegalAccessException | InstantiationException e) {
             System.err.println("An " + e.getClass() + " was thrown while trying to instantiate a " + playerClass.getName() + " player monitor");
             System.err.println(e.getMessage());
         }
-    }
-
-    public void stopMonitoringPlayer(Class<? extends Player> playerClass) {
-        if (trackedPlayer.getClass().equals(playerClass)) {
-
-        } else {
-
-        }
-    }
-
-    public String getTrackedPlayer() {
-        return trackedPlayer.getName();
     }
 }
