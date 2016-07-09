@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.model.configuration;
 
+import lombok.Builder;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,9 +27,10 @@ import java.util.HashMap;
 /**
  * Created by Tristan Deloche on 08/07/2016.
  */
+@Builder
 public class ApplicationConfiguration {
 
-    HashMap<String, String> configMap = new HashMap<>();
+    private HashMap<String, String> configMap;
 
     @Getter
     private static final ApplicationConfiguration INSTANCE;
@@ -36,13 +38,9 @@ public class ApplicationConfiguration {
         INSTANCE = readConfiguration();
     }
 
-    public final String MusixMatchApiKey = "123";
-
-    private ApplicationConfiguration() {}
-
     @NotNull
-    public static String get(ConfigurationKey key) {
-        return getINSTANCE().getImpl(key.value);
+    public String get(ConfigurationKey key) {
+        return getImpl(key.value);
     }
 
     private String getImpl(String key) {
@@ -58,12 +56,13 @@ public class ApplicationConfiguration {
 
     @NotNull
     private static ApplicationConfiguration readConfiguration() {
-        return new ApplicationConfiguration();
+        //TODO ACTUAL CONFIG FILE READING
+        return defaultConfiguration();
     }
 
     @NotNull
-    private static ApplicationConfiguration DefaultConfiguration() {
-        return new ApplicationConfiguration();
+    private static ApplicationConfiguration defaultConfiguration() {
+        return ApplicationConfigurationReader.dummy();
     }
 
     public enum ConfigurationKey {

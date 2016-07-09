@@ -16,20 +16,31 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.entity;
+package moe.tristan.Lyrical.model.lyricsproviders;
 
-import lombok.Builder;
-import lombok.Data;
+import moe.tristan.Lyrical.model.entity.Song;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.containsString;
 
 /**
- * Created by Tristan Deloche on 05/07/2016.
+ * Created by Tristan Deloche on 09/07/2016.
  */
-@Builder
-@Data
-public class Song {
-    private final String title;
-    private final String artist;
-    private final String album;
+public class MusixMatchServiceTest {
+    private MusixMatchService service;
 
-    private final String lyrics;
+    @Before
+    public void setUp() throws Exception {
+        service = new MusixMatchService("cf95b51764535943eae59b7e94a3f96c");
+    }
+
+    @Test
+    public void identifySong() throws Exception {
+        Song loseYourself = service.identifySong("Lose yourself", "Eminem");
+        Assert.assertThat(loseYourself.getLyrics(), containsString("Look"));
+        System.out.println(loseYourself.toString());
+    }
+
 }

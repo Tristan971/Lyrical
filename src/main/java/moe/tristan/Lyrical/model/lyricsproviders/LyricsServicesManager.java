@@ -30,7 +30,7 @@ public class LyricsServicesManager {
 
     private Set<Service> registeredServices = new HashSet<>();
 
-    public void registerService(Class<Service> serviceClass) {
+    public void registerService(Class<? extends Service> serviceClass) {
 
         try {
             if (registeredServices.stream().filter(service -> service.getClass() == serviceClass).count() != 0) {
@@ -55,7 +55,7 @@ public class LyricsServicesManager {
         registeredServices.removeIf(service -> service.getClass().getCanonicalName().equals(serviceClassToUnregister));
     }
 
-    public LyricsServicesManager getInstance() {
+    public static LyricsServicesManager getInstance() {
         return INSTANCE;
     }
 

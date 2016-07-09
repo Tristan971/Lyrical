@@ -16,20 +16,24 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.entity;
+package moe.tristan.Lyrical.model.configuration;
 
-import lombok.Builder;
-import lombok.Data;
+import moe.tristan.Lyrical.model.configuration.ApplicationConfiguration.ConfigurationKey;
+
+import java.util.Arrays;
+import java.util.HashMap;
 
 /**
- * Created by Tristan Deloche on 05/07/2016.
+ * Created by Tristan Deloche on 09/07/2016.
  */
-@Builder
-@Data
-public class Song {
-    private final String title;
-    private final String artist;
-    private final String album;
+public class ApplicationConfigurationReader {
+    public static ApplicationConfiguration dummy() {
+        HashMap<String, String> config = new HashMap<>();
+        Arrays.stream(ConfigurationKey.values())
+                .forEach(key -> config.put(key.value, ""));
 
-    private final String lyrics;
+        return ApplicationConfiguration.builder()
+                .configMap(config)
+                .build();
+    }
 }

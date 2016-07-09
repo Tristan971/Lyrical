@@ -24,5 +24,5 @@ import moe.tristan.Lyrical.model.entity.Song;
  * Created by Tristan Deloche on 05/07/2016.
  */
 public interface Service {
-    Song identifySong();
+    Song identifySong(String title, String artist);
 }
