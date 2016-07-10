@@ -18,10 +18,11 @@
 
 package moe.tristan.Lyrical.model.integration.system.macOS;
 
-import apple.applescript.AppleScriptEngine;
 import lombok.Getter;
 import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 /**
@@ -31,7 +32,8 @@ public final class macOS implements OperatingSystem {
     @Getter
     private static final macOS INSTANCE = new macOS();
 
-    private static final AppleScriptEngine appleScriptEngine = null;
+    private static final ScriptEngine appleScriptEngine =
+            new ScriptEngineManager().getEngineByName("AppleScriptEngine");
 
     public String runApplescript(String script) {
         try {
