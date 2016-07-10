@@ -20,8 +20,8 @@ package moe.tristan.Lyrical.model.integration.players.iTunes;
 
 import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.model.integration.players.PlayerSong;
+import moe.tristan.Lyrical.model.integration.system.SystemUtilities;
 import moe.tristan.Lyrical.model.integration.system.macOS;
-import moe.tristan.Lyrical.model.monitoring.PlayerMonitorService;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,7 +37,7 @@ public final class iTunes implements Player {
 
     @Override
     public PlayerSong getCurrentlyPlayedSong() {
-        if (PlayerMonitorService.PLATFORM instanceof macOS) {
+        if (SystemUtilities.CURRENT_PLATFORM instanceof macOS) {
             return getSong_macOS();
         } else {
             System.err.println("UNSUPPORTED PLATFORM.");

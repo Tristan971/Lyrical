@@ -25,6 +25,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import moe.tristan.Lyrical.Main;
+import moe.tristan.Lyrical.view.core.integration.macOSSystemTray;
 
 import java.io.IOException;
 
@@ -32,7 +33,7 @@ import java.io.IOException;
  * Created by Tristan Deloche on 09/07/2016.
  */
 public class GUILauncher {
-    public static void startWithStage(Stage primaryStage) {
+    public static void genericStart(Stage primaryStage) {
         Scene mainScene;
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -53,5 +54,8 @@ public class GUILauncher {
         primaryStage.initStyle(StageStyle.UTILITY);
         primaryStage.setTitle("Lyrical - v0.1 alpha");
         primaryStage.show();
+
+
+        primaryStage.setOnCloseRequest(event -> new macOSSystemTray(primaryStage).addAppToTray());
     }
 }

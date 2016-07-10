@@ -22,11 +22,11 @@ package moe.tristan.Lyrical.model.integration.system;
  * Created by Tristan Deloche on 09/07/2016.
  */
 public class SystemUtilities {
-    public static OperatingSystem getCurrentOperatingSystem() {
-        return getCurrentOperatingSystemImpl(System.getProperty("os.name"));
-    }
 
-    private static OperatingSystem getCurrentOperatingSystemImpl(String platformName) {
+    public static final OperatingSystem CURRENT_PLATFORM =
+            getCurrentOperatingSystem(System.getProperty("os.name"));
+
+    private static OperatingSystem getCurrentOperatingSystem(String platformName) {
         System.out.println("Current platform is : "+platformName);
         if (isOSX(platformName))
         {

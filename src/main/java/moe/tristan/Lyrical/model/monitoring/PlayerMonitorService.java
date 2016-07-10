@@ -21,8 +21,6 @@ package moe.tristan.Lyrical.model.monitoring;
 import lombok.Getter;
 import moe.tristan.Lyrical.model.entity.Song;
 import moe.tristan.Lyrical.model.integration.players.Player;
-import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
-import moe.tristan.Lyrical.model.integration.system.SystemUtilities;
 import moe.tristan.Lyrical.view.UIBridge;
 
 /**
@@ -33,8 +31,6 @@ public final class PlayerMonitorService {
     public static PlayerMonitorService getInstance() {
         return INSTANCE;
     }
-
-    public static final OperatingSystem PLATFORM = SystemUtilities.getCurrentOperatingSystem();
 
     private Monitor<Player> trackedPlayer;
 

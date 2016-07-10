@@ -16,18 +16,18 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.integration.system;
+package moe.tristan.Lyrical.view.core.integration;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Created by Tristan Deloche on 09/07/2016.
+ * Created by Tristan Deloche on 10/07/2016.
  */
-public class SystemUtilitiesTest {
-    @Test
-    public void getCurrentOperatingSystem() throws Exception {
-        Assert.assertEquals(macOS.getINSTANCE(), SystemUtilities.CURRENT_PLATFORM);
-    }
+public class macOSSystemTrayTest {
+    private macOSSystemTray systemTray = new macOSSystemTray(null);
 
+    @Test
+    public void addAppToTray() throws Exception {
+        systemTray.addAppToTray();
+    }
 }

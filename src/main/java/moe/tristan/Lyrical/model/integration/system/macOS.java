@@ -39,9 +39,8 @@ public final class macOS implements OperatingSystem {
             if ((returnedData = (String) appleScriptEngine.eval(script)) != null) {
                 return returnedData;
             }
-        } catch (ScriptException e) {
-            System.err.println("Script returned void instead of an instance of Object");
-        }
+        } catch (ScriptException ignored) {}
+
         return "NOT_FOUND";
     }
 
