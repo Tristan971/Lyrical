@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.model.integration.system;
 
+import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
 import org.junit.Before;
 import org.junit.Test;
 

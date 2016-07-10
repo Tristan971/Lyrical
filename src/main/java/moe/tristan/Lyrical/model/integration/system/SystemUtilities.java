@@ -18,6 +18,8 @@
 
 package moe.tristan.Lyrical.model.integration.system;
 
+import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
+
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */

@@ -21,7 +21,7 @@ package moe.tristan.Lyrical.model.integration.players.iTunes;
 import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.model.integration.players.PlayerSong;
 import moe.tristan.Lyrical.model.integration.system.SystemUtilities;
-import moe.tristan.Lyrical.model.integration.system.macOS;
+import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
