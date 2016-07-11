@@ -76,7 +76,7 @@ public class GUILauncher extends Application {
         primaryStage.setResizable(false);
         primaryStage.setScene(mainScene);
         primaryStage.initStyle(StageStyle.UTILITY);
-        primaryStage.setTitle("Lyrical - v0.1 alpha");
+        primaryStage.setTitle("Lyrical - v0.2 beta");
         primaryStage.show();
 
         if (java.awt.SystemTray.isSupported()) {
