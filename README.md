@@ -1,6 +1,6 @@
 # Lyrical : The lyrics companion app for your desktop
 
-![screenshot](http://tristan.moe/lyrical-0.1.png)
+![screenshot](http://tristan.moe/lyrical-0.2.png)
 
 ### Features
 - Live refresh of the lyrics of your song, using Musixmatch service
