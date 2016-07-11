@@ -35,7 +35,7 @@ public class SystemUtilities {
         {
             return macOS.getINSTANCE();
         } else {
-            throw new RuntimeException("This platform is unsupported at this stage. Sorry.");
+            return new DummySystem();
         }
     }
 
