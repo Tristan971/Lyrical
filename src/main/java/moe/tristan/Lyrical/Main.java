@@ -48,5 +48,6 @@ public final class Main extends Application {
         LyricsServicesManager.getInstance().registerService(MusixMatchService.class);
         PlayerMonitorService.getInstance().startMonitoringPlayer(iTunes.class);
         GUILauncher.genericStart(primaryStage);
+
     }
 }

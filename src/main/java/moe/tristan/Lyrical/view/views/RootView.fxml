@@ -25,45 +25,45 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="moe.tristan.Lyrical.view.views.RootViewController">
-   <Label fx:id="title_label" layoutX="13.0" layoutY="14.0" prefHeight="34.0" prefWidth="230.0" text="Lose yourself" wrapText="true" AnchorPane.bottomAnchor="456.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-      <font>
-         <Font name="Helvetica Neue Bold" size="18.0" />
-      </font>
-      <effect>
-         <DropShadow blurType="GAUSSIAN" color="WHITE" height="1.0" offsetX="1.0" offsetY="1.0" radius="0.0" width="0.0" />
-      </effect>
-      <textFill>
-         <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-            <stops>
-               <Stop color="BLACK" />
-               <Stop color="#7c7c7c" offset="1.0" />
-            </stops>
-         </LinearGradient>
-      </textFill>
-   </Label>
-   <Label fx:id="artist_label" layoutX="10.0" layoutY="44.0" prefHeight="20.0" prefWidth="230.0" text="Eminem" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="436.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="44.0">
-      <font>
-         <Font name="Helvetica Neue Bold" size="13.0" />
-      </font>
-      <effect>
-         <DropShadow blurType="GAUSSIAN" color="WHITE" height="1.0" offsetX="1.0" offsetY="1.0" radius="0.0" width="0.0" />
-      </effect>
-      <textFill>
-         <LinearGradient endX="1.0" endY="1.0" startX="1.0">
-            <stops>
-               <Stop color="BLACK" />
-               <Stop color="#7c7c7c" offset="1.0" />
-            </stops>
-         </LinearGradient>
-      </textFill>
-   </Label>
-   <Label fx:id="lyrics_label" alignment="TOP_LEFT" layoutX="14.0" layoutY="71.0" prefHeight="392.0" prefWidth="230.0" text="Label" textOverrun="CLIP" wrapText="true" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="71.0" />
+<AnchorPane fx:id="parentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="moe.tristan.Lyrical.view.views.RootViewController">
    <Rectangle fill="#0000005b" height="20.0" layoutY="480.0" stroke="BLACK" strokeWidth="0.0" width="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="480.0" />
    <Label layoutX="23.0" layoutY="483.0" text="These lyrics are not for commercial use" textFill="WHITE">
       <font>
          <Font size="11.0" />
       </font>
    </Label>
+   <Text fx:id="title_text" layoutX="10.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lose yourself" AnchorPane.topAnchor="10.0">
+      <fill>
+         <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+            <stops>
+               <Stop color="#222020" />
+               <Stop color="#5b5a5a" offset="1.0" />
+            </stops>
+         </LinearGradient>
+      </fill>
+      <font>
+         <Font name="Helvetica Neue Bold" size="28.0" />
+      </font>
+      <effect>
+         <DropShadow blurType="GAUSSIAN" color="WHITE" height="0.0" offsetX="1.0" offsetY="1.0" radius="0.0" width="0.0" />
+      </effect></Text>
+   <Text fx:id="artist_text" layoutX="10.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Eminem" wrappingWidth="230.00000417232513" AnchorPane.topAnchor="47.0">
+      <fill>
+         <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+            <stops>
+               <Stop color="#222020" />
+               <Stop color="#6b6b6b" offset="1.0" />
+            </stops>
+         </LinearGradient>
+      </fill>
+      <font>
+         <Font name="Helvetica Neue Bold" size="18.0" />
+      </font>
+      <effect>
+         <DropShadow blurType="GAUSSIAN" color="#ffffff98" height="1.0" offsetX="1.0" offsetY="1.0" radius="0.0" width="0.0" />
+      </effect>
+   </Text>
+   <Label fx:id="lyrics_label" alignment="TOP_LEFT" layoutX="14.0" layoutY="76.0" prefHeight="414.0" prefWidth="230.0" text="Lyrics" wrapText="true" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0" />
 </AnchorPane>

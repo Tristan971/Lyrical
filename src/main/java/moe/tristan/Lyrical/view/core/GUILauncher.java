@@ -25,7 +25,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import moe.tristan.Lyrical.Main;
-import moe.tristan.Lyrical.view.core.integration.macOSSystemTray;
+import moe.tristan.Lyrical.view.system.SystemTrayUtils;
 
 import java.io.IOException;
 
@@ -55,7 +55,8 @@ public class GUILauncher {
         primaryStage.setTitle("Lyrical - v0.1 alpha");
         primaryStage.show();
 
-
-        primaryStage.setOnCloseRequest(event -> new macOSSystemTray(primaryStage).addAppToTray());
+        if (java.awt.SystemTray.isSupported()) {
+            SystemTrayUtils.initTrayIconWithStage(primaryStage);
+        }
     }
 }

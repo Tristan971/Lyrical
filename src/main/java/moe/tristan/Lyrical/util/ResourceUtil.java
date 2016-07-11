@@ -16,18 +16,22 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.view.core.integration;
+package moe.tristan.Lyrical.util;
 
-import org.junit.Test;
+import moe.tristan.Lyrical.Main;
+
+import java.net.URL;
 
 /**
- * Created by Tristan Deloche on 10/07/2016.
+ * Created by Tristan Deloche on 11/07/2016.
  */
-public class macOSSystemTrayTest {
-    private macOSSystemTray systemTray = new macOSSystemTray(null);
+@SuppressWarnings("WeakerAccess")
+public class ResourceUtil {
+    public static URL getResource(String resourcePath) {
+        return Main.class.getClassLoader().getResource(resourcePath);
+    }
 
-    @Test
-    public void addAppToTray() throws Exception {
-        systemTray.addAppToTray();
+    public static URL getImageResource(String image) {
+        return getResource("images/"+image);
     }
 }

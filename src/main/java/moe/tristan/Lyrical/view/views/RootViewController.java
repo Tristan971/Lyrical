@@ -22,6 +22,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import moe.tristan.Lyrical.view.UIBridge;
 
 /**
@@ -29,30 +30,47 @@ import moe.tristan.Lyrical.view.UIBridge;
  */
 public class RootViewController extends AnchorPane {
     @FXML
-    private Label title_label;
+    private AnchorPane parentPane;
 
     @FXML
-    private Label artist_label;
+    private Text title_text;
+
+    @FXML
+    private Text artist_text;
 
     @FXML
     private Label lyrics_label;
 
-    public RootViewController() {
-    }
+    public RootViewController() {}
 
+
+    // It is called by JavaFX
+    @SuppressWarnings("unused")
     public void initialize() {
-        title_label.setText(UIBridge.getInstance().title.get());
+        title_text.setText(UIBridge.getInstance().title.get());
         UIBridge.getInstance().title.addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> title_label.setText(newValue));
+            Platform.runLater(() -> {
+                title_text.setText(newValue);
+                System.out.println(isTextClipped(title_text));
+            });
         });
-        artist_label.setText(UIBridge.getInstance().artist.get());
+        artist_text.setText(UIBridge.getInstance().artist.get());
         UIBridge.getInstance().artist.addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> artist_label.setText(newValue));
+            Platform.runLater(() -> artist_text.setText(newValue));
         });
         lyrics_label.setText(UIBridge.getInstance().lyrics.get());
         UIBridge.getInstance().lyrics.addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> lyrics_label.setText(newValue));
         });
+
+        //TranslateTransition transition = new TranslateTransition(new Duration(5000), title_text);
+        //transition.setFromX(title_text.getX()-250);
+        //transition.setToX(title_text.getX()+150);
+        //transition.playFromStart();
+    }
+
+    private boolean isTextClipped(Text text) {
+        return text.getBoundsInParent().getWidth() > 230;
     }
 
 }
