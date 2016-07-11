@@ -49,6 +49,7 @@ public class SystemTrayUtils {
 
             trayIcon.addMouseListener(getMouseListener(stage));
             tray.add(trayIcon);
+            stage.setOnCloseRequest(event -> System.exit(0));
         } catch (@NotNull AWTException | IOException e) {
             e.printStackTrace();
         }
