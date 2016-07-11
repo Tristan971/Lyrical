@@ -28,7 +28,9 @@ import org.junit.Test;
 public class SystemUtilitiesTest {
     @Test
     public void getCurrentOperatingSystem() throws Exception {
-        Assert.assertEquals(macOS.getINSTANCE(), SystemUtilities.CURRENT_PLATFORM);
+        if (System.getProperty("os.name").toLowerCase().contains("mac")) {
+            Assert.assertEquals(macOS.getINSTANCE(), SystemUtilities.CURRENT_PLATFORM);
+        }
     }
 
 }
