@@ -18,41 +18,136 @@
 
 package moe.tristan.Lyrical.view.views;
 
+import com.sun.javafx.scene.control.skin.Utils;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.OverrunStyle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
 import moe.tristan.Lyrical.view.UIBridge;
+import org.jetbrains.annotations.NotNull;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
-public class RootViewController extends AnchorPane {
+public class RootViewController {
     @FXML
-    private Label title_label;
+    private Text titleText;
 
     @FXML
-    private Label artist_label;
+    private Text artistText;
 
     @FXML
-    private Label lyrics_label;
+    private Label lyricsLabel;
+
+    private static RootViewController instance = null;
+    private static final double MAXWIDTH = 230;
 
     public RootViewController() {
+        instance = this;
     }
 
+
+    // It is called by JavaFX
+    @SuppressWarnings("unused")
     public void initialize() {
-        title_label.setText(UIBridge.getInstance().title.get());
+        titleText.setText(UIBridge.getInstance().title.get());
         UIBridge.getInstance().title.addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> title_label.setText(newValue));
+            Platform.runLater(() -> {
+                titleText.setText(newValue);
+                if (isTextClipped(titleText)) {
+                    marqueeLongTexe(titleText);
+                }
+            });
         });
-        artist_label.setText(UIBridge.getInstance().artist.get());
+        artistText.setText(UIBridge.getInstance().artist.get());
         UIBridge.getInstance().artist.addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> artist_label.setText(newValue));
+            Platform.runLater(() -> {
+                artistText.setText(newValue);
+                if (isTextClipped(artistText)) {
+                    marqueeLongTexe(artistText);
+                }
+            });
         });
-        lyrics_label.setText(UIBridge.getInstance().lyrics.get());
+        lyricsLabel.setText(UIBridge.getInstance().lyrics.get());
         UIBridge.getInstance().lyrics.addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> lyrics_label.setText(newValue));
+            Platform.runLater(() -> lyricsLabel.setText(newValue));
         });
+
+        //TranslateTransition transition = new TranslateTransition(new Duration(5000), titleText);
+        //transition.setFromX(titleText.getX()-250);
+        //transition.setToX(titleText.getX()+150);
+        //transition.playFromStart();
     }
 
+    private boolean isTextClipped(@NotNull Text text) {
+        return text.getBoundsInParent().getWidth() > MAXWIDTH;
+    }
+
+    private static String computeClippedText(Text text) {
+        try {
+            Method computeClippedTextImpl = Utils.class.getDeclaredMethod(
+                    "computeClippedText",
+                    Font.class,
+                    String.class,
+                    double.class,
+                    OverrunStyle.class,
+                    String.class
+            );
+            computeClippedTextImpl.setAccessible(true);
+            return (String) computeClippedTextImpl.invoke(
+                    instance,
+                    text.getFont(),
+                    text.getText(),
+                    MAXWIDTH,
+                    OverrunStyle.ELLIPSIS,
+                    "..."
+            );
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return text.getText();
+    }
+
+    private static void marqueeLongTexe(Text text) {
+        Runnable transitionAction = getMarqueeTransition(text);
+        Platform.runLater(transitionAction);
+    }
+
+    @NotNull
+    private static Runnable getMarqueeTransition(Text text) {
+        TranslateTransition marquee = new TranslateTransition(
+                new Duration(5000),
+                text
+        );
+
+        double initialMinX = text.getX();
+        double initialEndX = text.getBoundsInParent().getMaxX();
+        double textLen = initialEndX - initialMinX;
+        double overrunLen = textLen - 230;
+        double goalX = initialMinX - overrunLen;
+
+        marquee.setFromX(initialMinX);
+        marquee.setToX(initialMinX - overrunLen);
+
+        TranslateTransition returnTransition = new TranslateTransition(
+                new Duration(5000),
+                text
+        );
+
+        returnTransition.setFromX(goalX);
+        returnTransition.setToX(initialMinX);
+
+        return () -> {
+            marquee.setOnFinished(e -> returnTransition.playFromStart());
+            returnTransition.setOnFinished(e -> text.setText(computeClippedText(text)));
+            marquee.playFromStart();
+        };
+    }
 }

@@ -18,15 +18,18 @@
 
 package moe.tristan.Lyrical.model.integration.system;
 
+import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
 public class SystemUtilities {
-    public static OperatingSystem getCurrentOperatingSystem() {
-        return getCurrentOperatingSystemImpl(System.getProperty("os.name"));
-    }
 
-    private static OperatingSystem getCurrentOperatingSystemImpl(String platformName) {
+    public static final OperatingSystem CURRENT_PLATFORM =
+            getCurrentOperatingSystem(System.getProperty("os.name"));
+
+    private static OperatingSystem getCurrentOperatingSystem(@NotNull String platformName) {
         System.out.println("Current platform is : "+platformName);
         if (isOSX(platformName))
         {
@@ -36,7 +39,7 @@ public class SystemUtilities {
         }
     }
 
-    private static boolean isOSX(String platformName) {
+    private static boolean isOSX(@NotNull String platformName) {
         return  platformName.toLowerCase().contains("mac") ||
                 platformName.toLowerCase().contains("darwin") ||
                 platformName.toLowerCase().contains("osx");

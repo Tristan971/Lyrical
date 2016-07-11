@@ -34,6 +34,7 @@ import org.jmusixmatch.entity.track.TrackData;
 
 public final class MusixMatchService implements Service {
 
+    @NotNull
     private final MusixMatch musixMatch;
 
     public MusixMatchService() {

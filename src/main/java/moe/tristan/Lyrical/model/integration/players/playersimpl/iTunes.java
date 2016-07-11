@@ -16,12 +16,12 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.integration.players.iTunes;
+package moe.tristan.Lyrical.model.integration.players.playersimpl;
 
 import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.model.integration.players.PlayerSong;
-import moe.tristan.Lyrical.model.integration.system.macOS;
-import moe.tristan.Lyrical.model.monitoring.PlayerMonitorService;
+import moe.tristan.Lyrical.model.integration.system.SystemUtilities;
+import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,7 +37,7 @@ public final class iTunes implements Player {
 
     @Override
     public PlayerSong getCurrentlyPlayedSong() {
-        if (PlayerMonitorService.PLATFORM instanceof macOS) {
+        if (SystemUtilities.CURRENT_PLATFORM instanceof macOS) {
             return getSong_macOS();
         } else {
             System.err.println("UNSUPPORTED PLATFORM.");
@@ -64,7 +64,7 @@ public final class iTunes implements Player {
                         + "  return trackname\n"
                         + "end run";
 
-        String name = macOS.getINSTANCE().runApplescript(scriptForName);
+        String name = macOS.getINSTANCE().runAppleScriptNew(scriptForName);
 
         final String scriptForArtist =
                 "on run\n"
@@ -80,7 +80,7 @@ public final class iTunes implements Player {
                         + "  return artistname\n"
                         + "end run";
 
-        String artist = macOS.getINSTANCE().runApplescript(scriptForArtist);
+        String artist = macOS.getINSTANCE().runAppleScriptNew(scriptForArtist);
 
         return PlayerSong.builder()
                 .title(name)

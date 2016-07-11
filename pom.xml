@@ -24,7 +24,7 @@
 
     <groupId>moe.tristan</groupId>
     <artifactId>Lyrical</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -74,6 +74,16 @@
                 <includes>
                     <include>
                         **/*.fxml
+                    </include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>
+                    src/main/resources
+                </directory>
+                <includes>
+                    <include>
+                        **/*
                     </include>
                 </includes>
             </resource>

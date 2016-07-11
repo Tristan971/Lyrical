@@ -21,6 +21,7 @@ package moe.tristan.Lyrical.model.entity;
 import lombok.Builder;
 import lombok.Data;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
@@ -28,10 +29,14 @@ import org.jetbrains.annotations.Contract;
 @Builder
 @Data
 public final class Song {
+    @NotNull
     private final String title;
+    @NotNull
     private final String artist;
+    @NotNull
     private final String album;
 
+    @NotNull
     private final String lyrics;
 
     @Contract(" -> !null")

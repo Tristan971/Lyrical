@@ -29,6 +29,7 @@ import java.util.HashMap;
  */
 @Builder
 public final class ApplicationConfiguration {
+    @NotNull
     @Getter
     private static final ApplicationConfiguration INSTANCE;
     static {
@@ -42,7 +43,7 @@ public final class ApplicationConfiguration {
     }
 
     @NotNull
-    public String get(ConfigurationKey key) {
+    public String get(@NotNull ConfigurationKey key) {
         return getImpl(key.value);
     }
 

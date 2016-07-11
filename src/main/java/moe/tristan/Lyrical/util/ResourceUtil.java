@@ -16,14 +16,25 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.integration.players;
+package moe.tristan.Lyrical.util;
 
-import org.jetbrains.annotations.NotNull;
+import moe.tristan.Lyrical.Main;
+import org.jetbrains.annotations.Nullable;
+
+import java.net.URL;
 
 /**
- * Created by Tristan Deloche on 05/07/2016.
+ * Created by Tristan Deloche on 11/07/2016.
  */
-public interface Player {
-    @NotNull String getName();
-    PlayerSong getCurrentlyPlayedSong();
+@SuppressWarnings("WeakerAccess")
+public class ResourceUtil {
+    @Nullable
+    public static URL getResource(String resourcePath) {
+        return Main.class.getClassLoader().getResource(resourcePath);
+    }
+
+    @Nullable
+    public static URL getImageResource(@SuppressWarnings("SameParameterValue") String image) {
+        return getResource("images/"+image);
+    }
 }
