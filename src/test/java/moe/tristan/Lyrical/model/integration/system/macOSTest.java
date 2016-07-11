@@ -38,7 +38,7 @@ public class macOSTest {
 
     @Test
     public void runApplescript() throws Exception {
-        macOSInstance.runApplescript("say \"Hello from Java\"");
+        macOSInstance.runAppleScriptNew("say \"Hello from Java\"");
     }
 
     @Test

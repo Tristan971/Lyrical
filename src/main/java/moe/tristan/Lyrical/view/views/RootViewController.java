@@ -87,7 +87,6 @@ public class RootViewController {
     }
 
     private boolean isTextClipped(@NotNull Text text) {
-        System.out.println(text.getBoundsInParent().getWidth());
         return text.getBoundsInParent().getWidth() > MAXWIDTH;
     }
 

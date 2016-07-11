@@ -64,7 +64,7 @@ public final class iTunes implements Player {
                         + "  return trackname\n"
                         + "end run";
 
-        String name = macOS.getINSTANCE().runApplescript(scriptForName);
+        String name = macOS.getINSTANCE().runAppleScriptNew(scriptForName);
 
         final String scriptForArtist =
                 "on run\n"
@@ -80,7 +80,7 @@ public final class iTunes implements Player {
                         + "  return artistname\n"
                         + "end run";
 
-        String artist = macOS.getINSTANCE().runApplescript(scriptForArtist);
+        String artist = macOS.getINSTANCE().runAppleScriptNew(scriptForArtist);
 
         return PlayerSong.builder()
                 .title(name)
