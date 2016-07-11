@@ -20,6 +20,7 @@ package moe.tristan.Lyrical.model.integration.system;
 
 import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -27,6 +28,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
+@Ignore
 public class macOSTest {
     private macOS macOSInstance;
 
