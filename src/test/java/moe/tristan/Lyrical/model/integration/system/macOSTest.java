@@ -38,7 +38,11 @@ public class macOSTest {
 
     @Test
     public void runApplescript() throws Exception {
-        macOSInstance.runAppleScriptNew("say \"Hello from Java\"");
+        if (System.getProperty("os.name").toLowerCase().contains("mac")) {
+            macOSInstance.runAppleScriptNew("say \"Hello from Java\"");
+        } else {
+            System.out.println("Not on OS X. No need to test for AppleScript");
+        }
     }
 
     @Test
