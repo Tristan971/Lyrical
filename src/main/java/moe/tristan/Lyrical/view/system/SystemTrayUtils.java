@@ -20,7 +20,6 @@ package moe.tristan.Lyrical.view.system;
 
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import moe.tristan.Lyrical.util.ResourceUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,32 +37,25 @@ import java.io.IOException;
  *  @see{https://gist.github.com/jewelsea/e231e89e8d36ef4e5d8a}
  */
 public class SystemTrayUtils {
-
-    private static TrayIcon TRAY_ICON = null;
-    private boolean isVisible = true;
-
-    public static void initTrayIconWithStage(Stage stage) {
+    public static void initTrayIconWithStage(@NotNull Stage stage) {
         Platform.setImplicitExit(false);
         try {
             java.awt.Toolkit.getDefaultToolkit();
 
             java.awt.SystemTray tray = java.awt.SystemTray.getSystemTray();
+            //noinspection ConstantConditions
             java.awt.Image image = ImageIO.read(ResourceUtil.getImageResource("macOS/lyrical-trayicon-1X.png"));
             TrayIcon trayIcon = new TrayIcon(image);
 
             trayIcon.addMouseListener(getMouseListener(stage));
-            TRAY_ICON = trayIcon;
-
             tray.add(trayIcon);
-
-            stage.setOnCloseRequest(SystemTrayUtils::fireClosureEvent);
-        } catch (AWTException | IOException e) {
+        } catch (@NotNull AWTException | IOException e) {
             e.printStackTrace();
         }
     }
 
     @NotNull
-    private static MouseListener getMouseListener(Stage stage) {
+    private static MouseListener getMouseListener(@NotNull Stage stage) {
         return new MouseListener() {
             public void mouseClicked(MouseEvent e) {}
             public void mousePressed(MouseEvent e) {}
@@ -72,17 +64,8 @@ public class SystemTrayUtils {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                if (e.getID() == 1903) {
-                    java.awt.SystemTray.getSystemTray().remove(java.awt.SystemTray.getSystemTray().getTrayIcons()[0]);
-                }
-
                 Platform.runLater(stage.isShowing() ? stage::close : stage::show);
             }
         };
-    }
-
-    private static void fireClosureEvent(WindowEvent e) {
-        MouseEvent event = new MouseEvent(new java.awt.Label(), 1903, 0, 0, 0, 0, 0, false, 0);
-        TRAY_ICON.getMouseListeners()[0].mouseReleased(event);
     }
 }

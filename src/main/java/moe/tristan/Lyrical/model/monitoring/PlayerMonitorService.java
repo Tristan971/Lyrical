@@ -22,43 +22,41 @@ import lombok.Getter;
 import moe.tristan.Lyrical.model.entity.Song;
 import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.view.UIBridge;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
 public final class PlayerMonitorService {
-    private static final PlayerMonitorService INSTANCE = new PlayerMonitorService();
-    public static PlayerMonitorService getInstance() {
-        return INSTANCE;
-    }
+    private static final PlayerMonitorService instance = new PlayerMonitorService();
 
     private Monitor<Player> trackedPlayer;
 
     @Getter
     private Song currentSong = Song.emptySong();
 
-    public void setCurrentSong(Song newSong) {
+    public static void setCurrentSong(@NotNull Song newSong) {
         System.out.println("The song changed to : "+newSong.getTitle()+" - "+newSong.getArtist());
-        this.currentSong = newSong;
-        UIBridge.getInstance().songChanged(currentSong);
+        instance.currentSong = newSong;
+        UIBridge.getInstance().songChanged(instance.currentSong);
     }
 
     private PlayerMonitorService() {}
 
-    public void startMonitoringPlayer(Class<? extends Player> playerClass) {
+    public static void startMonitoringPlayer(@NotNull Class<? extends Player> playerClass) {
         try {
-            boolean alreadyMonitoringPlayer = trackedPlayer != null && trackedPlayer.getClass().equals(playerClass);
+            boolean alreadyMonitoringPlayer = instance.trackedPlayer != null && instance.trackedPlayer.getClass().equals(playerClass);
             if (!alreadyMonitoringPlayer) {
                 Player playerToTrack = playerClass.newInstance();
-                trackedPlayer = new Monitor<>(playerToTrack);
-                trackedPlayer.beginMonitoring();
+                instance.trackedPlayer = new Monitor<>(playerToTrack);
+                instance.trackedPlayer.beginMonitoring();
                 System.out.println("Correctly started monitoring "+playerClass.getSimpleName());
             } else {
                 System.err.println("Already monitoring "+playerClass.getSimpleName()+". Will switch now.");
-                trackedPlayer.stopMonitoring();
+                instance.trackedPlayer.stopMonitoring();
                 startMonitoringPlayer(playerClass);
             }
-        } catch (IllegalAccessException | InstantiationException e) {
+        } catch (@NotNull IllegalAccessException | InstantiationException e) {
             System.err.println("An " + e.getClass() + " was thrown while trying to instantiate a " + playerClass.getName() + " player monitor");
             System.err.println(e.getMessage());
         }

@@ -18,7 +18,6 @@
 
 package moe.tristan.Lyrical.view.core.integration;
 
-import moe.tristan.Lyrical.view.system.SystemTrayUtils;
 import org.junit.Test;
 
 /**
@@ -27,6 +26,5 @@ import org.junit.Test;
 public class systemTrayTest {
     @Test
     public void addAppToTray() throws Exception {
-        SystemTrayUtils.initTrayIconWithStage(null);
     }
 }

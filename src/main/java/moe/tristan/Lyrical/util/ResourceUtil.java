@@ -19,6 +19,7 @@
 package moe.tristan.Lyrical.util;
 
 import moe.tristan.Lyrical.Main;
+import org.jetbrains.annotations.Nullable;
 
 import java.net.URL;
 
@@ -27,11 +28,13 @@ import java.net.URL;
  */
 @SuppressWarnings("WeakerAccess")
 public class ResourceUtil {
+    @Nullable
     public static URL getResource(String resourcePath) {
         return Main.class.getClassLoader().getResource(resourcePath);
     }
 
-    public static URL getImageResource(String image) {
+    @Nullable
+    public static URL getImageResource(@SuppressWarnings("SameParameterValue") String image) {
         return getResource("images/"+image);
     }
 }

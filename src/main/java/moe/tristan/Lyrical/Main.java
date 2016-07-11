@@ -18,36 +18,23 @@
 
 package moe.tristan.Lyrical;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
-import moe.tristan.Lyrical.model.integration.players.iTunes.iTunes;
-import moe.tristan.Lyrical.model.lyricsproviders.LyricsServicesManager;
-import moe.tristan.Lyrical.model.lyricsproviders.services.MusixMatchService;
-import moe.tristan.Lyrical.model.monitoring.PlayerMonitorService;
 import moe.tristan.Lyrical.view.core.GUILauncher;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-public final class Main extends Application {
+public final class Main {
     public static boolean DEV_MODE = false;
 
-    public static void main(String... args) {
+    public static void main(@NotNull String... args) {
         DEV_MODE = Arrays.stream(args)
                 .filter(s -> s.equals("DEV"))
                 .findAny()
                 .isPresent();
 
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-        LyricsServicesManager.getInstance().registerService(MusixMatchService.class);
-        PlayerMonitorService.getInstance().startMonitoringPlayer(iTunes.class);
-        GUILauncher.genericStart(primaryStage);
-
+        GUILauncher.main(args);
     }
 }

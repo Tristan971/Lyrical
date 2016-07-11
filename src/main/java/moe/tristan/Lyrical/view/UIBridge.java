@@ -21,12 +21,14 @@ package moe.tristan.Lyrical.view;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import moe.tristan.Lyrical.model.entity.Song;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
 public class UIBridge {
     private static final UIBridge INSTANCE = new UIBridge();
+    @NotNull
     public static UIBridge getInstance() {
         return INSTANCE;
     }
@@ -37,7 +39,7 @@ public class UIBridge {
 
     private UIBridge() {}
 
-    public void songChanged(Song newSong) {
+    public void songChanged(@NotNull Song newSong) {
         title.setValue(newSong.getTitle());
         artist.setValue(newSong.getArtist());
         lyrics.setValue(newSong.getLyrics());

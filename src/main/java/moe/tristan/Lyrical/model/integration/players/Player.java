@@ -18,10 +18,12 @@
 
 package moe.tristan.Lyrical.model.integration.players;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
 public interface Player {
-    String getName();
+    @NotNull String getName();
     PlayerSong getCurrentlyPlayedSong();
 }

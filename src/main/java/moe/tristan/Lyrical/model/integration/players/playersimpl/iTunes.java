@@ -16,7 +16,7 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.integration.players.iTunes;
+package moe.tristan.Lyrical.model.integration.players.playersimpl;
 
 import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.model.integration.players.PlayerSong;

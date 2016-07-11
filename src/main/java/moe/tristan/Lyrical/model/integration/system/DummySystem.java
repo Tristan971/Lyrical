@@ -21,6 +21,7 @@ package moe.tristan.Lyrical.model.integration.system;
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
+@SuppressWarnings("unused")
 public class DummySystem implements OperatingSystem {
     @Override
     public void updateSystemDisplay() {

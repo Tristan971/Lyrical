@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.model.integration.players.iTunes;
 
+import moe.tristan.Lyrical.model.integration.players.playersimpl.iTunes;
 import org.junit.Test;
 
 /**

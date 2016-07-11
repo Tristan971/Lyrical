@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.view.core;
 
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -25,15 +26,38 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import moe.tristan.Lyrical.Main;
+import moe.tristan.Lyrical.model.integration.players.playersimpl.iTunes;
+import moe.tristan.Lyrical.model.lyricsproviders.LyricsServicesManager;
+import moe.tristan.Lyrical.model.lyricsproviders.services.MusixMatchService;
+import moe.tristan.Lyrical.model.monitoring.PlayerMonitorService;
 import moe.tristan.Lyrical.view.system.SystemTrayUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
-public class GUILauncher {
-    public static void genericStart(Stage primaryStage) {
+public class GUILauncher extends Application {
+
+    public static void main(String... args) {
+        initAWT();
+        launch(args);
+    }
+
+    @Override
+    public void start(@NotNull Stage primaryStage) throws Exception {
+        LyricsServicesManager.registerService(MusixMatchService.class);
+        PlayerMonitorService.startMonitoringPlayer(iTunes.class);
+        genericStart(primaryStage);
+    }
+
+    private static void initAWT() {
+        System.setProperty("apple.awt.UIElement", "true");
+        java.awt.Toolkit.getDefaultToolkit();
+    }
+
+    private static void genericStart(@NotNull Stage primaryStage) {
         Scene mainScene;
         try {
             FXMLLoader loader = new FXMLLoader();
