@@ -32,41 +32,37 @@ import java.util.stream.Collectors;
  * Created by Tristan Deloche on 08/07/2016.
  */
 public final class LyricsServicesManager {
-    private static final LyricsServicesManager INSTANCE = new LyricsServicesManager();
-    public static LyricsServicesManager getInstance() {
-        return INSTANCE;
-    }
+    private static final LyricsServicesManager instance = new LyricsServicesManager();
 
     private final Set<Service> registeredServices = new HashSet<>();
 
     private LyricsServicesManager() {}
 
-    public void registerService(Class<? extends Service> serviceClass) {
-
+    public static void registerService(@NotNull Class<? extends Service> serviceClass) {
         try {
-            Optional<? extends Service> possibleDuplicate = registeredServices.stream().filter(service -> service.getClass() == serviceClass).findAny();
+            Optional<? extends Service> possibleDuplicate = instance.registeredServices.stream().filter(service -> service.getClass() == serviceClass).findAny();
             if (!possibleDuplicate.isPresent()) {
-                registeredServices.add(serviceClass.newInstance());
+                instance.registeredServices.add(serviceClass.newInstance());
                 System.out.println("Correctly registered the "+serviceClass.getSimpleName()+" service.");
             } else {
                 System.err.println(
                         "A " + serviceClass.getName() + " service is already "
                                 + "registered. Unregister it first.\n"
                                 + "Registered services are : " +
-                                registeredServices.stream()
+                                instance.registeredServices.stream()
                                         .map(service -> service.getClass().getName())
                                         .collect(Collectors.toList())
                 );
             }
-        } catch (IllegalAccessException | InstantiationException e) {
+        } catch (@NotNull IllegalAccessException | InstantiationException e) {
             System.err.println("An " + e.getClass() + " was thrown while trying to instantiate a " + serviceClass.getName() + " service");
             System.err.println(e.getMessage());
         }
     }
 
-    public void unregisterService(Class<? extends Service> serviceClass) {
+    public static void unregisterService(@NotNull Class<? extends Service> serviceClass) {
         final String serviceClassToUnregister = serviceClass.getCanonicalName();
-        boolean unregistered = registeredServices.removeIf(service -> service.getClass().getCanonicalName().equals(serviceClassToUnregister));
+        boolean unregistered = instance.registeredServices.removeIf(service -> service.getClass().getCanonicalName().equals(serviceClassToUnregister));
         if (unregistered) {
             System.out.println("Correctly unregistered the "+serviceClass.getSimpleName()+" service.");
         } else {
@@ -76,20 +72,19 @@ public final class LyricsServicesManager {
                     +" service registered. "
                     + "Therefore no service could be unregistered. "
                     + "The currently registered services are : "
-                    +registeredServices
+                    + instance.registeredServices
             );
         }
-
     }
 
     @NotNull
-    public Set<Service> getRegisteredServices() {
-        return Collections.unmodifiableSet(new HashSet<>(registeredServices));
+    public static Set<Service> getRegisteredServices() {
+        return Collections.unmodifiableSet(new HashSet<>(instance.registeredServices));
     }
 
     @NotNull
-    public Song identifySong(String title, String artist) {
-        Service service = registeredServices.stream().findAny().orElse(new DummyService());
+    public static Song identifySong(String title, String artist) {
+        Service service = instance.registeredServices.stream().findAny().orElse(new DummyService());
         return service.identifySong(title, artist);
     }
 }

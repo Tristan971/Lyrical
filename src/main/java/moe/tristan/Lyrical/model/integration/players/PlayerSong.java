@@ -21,6 +21,7 @@ package moe.tristan.Lyrical.model.integration.players;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
@@ -29,6 +30,8 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode
 public final class PlayerSong {
+    @NotNull
     private final String title;
+    @NotNull
     private final String artist;
 }

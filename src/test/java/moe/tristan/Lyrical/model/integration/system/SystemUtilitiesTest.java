@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.model.integration.system;
 
+import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -27,7 +28,7 @@ import org.junit.Test;
 public class SystemUtilitiesTest {
     @Test
     public void getCurrentOperatingSystem() throws Exception {
-        Assert.assertEquals(macOS.getINSTANCE(), SystemUtilities.getCurrentOperatingSystem());
+        Assert.assertEquals(macOS.getINSTANCE(), SystemUtilities.CURRENT_PLATFORM);
     }
 
 }

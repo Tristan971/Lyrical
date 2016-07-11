@@ -22,6 +22,8 @@ import moe.tristan.Lyrical.model.entity.Song;
 import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.model.integration.players.PlayerSong;
 import moe.tristan.Lyrical.model.lyricsproviders.LyricsServicesManager;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -33,6 +35,7 @@ public class Monitor<T extends Player> {
     private boolean shouldMonitor = false;
 
     private final T monitoredPlayer;
+    @Nullable
     private PlayerSong lastKnownSong = null;
 
     public Monitor(T playerToMonitor) {
@@ -48,15 +51,14 @@ public class Monitor<T extends Player> {
         }
     }
 
-    private void songChangedTo(PlayerSong newSong) {
+    private void songChangedTo(@NotNull PlayerSong newSong) {
         lastKnownSong = newSong;
-        Song lyricizedSong = LyricsServicesManager.getInstance()
-                .identifySong(
-                        newSong.getTitle(),
-                        newSong.getArtist()
-                );
+        Song lyricizedSong = LyricsServicesManager.identifySong(
+                newSong.getTitle(),
+                newSong.getArtist()
+        );
 
-        PlayerMonitorService.getInstance().setCurrentSong(lyricizedSong);
+        PlayerMonitorService.setCurrentSong(lyricizedSong);
     }
 
     public void beginMonitoring() {

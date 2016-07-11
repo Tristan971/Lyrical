@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.model.integration.system;
 
+import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,7 +38,7 @@ public class macOSTest {
 
     @Test
     public void runApplescript() throws Exception {
-        macOSInstance.runApplescript("say \"Hello from Java\"");
+        macOSInstance.runAppleScriptNew("say \"Hello from Java\"");
     }
 
     @Test

@@ -16,14 +16,15 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.integration.players;
+package moe.tristan.Lyrical.view.core.integration;
 
-import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 
 /**
- * Created by Tristan Deloche on 05/07/2016.
+ * Created by Tristan Deloche on 10/07/2016.
  */
-public interface Player {
-    @NotNull String getName();
-    PlayerSong getCurrentlyPlayedSong();
+public class systemTrayTest {
+    @Test
+    public void addAppToTray() throws Exception {
+    }
 }
