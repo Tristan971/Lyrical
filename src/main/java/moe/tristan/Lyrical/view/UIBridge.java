@@ -27,14 +27,18 @@ import org.jetbrains.annotations.NotNull;
  * Created by Tristan Deloche on 09/07/2016.
  */
 public class UIBridge {
+    @NotNull
     private static final UIBridge INSTANCE = new UIBridge();
     @NotNull
     public static UIBridge getInstance() {
         return INSTANCE;
     }
 
+    @NotNull
     public final StringProperty title = new SimpleStringProperty("");
+    @NotNull
     public final StringProperty artist = new SimpleStringProperty("");
+    @NotNull
     public final StringProperty lyrics = new SimpleStringProperty("");
 
     private UIBridge() {}

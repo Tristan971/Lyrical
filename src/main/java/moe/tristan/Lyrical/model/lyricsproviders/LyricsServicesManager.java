@@ -32,8 +32,10 @@ import java.util.stream.Collectors;
  * Created by Tristan Deloche on 08/07/2016.
  */
 public final class LyricsServicesManager {
+    @NotNull
     private static final LyricsServicesManager instance = new LyricsServicesManager();
 
+    @NotNull
     private final Set<Service> registeredServices = new HashSet<>();
 
     private LyricsServicesManager() {}

@@ -28,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
  * Created by Tristan Deloche on 09/07/2016.
  */
 public final class PlayerMonitorService {
+    @NotNull
     private static final PlayerMonitorService instance = new PlayerMonitorService();
 
     private Monitor<Player> trackedPlayer;

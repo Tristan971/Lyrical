@@ -21,6 +21,7 @@ package moe.tristan.Lyrical.model.configuration;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import moe.tristan.Lyrical.model.configuration.ApplicationConfiguration.ConfigurationKey;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,6 +32,7 @@ import java.util.HashMap;
  * Created by Tristan Deloche on 09/07/2016.
  */
 public final class ApplicationConfigurationReader {
+    @NotNull
     private static final Gson gson = new Gson();
 
     public static ApplicationConfiguration dummy() {

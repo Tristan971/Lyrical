@@ -29,6 +29,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import moe.tristan.Lyrical.view.UIBridge;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -46,6 +47,8 @@ public class RootViewController {
     @FXML
     private Label lyricsLabel;
 
+
+    @Nullable
     private static RootViewController instance = null;
     private static final double MAXWIDTH = 230;
 
@@ -90,7 +93,8 @@ public class RootViewController {
         return text.getBoundsInParent().getWidth() > MAXWIDTH;
     }
 
-    private static String computeClippedText(Text text) {
+    @NotNull
+    private static String computeClippedText(@NotNull Text text) {
         try {
             Method computeClippedTextImpl = Utils.class.getDeclaredMethod(
                     "computeClippedText",
@@ -101,6 +105,7 @@ public class RootViewController {
                     String.class
             );
             computeClippedTextImpl.setAccessible(true);
+            assert instance != null;
             return (String) computeClippedTextImpl.invoke(
                     instance,
                     text.getFont(),
@@ -109,19 +114,19 @@ public class RootViewController {
                     OverrunStyle.ELLIPSIS,
                     "..."
             );
-        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+        } catch (@NotNull NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
         return text.getText();
     }
 
-    private static void marqueeLongTexe(Text text) {
+    private static void marqueeLongTexe(@NotNull Text text) {
         Runnable transitionAction = getMarqueeTransition(text);
         Platform.runLater(transitionAction);
     }
 
     @NotNull
-    private static Runnable getMarqueeTransition(Text text) {
+    private static Runnable getMarqueeTransition(@NotNull Text text) {
         TranslateTransition marquee = new TranslateTransition(
                 new Duration(5000),
                 text

@@ -30,9 +30,11 @@ import java.io.InputStreamReader;
  * Created by Tristan Deloche on 05/07/2016.
  */
 public final class macOS implements OperatingSystem {
+    @NotNull
     private static final String ERROR_MESSAGE = "NOT_FOUND";
 
     @Getter
+    @NotNull
     private static final macOS INSTANCE = new macOS();
 
     //public String runApplescript(String script) {
