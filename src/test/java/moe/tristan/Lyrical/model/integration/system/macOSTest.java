@@ -20,7 +20,6 @@ package moe.tristan.Lyrical.model.integration.system;
 
 import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -28,7 +27,6 @@ import static org.junit.Assert.*;
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
-@Ignore
 public class macOSTest {
     private macOS macOSInstance;
 
@@ -40,11 +38,8 @@ public class macOSTest {
 
     @Test
     public void runApplescript() throws Exception {
-        if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-            macOSInstance.runAppleScriptNew("say \"Hello from Java\"");
-        } else {
-            System.out.println("Not on OS X. No need to test for AppleScript");
-        }
+        if (System.getProperty("os.name").toLowerCase().contains("mac"))
+        macOSInstance.runAppleScriptNew("say \"Hello from Java\"");
     }
 
     @Test
