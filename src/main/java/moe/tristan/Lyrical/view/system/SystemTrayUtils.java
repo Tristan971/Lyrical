@@ -37,6 +37,8 @@ import java.io.IOException;
  *  @see{https://gist.github.com/jewelsea/e231e89e8d36ef4e5d8a}
  */
 public class SystemTrayUtils {
+
+
     public static void initTrayIconWithStage(@NotNull Stage stage) {
         Platform.setImplicitExit(false);
         try {
@@ -58,14 +60,28 @@ public class SystemTrayUtils {
     @NotNull
     private static MouseListener getMouseListener(@NotNull Stage stage) {
         return new MouseListener() {
-            public void mouseClicked(MouseEvent e) {}
-            public void mousePressed(MouseEvent e) {}
-            public void mouseEntered(MouseEvent e) {}
-            public void mouseExited(MouseEvent e) {}
+            private double posX;
+            private double posY;
+
+            public final void mouseClicked(MouseEvent e) {}
+            public final void mousePressed(MouseEvent e) {}
+            public final void mouseEntered(MouseEvent e) {}
+            public final void mouseExited(MouseEvent e) {}
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                Platform.runLater(stage.isShowing() ? stage::close : stage::show);
+                Platform.runLater(stage.isShowing() ? this::hide : this::show);
+            }
+
+            private void show() {
+                stage.setX(posX);
+                stage.setY(posY);
+                stage.show();
+            }
+            private void hide() {
+                posX = stage.getX();
+                posY = stage.getY();
+                stage.close();
             }
         };
     }
