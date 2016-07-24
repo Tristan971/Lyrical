@@ -22,6 +22,7 @@ import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.model.integration.players.PlayerSong;
 import moe.tristan.Lyrical.model.integration.system.SystemUtilities;
 import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
+import moe.tristan.Lyrical.model.monitoring.PlayerMonitorService;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,10 +41,11 @@ public final class iTunes implements Player {
         if (SystemUtilities.CURRENT_PLATFORM instanceof macOS) {
             return getSong_macOS();
         } else {
-            System.err.println("UNSUPPORTED PLATFORM.");
+            System.err.println("iTunes monitoring is not supported on this platform. Stopping monitoring.");
+            PlayerMonitorService.stopMonitoringPlayer(iTunes.class);
             return PlayerSong.builder()
-                    .title("Unsupported")
-                    .artist("Platform")
+                    .title("Unknown Song")
+                    .artist("Unknown artist")
                     .build();
         }
     }

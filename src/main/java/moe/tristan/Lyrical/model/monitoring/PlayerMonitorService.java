@@ -61,4 +61,17 @@ public final class PlayerMonitorService {
             System.err.println(e.getMessage());
         }
     }
+
+    public static void stopMonitoringPlayer(@NotNull Class<? extends Player> playerClass) {
+        if (instance.trackedPlayer.getMonitoredPlayer().equals(playerClass)) {
+            instance.trackedPlayer.stopMonitoring();
+        } else {
+            System.err.println(
+                    "No player of class "+playerClass+" is currently being "
+                            + "monitored. Monitoring "+
+                            instance.trackedPlayer.getMonitoredPlayer()+
+                            " right now."
+            );
+        }
+    }
 }

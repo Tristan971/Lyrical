@@ -31,9 +31,15 @@ public class SystemUtilities {
 
     private static OperatingSystem getCurrentOperatingSystem(@NotNull String platformName) {
         System.out.println("Current platform is : "+platformName);
-        if (isOSX(platformName))
-        {
-            return macOS.getINSTANCE();
+        if (isOSX(platformName)) {
+            System.out.println("Platform detected as macOS");
+            return macOS.INSTANCE;
+        } else if(isWindows(platformName)) {
+            System.out.println("Platform detected as Windows");
+            return () -> System.out.println("Unsupported atm : "+platformName);
+        } else if (isLinux(platformName)) {
+            System.out.println("Platform detected as Linux");
+            return () -> System.out.println("Unsupported atm : "+platformName);
         } else {
             return new DummySystem();
         }
@@ -43,5 +49,14 @@ public class SystemUtilities {
         return  platformName.toLowerCase().contains("mac") ||
                 platformName.toLowerCase().contains("darwin") ||
                 platformName.toLowerCase().contains("osx");
+    }
+
+    private static boolean isWindows(@NotNull String platformName) {
+        return platformName.toLowerCase().contains("windows") ||
+                platformName.toLowerCase().contains("nt");
+    }
+
+    private static boolean isLinux(@NotNull String platformName) {
+        return platformName.toLowerCase().contains("linux");
     }
 }

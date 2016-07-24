@@ -78,7 +78,12 @@ public class Monitor<T extends Player> {
                 1000
         );
     }
+
     public void stopMonitoring() {
         shouldMonitor = false;
+    }
+
+    public Class<? extends Player> getMonitoredPlayer() {
+        return monitoredPlayer.getClass();
     }
 }

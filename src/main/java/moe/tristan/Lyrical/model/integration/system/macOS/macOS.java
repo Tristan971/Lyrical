@@ -33,7 +33,7 @@ public final class macOS implements OperatingSystem {
     private static final String ERROR_MESSAGE = "NOT_FOUND";
 
     @Getter
-    private static final macOS INSTANCE = new macOS();
+    public static final macOS INSTANCE = new macOS();
 
     //public String runApplescript(String script) {
     //    try {

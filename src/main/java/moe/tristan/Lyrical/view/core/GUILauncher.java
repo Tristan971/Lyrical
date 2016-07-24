@@ -74,7 +74,9 @@ public class GUILauncher extends Application {
         }
         primaryStage.setScene(mainScene);
         primaryStage.setResizable(false);
-        primaryStage.initStyle(StageStyle.UTILITY);
+        primaryStage.setMaxHeight(mainScene.getHeight());
+        primaryStage.setMaxWidth(mainScene.getWidth());
+        primaryStage.initStyle(StageStyle.DECORATED);
         primaryStage.setTitle("Lyrical - v0.2 beta");
         primaryStage.show();
 

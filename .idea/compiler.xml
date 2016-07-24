@@ -14,7 +14,8 @@
       <entry name="!?*.aj" />
     </wildcardResourcePatterns>
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="false">
+      <profile default="true" name="Default" enabled="true">
+        <processor name="lombok.launch.AnnotationProcessorHider$AnnotationProcessor" />
         <processorPath useClasspath="true" />
       </profile>
       <profile default="false" name="Maven default annotation processors profile" enabled="true">
@@ -26,8 +27,7 @@
         <module name="Lyrical" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="JMusixmatch" target="1.8" />
+    <bytecodeTargetLevel target="1.8">
       <module name="Lyrical" target="1.8" />
     </bytecodeTargetLevel>
   </component>
