@@ -29,9 +29,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by Tristan Deloche on 09/07/2016.
+ * This class acts as a decorator for Player monitoring
  */
-public class Monitor<T extends Player> {
+public final class Monitor<T extends Player> {
     private boolean shouldMonitor = false;
 
     private final T monitoredPlayer;

@@ -1,0 +1,28 @@
+2016-09-08 15:16:31.969 INFO     [Timer-0]:moe.tristan.Lyrical.model.integration.system.SystemUtilities - Current platform is : Windows 10
+2016-09-08 15:16:31.972 INFO     [Timer-0]:moe.tristan.Lyrical.model.integration.system.SystemUtilities - Platform detected as Windows
+2016-09-08 15:20:05.358 INFO     [Timer-0]:moe.tristan.Lyrical.model.integration.system.SystemUtilities - Current platform is : Windows 10
+2016-09-08 15:20:05.361 INFO     [Timer-0]:moe.tristan.Lyrical.model.integration.system.SystemUtilities - Platform detected as Windows
+2016-09-08 15:25:09.903 DEBUG    [JavaFX Application Thread]:moe.tristan.Lyrical.model.configuration.ApplicationConfigurationReader - Reading the default configuration profile.
+2016-09-08 15:25:09.913 DEBUG    [JavaFX Application Thread]:moe.tristan.Lyrical.model.configuration.ApplicationConfigurationReader - Read configuration is : {MUSIXMATCH_API_KEY=cf95b51764535943eae59b7e94a3f96c}
+2016-09-08 15:25:09.941 INFO     [JavaFX Application Thread]:moe.tristan.Lyrical.model.lyricsproviders.LyricsServicesManager - Correctly registered the MusixMatchService service.
+2016-09-08 15:25:09.945 INFO     [JavaFX Application Thread]:moe.tristan.Lyrical.model.monitoring.PlayerMonitorService - Correctly started monitoring iTunes
+2016-09-08 15:25:09.946 INFO     [Timer-0]:moe.tristan.Lyrical.model.integration.system.SystemUtilities - Current platform is : Windows 10
+2016-09-08 15:25:09.947 INFO     [Timer-0]:moe.tristan.Lyrical.model.integration.system.SystemUtilities - Platform detected as Windows
+2016-09-08 15:25:10.876 DEBUG    [Timer-0]:moe.tristan.Lyrical.model.lyricsproviders.services.MusixMatchService - Song not found : [No title,No artist]
+2016-09-08 15:25:10.876 INFO     [Timer-0]:moe.tristan.Lyrical.model.monitoring.PlayerMonitorService - The song changed to : No title - No artist
+2016-09-08 15:48:25.562 DEBUG    [JavaFX Application Thread]:ApplicationConfigurationReader - Reading the default configuration profile.
+2016-09-08 15:48:25.580 DEBUG    [JavaFX Application Thread]:ApplicationConfigurationReader - Read configuration is : {MUSIXMATCH_API_KEY=cf95b51764535943eae59b7e94a3f96c}
+2016-09-08 15:48:25.592 INFO     [JavaFX Application Thread]:LyricsServicesManager - Correctly registered the MusixMatchService service.
+2016-09-08 15:48:25.649 INFO     [JavaFX Application Thread]:PlayerMonitorService - Correctly started monitoring iTunes
+2016-09-08 15:48:25.666 INFO     [Timer-0]:SystemUtilities - Current platform is : Windows 10
+2016-09-08 15:48:25.666 INFO     [Timer-0]:SystemUtilities - Platform detected as Windows
+2016-09-08 15:48:36.752 DEBUG    [Timer-0]:MusixMatchService - Song not found : [No title,No artist]
+2016-09-08 15:48:36.752 INFO     [Timer-0]:PlayerMonitorService - The song changed to : No title - No artist
+2016-09-08 16:13:35.920 DEBUG    [JavaFX Application Thread]:ApplicationConfigurationReader - Reading the default configuration profile.
+2016-09-08 16:13:35.928 DEBUG    [JavaFX Application Thread]:ApplicationConfigurationReader - Read configuration is : {MUSIXMATCH_API_KEY=cf95b51764535943eae59b7e94a3f96c}
+2016-09-08 16:13:35.929 INFO     [JavaFX Application Thread]:LyricsServicesManager - Correctly registered the MusixMatchService service.
+2016-09-08 16:13:35.933 INFO     [JavaFX Application Thread]:SystemUtilities - Current platform is : Windows 10
+2016-09-08 16:13:35.933 INFO     [JavaFX Application Thread]:SystemUtilities - Platform detected as Windows
+2016-09-08 16:13:35.934 INFO     [JavaFX Application Thread]:PlayerMonitorService - Correctly started monitoring iTunes
+2016-09-08 16:13:36.646 DEBUG    [Timer-0]:MusixMatchService - Song not found : [No title,No artist]
+2016-09-08 16:13:36.646 INFO     [Timer-0]:PlayerMonitorService - The song changed to : No title - No artist

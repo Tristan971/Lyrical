@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.model.integration.players.playersimpl;
 
+import com.jacob.activeX.ActiveXComponent;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.integration.players.Player;
@@ -63,16 +64,6 @@ public final class iTunes implements Player {
     }
 
     @NotNull
-    public static PlayerSong getSong_Unsupported() {
-        log.error("iTunes monitoring is not supported on this platform. Stopping monitoring.");
-        PlayerMonitorService.stopMonitoringPlayer(iTunes.class);
-        return PlayerSong.builder()
-                .title("Unknown Song")
-                .artist("Unknown artist")
-                .build();
-    }
-
-    @NotNull
     public static PlayerSong getSong_macOS() {
         final String scriptForName =
                 "on run\n"
@@ -114,7 +105,18 @@ public final class iTunes implements Player {
 
     @NotNull
     public static PlayerSong getSong_WindowsNT() {
+        ActiveXComponent itunesActiveX = new ActiveXComponent("iTunes.Application");
         return PlayerSong.dummyPlayerSong();
+    }
+
+    @NotNull
+    public static PlayerSong getSong_Unsupported() {
+        log.error("iTunes monitoring is not supported on this platform. Stopping monitoring.");
+        PlayerMonitorService.stopMonitoringPlayer(iTunes.class);
+        return PlayerSong.builder()
+                .title("Unknown Song")
+                .artist("Unknown artist")
+                .build();
     }
 }
 
