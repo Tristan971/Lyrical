@@ -18,9 +18,11 @@
 
 package moe.tristan.Lyrical.model.integration.players.playersimpl;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.model.integration.players.PlayerSong;
+import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
 import moe.tristan.Lyrical.model.integration.system.SystemUtilities;
 import moe.tristan.Lyrical.model.integration.system.Windows.WindowsNT;
 import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
@@ -28,16 +30,26 @@ import moe.tristan.Lyrical.model.monitoring.PlayerMonitorService;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Service class managing the iTunes player
  */
+@SuppressWarnings("WeakerAccess")
 @Slf4j
+@Data
 public final class iTunes implements Player {
-    @NotNull
-    @Contract(pure = true)
-    public String getName() {
-        return "iTunes";
-    }
+
+    private final String name = "iTunes";
+    private final Set<OperatingSystem> supportedOperatingSystems =
+            new HashSet<>(
+                    Arrays.asList(
+                            macOS.INSTANCE,
+                            WindowsNT.INSTANCE
+                    )
+            );
 
     @Override
     public PlayerSong getCurrentlyPlayedSong() {
@@ -76,7 +88,7 @@ public final class iTunes implements Player {
                         + "  return trackname\n"
                         + "end run";
 
-        String name = macOS.getINSTANCE().runAppleScriptNew(scriptForName);
+        String name = macOS.INSTANCE.runAppleScriptNew(scriptForName);
 
         final String scriptForArtist =
                 "on run\n"
@@ -92,7 +104,7 @@ public final class iTunes implements Player {
                         + "  return artistname\n"
                         + "end run";
 
-        String artist = macOS.getINSTANCE().runAppleScriptNew(scriptForArtist);
+        String artist = macOS.INSTANCE.runAppleScriptNew(scriptForArtist);
 
         return PlayerSong.builder()
                 .title(name)

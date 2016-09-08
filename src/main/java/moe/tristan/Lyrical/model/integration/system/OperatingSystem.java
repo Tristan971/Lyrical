@@ -18,9 +18,24 @@
 
 package moe.tristan.Lyrical.model.integration.system;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 /**
- * Created by Tristan Deloche on 05/07/2016.
+ * Interface for platform-representing classes.
+ * They are meant to offer platform-dependante but
+ * player-agnostic functionnalities.
  */
 public interface OperatingSystem {
-    void updateSystemDisplay();
+    String getName();
+
+    default void updateSystemDisplay() {
+        throw new UnsupportedOperationException();
+    }
+
+    @NotNull
+    @Contract(pure = true)
+    static String ERROR_MESSAGE() {
+        return "NOT_FOUND";
+    }
 }

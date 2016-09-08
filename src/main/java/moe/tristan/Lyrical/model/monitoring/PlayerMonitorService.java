@@ -22,11 +22,12 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.entity.Song;
 import moe.tristan.Lyrical.model.integration.players.Player;
+import moe.tristan.Lyrical.model.integration.system.SystemUtilities;
 import moe.tristan.Lyrical.view.UIBridge;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by Tristan Deloche on 09/07/2016.
+ * Service class used to manage currently listened-to player.
  */
 @Slf4j
 public final class PlayerMonitorService {
@@ -50,9 +51,13 @@ public final class PlayerMonitorService {
             boolean alreadyMonitoringPlayer = instance.trackedPlayer != null && instance.trackedPlayer.getClass().equals(playerClass);
             if (!alreadyMonitoringPlayer) {
                 Player playerToTrack = playerClass.newInstance();
-                instance.trackedPlayer = new Monitor<>(playerToTrack);
-                instance.trackedPlayer.beginMonitoring();
-                log.info("Correctly started monitoring "+playerClass.getSimpleName());
+                if (playerToTrack.getSupportedOperatingSystems().contains(SystemUtilities.CURRENT_PLATFORM)) {
+                    instance.trackedPlayer = new Monitor<>(playerToTrack);
+                    instance.trackedPlayer.beginMonitoring();
+                    log.info("Correctly started monitoring "+playerClass.getSimpleName());
+                } else {
+                    log.error(playerToTrack.getName()+" is not supported on "+SystemUtilities.CURRENT_PLATFORM);
+                }
             } else {
                 log.error("Already monitoring "+playerClass.getSimpleName()+". Will switch now.");
                 instance.trackedPlayer.stopMonitoring();

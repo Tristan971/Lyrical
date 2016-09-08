@@ -18,16 +18,14 @@
 
 package moe.tristan.Lyrical.model.integration.system;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.Data;
 
 /**
- * Created by Tristan Deloche on 09/07/2016.
+ * Represents an unsupported platform.
+ * The name fiels will always have the value passed in argument.
+ * It will be equivalent to System.getProperty("os.name")
  */
-@SuppressWarnings("unused")
-@Slf4j
+@Data
 public class DummySystem implements OperatingSystem {
-    @Override
-    public void updateSystemDisplay() {
-        log.error("UNSUPPORTED PLATFORM.");
-    }
+    private final String name;
 }

@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.model.integration.system.macOS;
 
+import lombok.Data;
 import lombok.Getter;
 import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
 import org.jetbrains.annotations.NotNull;
@@ -27,13 +28,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- * Created by Tristan Deloche on 05/07/2016.
+ * Class representing the macOS system implementation.
+ * It offers some platform-dependant functionnalities.
  */
+@Data
 public final class macOS implements OperatingSystem {
-    private static final String ERROR_MESSAGE = "NOT_FOUND";
-
-    @Getter
     public static final macOS INSTANCE = new macOS();
+
+    private final String name = "macOS";
 
     @NotNull
     public String runAppleScriptNew(String script) {
@@ -46,16 +48,11 @@ public final class macOS implements OperatingSystem {
 
             String line = reader.lines().findFirst().orElse("null");
             reader.close();
-            return line.equals("null") ? ERROR_MESSAGE : line;
+            return line.equals("null") ? OperatingSystem.ERROR_MESSAGE() : line;
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return ERROR_MESSAGE;
-    }
-
-    @Override
-    public void updateSystemDisplay() {
-
+        return OperatingSystem.ERROR_MESSAGE();
     }
 }

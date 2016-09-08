@@ -18,17 +18,15 @@
 
 package moe.tristan.Lyrical.model.integration.system.Windows;
 
+import lombok.Data;
 import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
 
 /**
- * Windows NT Integration tools
+ * Class modeling a Windows NT platform.
+ * It provides platform-dependant functionnalities.
  */
+@Data
 public class WindowsNT implements OperatingSystem {
-
     public static final WindowsNT INSTANCE = new WindowsNT();
-
-    @Override
-    public void updateSystemDisplay() {
-
-    }
+    private final String name = "Windows";
 }

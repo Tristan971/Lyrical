@@ -24,7 +24,7 @@ import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by Tristan Deloche on 09/07/2016.
+ * Class providing utilities for platform detections
  */
 @Slf4j
 public class SystemUtilities {
@@ -40,12 +40,9 @@ public class SystemUtilities {
         } else if(isWindows(platformName)) {
             log.info("Platform detected as Windows");
             return WindowsNT.INSTANCE;
-        } else if (isLinux(platformName)) {
-            log.info("Platform detected as Linux");
-            return () -> log.error("Unsupported atm : "+platformName);
         } else {
-            log.error("Platform unknown? What? => " + platformName);
-            return new DummySystem();
+            log.error("Platform unsupported as of right now => " + platformName);
+            return new DummySystem(platformName);
         }
     }
 

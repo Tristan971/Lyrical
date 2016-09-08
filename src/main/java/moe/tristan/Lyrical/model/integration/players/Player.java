@@ -18,12 +18,15 @@
 
 package moe.tristan.Lyrical.model.integration.players;
 
-import org.jetbrains.annotations.NotNull;
+import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
+import java.util.Set;
 
 /**
- * Created by Tristan Deloche on 05/07/2016.
+ * Interface for players to be working all in a meaningful way and be
+ * handled by the monitor service managers
  */
 public interface Player {
-    @NotNull String getName();
+    String getName();
+    Set<OperatingSystem> getSupportedOperatingSystems();
     PlayerSong getCurrentlyPlayedSong();
 }

@@ -29,7 +29,7 @@ public class SystemUtilitiesTest {
     @Test
     public void getCurrentOperatingSystem() throws Exception {
         if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-            Assert.assertEquals(macOS.getINSTANCE(), SystemUtilities.CURRENT_PLATFORM);
+            Assert.assertEquals(macOS.INSTANCE, SystemUtilities.CURRENT_PLATFORM);
         }
     }
 
