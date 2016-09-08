@@ -18,17 +18,20 @@
 
 package moe.tristan.Lyrical.model.integration.players.playersimpl;
 
+import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.model.integration.players.PlayerSong;
 import moe.tristan.Lyrical.model.integration.system.SystemUtilities;
+import moe.tristan.Lyrical.model.integration.system.Windows.WindowsNT;
 import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
 import moe.tristan.Lyrical.model.monitoring.PlayerMonitorService;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Created by Tristan Deloche on 05/07/2016.
+ * Service class managing the iTunes player
  */
+@Slf4j
 public final class iTunes implements Player {
     @NotNull
     @Contract(pure = true)
@@ -40,14 +43,21 @@ public final class iTunes implements Player {
     public PlayerSong getCurrentlyPlayedSong() {
         if (SystemUtilities.CURRENT_PLATFORM instanceof macOS) {
             return getSong_macOS();
+        } else if (SystemUtilities.CURRENT_PLATFORM instanceof WindowsNT) {
+            return getSong_WindowsNT();
         } else {
-            System.err.println("iTunes monitoring is not supported on this platform. Stopping monitoring.");
-            PlayerMonitorService.stopMonitoringPlayer(iTunes.class);
-            return PlayerSong.builder()
-                    .title("Unknown Song")
-                    .artist("Unknown artist")
-                    .build();
+            return getSong_Unsupported();
         }
+    }
+
+    @NotNull
+    public static PlayerSong getSong_Unsupported() {
+        log.error("iTunes monitoring is not supported on this platform. Stopping monitoring.");
+        PlayerMonitorService.stopMonitoringPlayer(iTunes.class);
+        return PlayerSong.builder()
+                .title("Unknown Song")
+                .artist("Unknown artist")
+                .build();
     }
 
     @NotNull
@@ -89,4 +99,11 @@ public final class iTunes implements Player {
                 .artist(artist)
                 .build();
     }
+
+    @NotNull
+    public static PlayerSong getSong_WindowsNT() {
+        return PlayerSong.dummyPlayerSong();
+    }
 }
+
+

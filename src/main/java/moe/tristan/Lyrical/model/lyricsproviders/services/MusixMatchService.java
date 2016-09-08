@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.model.lyricsproviders.services;
 
+import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.configuration.ApplicationConfiguration;
 import moe.tristan.Lyrical.model.configuration.ApplicationConfiguration.ConfigurationKey;
 import moe.tristan.Lyrical.model.entity.Song;
@@ -31,7 +32,7 @@ import org.jmusixmatch.entity.track.TrackData;
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-
+@Slf4j
 public final class MusixMatchService implements Service {
 
     @NotNull
@@ -60,7 +61,7 @@ public final class MusixMatchService implements Service {
         try {
             bestGuess = musixMatch.getMatchingTrack(title, artist).getTrack();
         } catch (MusixMatchException e) {
-            System.err.println("Song not found : ["+title+","+artist+"]");
+            log.debug("Song not found : ["+title+","+artist+"]");
         }
 
         if (!(bestGuess == null) && bestGuess.getHas_lyrics() == 1) {

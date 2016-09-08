@@ -19,6 +19,7 @@
 package moe.tristan.Lyrical.model.monitoring;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.entity.Song;
 import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.view.UIBridge;
@@ -27,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
+@Slf4j
 public final class PlayerMonitorService {
     private static final PlayerMonitorService instance = new PlayerMonitorService();
 
@@ -36,7 +38,7 @@ public final class PlayerMonitorService {
     private Song currentSong = Song.emptySong();
 
     public static void setCurrentSong(@NotNull Song newSong) {
-        System.out.println("The song changed to : "+newSong.getTitle()+" - "+newSong.getArtist());
+        log.info("The song changed to : "+newSong.getTitle()+" - "+newSong.getArtist());
         instance.currentSong = newSong;
         UIBridge.getInstance().songChanged(instance.currentSong);
     }
@@ -50,15 +52,14 @@ public final class PlayerMonitorService {
                 Player playerToTrack = playerClass.newInstance();
                 instance.trackedPlayer = new Monitor<>(playerToTrack);
                 instance.trackedPlayer.beginMonitoring();
-                System.out.println("Correctly started monitoring "+playerClass.getSimpleName());
+                log.info("Correctly started monitoring "+playerClass.getSimpleName());
             } else {
-                System.err.println("Already monitoring "+playerClass.getSimpleName()+". Will switch now.");
+                log.error("Already monitoring "+playerClass.getSimpleName()+". Will switch now.");
                 instance.trackedPlayer.stopMonitoring();
                 startMonitoringPlayer(playerClass);
             }
         } catch (@NotNull IllegalAccessException | InstantiationException e) {
-            System.err.println("An " + e.getClass() + " was thrown while trying to instantiate a " + playerClass.getName() + " player monitor");
-            System.err.println(e.getMessage());
+            log.error("An exception was thrown while trying to instantiate a " + playerClass.getName() + " player monitor", e);
         }
     }
 
@@ -66,7 +67,7 @@ public final class PlayerMonitorService {
         if (instance.trackedPlayer.getMonitoredPlayer().equals(playerClass)) {
             instance.trackedPlayer.stopMonitoring();
         } else {
-            System.err.println(
+            log.error(
                     "No player of class "+playerClass+" is currently being "
                             + "monitored. Monitoring "+
                             instance.trackedPlayer.getMonitoredPlayer()+

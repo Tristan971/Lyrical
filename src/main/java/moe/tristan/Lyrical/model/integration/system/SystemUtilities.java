@@ -18,29 +18,33 @@
 
 package moe.tristan.Lyrical.model.integration.system;
 
+import lombok.extern.slf4j.Slf4j;
+import moe.tristan.Lyrical.model.integration.system.Windows.WindowsNT;
 import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
+@Slf4j
 public class SystemUtilities {
 
     public static final OperatingSystem CURRENT_PLATFORM =
             getCurrentOperatingSystem(System.getProperty("os.name"));
 
     private static OperatingSystem getCurrentOperatingSystem(@NotNull String platformName) {
-        System.out.println("Current platform is : "+platformName);
+        log.info("Current platform is : "+platformName);
         if (isOSX(platformName)) {
-            System.out.println("Platform detected as macOS");
+            log.info("Platform detected as macOS");
             return macOS.INSTANCE;
         } else if(isWindows(platformName)) {
-            System.out.println("Platform detected as Windows");
-            return () -> System.out.println("Unsupported atm : "+platformName);
+            log.info("Platform detected as Windows");
+            return WindowsNT.INSTANCE;
         } else if (isLinux(platformName)) {
-            System.out.println("Platform detected as Linux");
-            return () -> System.out.println("Unsupported atm : "+platformName);
+            log.info("Platform detected as Linux");
+            return () -> log.error("Unsupported atm : "+platformName);
         } else {
+            log.error("Platform unknown? What? => " + platformName);
             return new DummySystem();
         }
     }

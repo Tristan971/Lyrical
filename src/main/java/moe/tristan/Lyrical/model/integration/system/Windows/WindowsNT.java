@@ -16,29 +16,19 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.integration.players;
+package moe.tristan.Lyrical.model.integration.system.Windows;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import org.jetbrains.annotations.NotNull;
+import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
 
 /**
- * Created by Tristan Deloche on 09/07/2016.
+ * Windows NT Integration tools
  */
-@Builder
-@Data
-@EqualsAndHashCode
-public final class PlayerSong {
-    @NotNull
-    private final String title;
-    @NotNull
-    private final String artist;
+public class WindowsNT implements OperatingSystem {
 
-    public static PlayerSong dummyPlayerSong() {
-        return PlayerSong.builder()
-                .artist("No artist")
-                .title("No title")
-                .build();
+    public static final WindowsNT INSTANCE = new WindowsNT();
+
+    @Override
+    public void updateSystemDisplay() {
+
     }
 }

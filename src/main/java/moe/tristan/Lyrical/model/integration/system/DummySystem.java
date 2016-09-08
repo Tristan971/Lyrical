@@ -18,13 +18,16 @@
 
 package moe.tristan.Lyrical.model.integration.system;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
 @SuppressWarnings("unused")
+@Slf4j
 public class DummySystem implements OperatingSystem {
     @Override
     public void updateSystemDisplay() {
-        System.err.println("UNSUPPORTED PLATFORM.");
+        log.error("UNSUPPORTED PLATFORM.");
     }
 }

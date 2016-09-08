@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.model.lyricsproviders;
 
+import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.entity.Song;
 import moe.tristan.Lyrical.model.lyricsproviders.services.DummyService;
 import org.jetbrains.annotations.NotNull;
@@ -31,6 +32,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Tristan Deloche on 08/07/2016.
  */
+@Slf4j
 public final class LyricsServicesManager {
     private static final LyricsServicesManager instance = new LyricsServicesManager();
 
@@ -43,9 +45,9 @@ public final class LyricsServicesManager {
             Optional<? extends Service> possibleDuplicate = instance.registeredServices.stream().filter(service -> service.getClass() == serviceClass).findAny();
             if (!possibleDuplicate.isPresent()) {
                 instance.registeredServices.add(serviceClass.newInstance());
-                System.out.println("Correctly registered the "+serviceClass.getSimpleName()+" service.");
+                log.info("Correctly registered the "+serviceClass.getSimpleName()+" service.");
             } else {
-                System.err.println(
+                log.error(
                         "A " + serviceClass.getName() + " service is already "
                                 + "registered. Unregister it first.\n"
                                 + "Registered services are : " +
@@ -55,8 +57,7 @@ public final class LyricsServicesManager {
                 );
             }
         } catch (@NotNull IllegalAccessException | InstantiationException e) {
-            System.err.println("An " + e.getClass() + " was thrown while trying to instantiate a " + serviceClass.getName() + " service");
-            System.err.println(e.getMessage());
+            log.error("An exception was thrown while trying to instantiate a " + serviceClass.getName() + " service", e);
         }
     }
 
@@ -64,9 +65,9 @@ public final class LyricsServicesManager {
         final String serviceClassToUnregister = serviceClass.getCanonicalName();
         boolean unregistered = instance.registeredServices.removeIf(service -> service.getClass().getCanonicalName().equals(serviceClassToUnregister));
         if (unregistered) {
-            System.out.println("Correctly unregistered the "+serviceClass.getSimpleName()+" service.");
+            log.info("Correctly unregistered the "+serviceClass.getSimpleName()+" service.");
         } else {
-            System.err.println(
+            log.error(
                     "There was no "
                     +serviceClass.getSimpleName()
                     +" service registered. "

@@ -20,6 +20,7 @@ package moe.tristan.Lyrical.model.configuration;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -28,6 +29,7 @@ import java.util.HashMap;
  * Created by Tristan Deloche on 08/07/2016.
  */
 @Builder
+@Slf4j
 public final class ApplicationConfiguration {
     @NotNull
     @Getter
@@ -52,7 +54,7 @@ public final class ApplicationConfiguration {
         String a = configMap.get(key);
 
         if (a == null) {
-            System.err.println("A key "+key+" was not found in the configuration : "+configMap.toString());
+            log.error("A key "+key+" was not found in the configuration : "+configMap.toString());
             return "NULL";
         } else {
             return a;

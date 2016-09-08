@@ -35,17 +35,6 @@ public final class macOS implements OperatingSystem {
     @Getter
     public static final macOS INSTANCE = new macOS();
 
-    //public String runApplescript(String script) {
-    //    try {
-    //        String returnedData;
-    //        if ((returnedData = (String) appleScriptEngine.eval(script)) != null) {
-    //            return returnedData;
-    //        }
-    //    } catch (ScriptException ignored) {}
-    //
-    //    return ERROR_MESSAGE;
-    //}
-
     @NotNull
     public String runAppleScriptNew(String script) {
         Runtime runtime = Runtime.getRuntime();

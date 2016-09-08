@@ -20,6 +20,7 @@ package moe.tristan.Lyrical.model.configuration;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.configuration.ApplicationConfiguration.ConfigurationKey;
 
 import java.io.InputStream;
@@ -30,6 +31,7 @@ import java.util.HashMap;
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
+@Slf4j
 public final class ApplicationConfigurationReader {
     private static final Gson gson = new Gson();
 
@@ -51,14 +53,14 @@ public final class ApplicationConfigurationReader {
         TypeToken<HashMap<String, String>> hashMapTypeToken =
                 new TypeToken<HashMap<String, String>>() {};
 
-        System.out.println("Reading the default configuration profile.");
+        log.debug("Reading the default configuration profile.");
         final HashMap<String, String> configMap =
                 gson.fromJson(new InputStreamReader(profileStream), hashMapTypeToken.getType());
 
         Arrays.stream(ConfigurationKey.values())
                 .forEach(key -> configMap.putIfAbsent(key.value, ""));
 
-        System.out.println("Read configuration is : "+configMap);
+        log.debug("Read configuration is : "+configMap);
         return ApplicationConfiguration.builder()
                 .configMap(configMap)
                 .build();
