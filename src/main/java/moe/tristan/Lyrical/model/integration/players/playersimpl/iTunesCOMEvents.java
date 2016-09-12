@@ -29,10 +29,12 @@ import moe.tristan.Lyrical.model.integration.players.PlayerSong;
 @SuppressWarnings("unused")
 @Slf4j
 public final class iTunesCOMEvents {
+    public static final iTunesCOMEvents instance = new iTunesCOMEvents();
     public static PlayerSong lastComEventSong = PlayerSong.dummyPlayerSong();
 
-    public iTunesCOMEvents() {
-        log.info("Created an instance of "+this.getClass().getSimpleName());
+
+    private iTunesCOMEvents() {
+        log.info("Created the instance of "+this.getClass().getSimpleName());
     }
 
     public void OnPlayerPlayEvent(Variant[] args) {

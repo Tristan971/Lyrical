@@ -18,7 +18,11 @@
 
 package moe.tristan.Lyrical.model.integration.system.Windows;
 
+import com.jacob.activeX.ActiveXComponent;
+import com.jacob.com.Dispatch;
+import com.jacob.com.DispatchEvents;
 import lombok.Data;
+import moe.tristan.Lyrical.model.integration.players.playersimpl.iTunesCOMEvents;
 import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
 
 /**
@@ -29,4 +33,10 @@ import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
 public class WindowsNT implements OperatingSystem {
     public static final WindowsNT INSTANCE = new WindowsNT();
     private final String name = "Windows";
+
+    public static DispatchEvents initJacobEvents(String identifier, Object sink) {
+        ActiveXComponent activeXComponent = new ActiveXComponent(identifier);
+        Dispatch controller = activeXComponent.getObject();
+        return new DispatchEvents(controller, sink);
+    }
 }

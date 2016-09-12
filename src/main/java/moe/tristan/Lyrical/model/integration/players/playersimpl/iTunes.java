@@ -127,15 +127,10 @@ public final class iTunes implements Player {
     public void startMonitoring() {
         if (SystemUtilities.CURRENT_PLATFORM instanceof WindowsNT) {
             ComThread.InitMTA(true);
-            ActiveXComponent itunesActiveX = new ActiveXComponent(
-                    "iTunes.Application"
+            DispatchEvents events = WindowsNT.initJacobEvents(
+                    "iTunes.Application",
+                    iTunesCOMEvents.instance
             );
-            Dispatch iTunesController = itunesActiveX.getObject();
-            DispatchEvents events =
-                    new DispatchEvents(
-                            iTunesController,
-                            new iTunesCOMEvents()
-                    );
         }
 
         isMonitoring = true;
