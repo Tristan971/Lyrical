@@ -23,5 +23,16 @@
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.6.2" level="project" />
     <orderEntry type="library" name="jacob" level="project" />
+    <orderEntry type="module-library" scope="RUNTIME">
+      <library name="JACOB Native">
+        <CLASSES />
+        <JAVADOC />
+        <NATIVE>
+          <root url="file://$MODULE_DIR$/src/main/resources/native" />
+          <root url="file://$MODULE_DIR$/src/main/resources/native" />
+        </NATIVE>
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

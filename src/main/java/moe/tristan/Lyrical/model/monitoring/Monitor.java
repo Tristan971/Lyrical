@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.model.monitoring;
 
+import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.entity.Song;
 import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.model.integration.players.PlayerSong;
@@ -31,6 +32,7 @@ import java.util.TimerTask;
 /**
  * This class acts as a decorator for Player monitoring
  */
+@Slf4j
 public final class Monitor<T extends Player> {
     private boolean shouldMonitor = false;
 
@@ -40,6 +42,8 @@ public final class Monitor<T extends Player> {
 
     public Monitor(T playerToMonitor) {
         this.monitoredPlayer = playerToMonitor;
+
+        Runtime.getRuntime().addShutdownHook(new Thread(this::stopMonitoring));
     }
 
     private void checkSong() {
@@ -63,6 +67,7 @@ public final class Monitor<T extends Player> {
 
     public void beginMonitoring() {
         shouldMonitor = true;
+        this.monitoredPlayer.startMonitoring();
         new Timer(true).scheduleAtFixedRate(
                 new TimerTask() {
                     @Override
@@ -77,9 +82,12 @@ public final class Monitor<T extends Player> {
                 0,
                 1000
         );
+        log.info("Correctly spawned a Monitor for "+monitoredPlayer.getClass().getSimpleName());
     }
 
     public void stopMonitoring() {
+        log.info("Correctly killed the monitor for "+monitoredPlayer.getClass().getSimpleName());
+        this.monitoredPlayer.stopMonitoring();
         shouldMonitor = false;
     }
 

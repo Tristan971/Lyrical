@@ -19,6 +19,9 @@
 package moe.tristan.Lyrical.model.integration.players.playersimpl;
 
 import com.jacob.activeX.ActiveXComponent;
+import com.jacob.com.ComThread;
+import com.jacob.com.Dispatch;
+import com.jacob.com.DispatchEvents;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.integration.players.Player;
@@ -42,7 +45,7 @@ import java.util.Set;
 @Slf4j
 @Data
 public final class iTunes implements Player {
-
+    private boolean isMonitoring = false;
     private final String name = "iTunes";
     private final Set<OperatingSystem> supportedOperatingSystems =
             new HashSet<>(
@@ -103,10 +106,10 @@ public final class iTunes implements Player {
                 .build();
     }
 
+    @Contract(pure = true)
     @NotNull
     public static PlayerSong getSong_WindowsNT() {
-        ActiveXComponent itunesActiveX = new ActiveXComponent("iTunes.Application");
-        return PlayerSong.dummyPlayerSong();
+        return iTunesCOMEvents.currentPlayerSong;
     }
 
     @NotNull
@@ -117,6 +120,38 @@ public final class iTunes implements Player {
                 .title("Unknown Song")
                 .artist("Unknown artist")
                 .build();
+    }
+
+    @Override
+    public void startMonitoring() {
+        if (SystemUtilities.CURRENT_PLATFORM instanceof WindowsNT) {
+            ComThread.InitMTA(true);
+            ActiveXComponent itunesActiveX = new ActiveXComponent(
+                    "iTunes.Application"
+            );
+            Dispatch iTunesController = itunesActiveX.getObject();
+            DispatchEvents events =
+                    new DispatchEvents(
+                            iTunesController,
+                            new iTunesCOMEvents()
+                    );
+        }
+
+        isMonitoring = true;
+    }
+
+    @Override
+    public void stopMonitoring() {
+        if (SystemUtilities.CURRENT_PLATFORM instanceof WindowsNT) {
+            ComThread.Release();
+        }
+
+        isMonitoring = false;
+    }
+
+    @Override
+    public boolean isMonitoring() {
+        return isMonitoring;
     }
 }
 

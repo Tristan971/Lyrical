@@ -16,19 +16,13 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.integration.players;
-
-import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
-import moe.tristan.Lyrical.model.monitoring.Monitorable;
-
-import java.util.Set;
+package moe.tristan.Lyrical.model.monitoring;
 
 /**
- * Interface for players to be working all in a meaningful way and be
- * handled by the monitor service managers
+ * Created by tdelo on 12/09/2016.
  */
-public interface Player extends Monitorable {
-    String getName();
-    Set<OperatingSystem> getSupportedOperatingSystems();
-    PlayerSong getCurrentlyPlayedSong();
+public interface Monitorable {
+    void startMonitoring();
+    void stopMonitoring();
+    boolean isMonitoring();
 }
