@@ -23,34 +23,44 @@ import com.jacob.com.Variant;
 import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.integration.players.PlayerSong;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
- * Created by tdelo on 09/09/2016.
+ * Listener class to iTunes COM events
  */
+@SuppressWarnings("unused")
 @Slf4j
 public final class iTunesCOMEvents {
+    public static PlayerSong lastComEventSong = PlayerSong.dummyPlayerSong();
 
-    public static PlayerSong currentPlayerSong = PlayerSong.dummyPlayerSong();
+    public iTunesCOMEvents() {
+        log.info("Created an instance of "+this.getClass().getSimpleName());
+    }
 
     public void OnPlayerPlayEvent(Variant[] args) {
-        extractArtistAndTrackName(args);
+        log.debug("OnPlayerPlayEvent");
+        lastComEventSong = extractArtistAndTrackName(args);
     }
 
     public void OnPlayerPlayingTrackChangedEvent(Variant[] args) {
-        List<String> argsStringRep = Arrays.stream(args)
-                .map(Variant::getString)
-                .collect(Collectors.toList());
-        log.debug(argsStringRep.toString());
-        extractArtistAndTrackName(args);
+        log.debug("OnPlayerPlayingTrackChangedEvent");
+        lastComEventSong = extractArtistAndTrackName(args);
     }
 
-    private static void extractArtistAndTrackName(Variant[] args) {
-        Dispatch event = args[0].getDispatch();
+    private static PlayerSong extractArtistAndTrackName(Variant[] args) {
+        if (args[0].getvt() == Variant.VariantDispatch) {
+            Dispatch event = args[0].getDispatch();
+            String artist = Dispatch.get(event, "Artist").toString();
+            String name = Dispatch.get(event, "Name").toString();
 
-        log.info("Artist: " + Dispatch.get(event, "Artist"));
-        log.info("Name: " + Dispatch.get(event, "Name"));
+            return PlayerSong.builder()
+                    .artist(artist)
+                    .title(name)
+                    .build();
+        }
+
+        log.error("Grave COM interface error. "
+                + "The variant received was not of type VT_DISPATCH : "+
+                args[0].toString()
+        );
+        return PlayerSong.dummyPlayerSong();
     }
 }

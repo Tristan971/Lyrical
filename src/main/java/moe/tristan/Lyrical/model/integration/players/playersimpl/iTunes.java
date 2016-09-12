@@ -22,6 +22,7 @@ import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.ComThread;
 import com.jacob.com.Dispatch;
 import com.jacob.com.DispatchEvents;
+import com.jacob.com.ROT;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.integration.players.Player;
@@ -109,7 +110,7 @@ public final class iTunes implements Player {
     @Contract(pure = true)
     @NotNull
     public static PlayerSong getSong_WindowsNT() {
-        return iTunesCOMEvents.currentPlayerSong;
+        return iTunesCOMEvents.lastComEventSong;
     }
 
     @NotNull

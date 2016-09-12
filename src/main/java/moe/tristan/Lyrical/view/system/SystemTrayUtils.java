@@ -34,7 +34,7 @@ import java.io.IOException;
  * Created by Tristan Deloche on 10/07/2016.
  *
  * Credits to Jewelsea for the SystemTray JavaFX usage skeleton
- *  @see{https://gist.github.com/jewelsea/e231e89e8d36ef4e5d8a}
+ *  {@link : https://gist.github.com/jewelsea/e231e89e8d36ef4e5d8a}
  */
 public class SystemTrayUtils {
     public static void initTrayIconWithStage(@NotNull Stage stage) {
@@ -44,7 +44,11 @@ public class SystemTrayUtils {
 
             java.awt.SystemTray tray = java.awt.SystemTray.getSystemTray();
             //noinspection ConstantConditions
-            java.awt.Image image = ImageIO.read(ResourceUtil.getImageResource("macOS/lyrical-trayicon-1X.png"));
+            java.awt.Image image = ImageIO.read(
+                    ResourceUtil.getImageResource(
+                            "macOS/lyrical-trayicon-1X.png"
+                    )
+            );
             TrayIcon trayIcon = new TrayIcon(image);
 
             trayIcon.addMouseListener(getMouseListener(stage));
