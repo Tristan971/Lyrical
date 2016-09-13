@@ -77,7 +77,7 @@ public class GUILauncher extends Application {
         primaryStage.setMaxHeight(500);
         primaryStage.setMaxWidth(250);
         primaryStage.initStyle(StageStyle.DECORATED);
-        primaryStage.setTitle("Lyrical - v0.2 beta");
+        primaryStage.setTitle("Lyrical - v0.3 beta");
         primaryStage.show();
         primaryStage.requestFocus();
 
