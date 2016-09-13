@@ -62,6 +62,12 @@ public class SystemTrayUtils {
     @NotNull
     private static MouseListener getMouseListener(@NotNull Stage stage) {
         return new MouseListener() {
+
+            // Default pos that should never be needed
+            // is 200px in diagonal from topleft
+            private double posX = 200.0;
+            private double posY = 200.0;
+
             public void mouseClicked(MouseEvent e) {}
             public void mousePressed(MouseEvent e) {}
             public void mouseEntered(MouseEvent e) {}
@@ -69,7 +75,18 @@ public class SystemTrayUtils {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                Platform.runLater(stage.isShowing() ? stage::close : stage::show);
+                Platform.runLater(() -> {
+                    if (stage.isShowing()) {
+                        posX = stage.getX();
+                        posY = stage.getY();
+                        stage.hide();
+                    } else {
+                        stage.setX(posX);
+                        stage.setY(posY);
+                        stage.show();
+                        stage.requestFocus();
+                    }
+                });
             }
         };
     }

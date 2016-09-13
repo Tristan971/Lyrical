@@ -79,6 +79,7 @@ public class GUILauncher extends Application {
         primaryStage.initStyle(StageStyle.DECORATED);
         primaryStage.setTitle("Lyrical - v0.2 beta");
         primaryStage.show();
+        primaryStage.requestFocus();
 
         if (java.awt.SystemTray.isSupported()) {
             SystemTrayUtils.initTrayIconWithStage(primaryStage);

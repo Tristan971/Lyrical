@@ -49,6 +49,9 @@ public class RootViewController {
     private static RootViewController instance = null;
     private static final double MAXWIDTH = 230;
 
+    // Smaller is faster
+    private static final double MARQUEE_LENGTH_FACTOR = 50;
+
     public RootViewController() {
         instance = this;
     }
@@ -79,11 +82,6 @@ public class RootViewController {
         UIBridge.getInstance().lyrics.addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> lyricsLabel.setText(newValue));
         });
-
-        //TranslateTransition transition = new TranslateTransition(new Duration(5000), titleText);
-        //transition.setFromX(titleText.getX()-250);
-        //transition.setToX(titleText.getX()+150);
-        //transition.playFromStart();
     }
 
     private boolean isTextClipped(@NotNull Text text) {
@@ -122,22 +120,22 @@ public class RootViewController {
 
     @NotNull
     private static Runnable getMarqueeTransition(Text text) {
-        TranslateTransition marquee = new TranslateTransition(
-                new Duration(5000),
-                text
-        );
-
         double initialMinX = text.getX();
         double initialEndX = text.getBoundsInParent().getMaxX();
         double textLen = initialEndX - initialMinX;
         double overrunLen = textLen - 230;
         double goalX = initialMinX - overrunLen;
 
+        TranslateTransition marquee = new TranslateTransition(
+                new Duration(overrunLen * MARQUEE_LENGTH_FACTOR),
+                text
+        );
+
         marquee.setFromX(initialMinX);
         marquee.setToX(initialMinX - overrunLen);
 
         TranslateTransition returnTransition = new TranslateTransition(
-                new Duration(5000),
+                new Duration(overrunLen * MARQUEE_LENGTH_FACTOR),
                 text
         );
 

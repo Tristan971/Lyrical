@@ -18,11 +18,8 @@
 
 package moe.tristan.Lyrical.model.integration.players.playersimpl;
 
-import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.ComThread;
-import com.jacob.com.Dispatch;
 import com.jacob.com.DispatchEvents;
-import com.jacob.com.ROT;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.integration.players.Player;
