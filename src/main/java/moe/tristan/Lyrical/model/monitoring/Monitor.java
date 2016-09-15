@@ -42,7 +42,6 @@ public final class Monitor<T extends Player> {
 
     public Monitor(T playerToMonitor) {
         this.monitoredPlayer = playerToMonitor;
-
         Runtime.getRuntime().addShutdownHook(new Thread(this::stopMonitoring));
     }
 

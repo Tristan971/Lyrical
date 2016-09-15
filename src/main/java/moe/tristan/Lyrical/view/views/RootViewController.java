@@ -50,7 +50,7 @@ public class RootViewController {
     private static final double MAXWIDTH = 230;
 
     // Smaller is faster
-    private static final double MARQUEE_LENGTH_FACTOR = 50;
+    private static final double MARQUEE_LENGTH_FACTOR = 40;
 
     public RootViewController() {
         instance = this;

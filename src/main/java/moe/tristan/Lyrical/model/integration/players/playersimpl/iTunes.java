@@ -20,6 +20,8 @@ package moe.tristan.Lyrical.model.integration.players.playersimpl;
 
 import com.jacob.com.ComThread;
 import com.jacob.com.DispatchEvents;
+import com.jacob.com.ROT;
+import javafx.application.Platform;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.integration.players.Player;
@@ -32,6 +34,7 @@ import moe.tristan.Lyrical.model.monitoring.PlayerMonitorService;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -124,7 +127,7 @@ public final class iTunes implements Player {
     public void startMonitoring() {
         if (SystemUtilities.CURRENT_PLATFORM instanceof WindowsNT) {
             ComThread.InitMTA(true);
-            DispatchEvents events = WindowsNT.initJacobEvents(
+            WindowsNT.initJacobEvents(
                     "iTunes.Application",
                     iTunesCOMEvents.instance
             );
@@ -136,9 +139,9 @@ public final class iTunes implements Player {
     @Override
     public void stopMonitoring() {
         if (SystemUtilities.CURRENT_PLATFORM instanceof WindowsNT) {
+            log.info("Stopping the iTunes COM connection thread and releasing all objects.");
             ComThread.Release();
         }
-
         isMonitoring = false;
     }
 
