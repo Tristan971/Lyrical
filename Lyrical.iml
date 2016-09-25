@@ -34,5 +34,6 @@
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.6.2" level="project" />
+    <orderEntry type="library" name="Maven: com.jacob:jacob:1.18" level="project" />
   </component>
 </module>

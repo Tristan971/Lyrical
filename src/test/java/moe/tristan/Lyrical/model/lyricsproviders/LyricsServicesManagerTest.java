@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.model.lyricsproviders;
 
+import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.lyricsproviders.services.MusixMatchService;
 import org.junit.Test;
 
@@ -28,6 +29,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
+@Slf4j
 public class LyricsServicesManagerTest {
 
 
@@ -54,7 +56,7 @@ public class LyricsServicesManagerTest {
     @Test
     public void getRegisteredServices() throws Exception {
         registerService();
-        System.out.println(LyricsServicesManager.getRegisteredServices());
+        log.debug(LyricsServicesManager.getRegisteredServices().toString());
         assertThat(
                 LyricsServicesManager.getRegisteredServices(),
                 hasItem(instanceOf(MusixMatchService.class))

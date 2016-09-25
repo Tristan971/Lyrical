@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.model.configuration;
 
+import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.configuration.ApplicationConfiguration.ConfigurationKey;
 import org.junit.Test;
 
@@ -26,13 +27,14 @@ import java.util.Arrays;
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
+@Slf4j
 public class ApplicationConfigurationReaderTest {
     @Test
     public void dummy() throws Exception {
         final ApplicationConfiguration configuration = ApplicationConfigurationReader.dummy();
         Arrays.stream(ConfigurationKey.values())
                 .map(key -> key.value +" : "+  configuration.get(key))
-                .forEach(System.out::println);
+                .forEach(log::debug);
     }
 
     @Test
@@ -40,7 +42,7 @@ public class ApplicationConfigurationReaderTest {
         final ApplicationConfiguration configuration = ApplicationConfiguration.getINSTANCE();
         Arrays.stream(ConfigurationKey.values())
                 .map(key -> key.value +" : "+  configuration.get(key))
-                .forEach(System.out::println);
+                .forEach(log::debug);
     }
 
 }

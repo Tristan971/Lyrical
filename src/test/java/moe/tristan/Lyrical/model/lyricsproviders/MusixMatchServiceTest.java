@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.model.lyricsproviders;
 
+import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.entity.Song;
 import moe.tristan.Lyrical.model.lyricsproviders.services.MusixMatchService;
 import org.junit.Assert;
@@ -29,6 +30,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
+@Slf4j
 public class MusixMatchServiceTest {
     private MusixMatchService service;
 
@@ -41,7 +43,7 @@ public class MusixMatchServiceTest {
     public void identifySong() throws Exception {
         Song loseYourself = service.identifySong("Lose yourself", "Eminem");
         Assert.assertThat(loseYourself.getLyrics(), containsString("Look"));
-        System.out.println(loseYourself.toString());
+        log.debug(loseYourself.toString());
     }
 
 }

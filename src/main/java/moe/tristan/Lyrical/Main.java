@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical;
 
+import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.view.core.GUILauncher;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,6 +27,7 @@ import java.util.Arrays;
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
+@Slf4j
 public final class Main {
     public static boolean DEV_MODE = false;
 
@@ -34,6 +36,9 @@ public final class Main {
                 .filter(s -> s.equals("DEV"))
                 .findAny()
                 .isPresent();
+        if (DEV_MODE) {
+            log.debug("Developer mode enabled");
+        }
 
         GUILauncher.main(args);
     }

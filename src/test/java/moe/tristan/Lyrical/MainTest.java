@@ -18,8 +18,10 @@
 
 package moe.tristan.Lyrical;
 
-import org.junit.Ignore;
 import org.junit.Test;
+
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -30,16 +32,19 @@ import static org.junit.Assert.assertThat;
  * Ignore these tests for now since the IoC is making them a bit tough to
  * implement decently. Oh well, we'll see later.
  */
-@Ignore
 public class MainTest {
     @Test
     public void main() throws Exception {
-        Main.main("DEV");
-        assertThat(Main.DEV_MODE, is(true));
+        Thread appThread = new Thread(() -> Main.main("DEV"));
+        appThread.start();
+        new ScheduledThreadPoolExecutor(1).schedule(
+                () -> {
+                        assertThat(Main.DEV_MODE, is(true));
+                    //noinspection deprecation
+                    appThread.stop();
+                },
+                3,
+                TimeUnit.SECONDS
+        );
     }
-
-    @Test
-    public void start() throws Exception {
-    }
-
 }

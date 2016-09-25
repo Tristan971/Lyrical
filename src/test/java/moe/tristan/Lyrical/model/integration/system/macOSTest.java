@@ -18,17 +18,17 @@
 
 package moe.tristan.Lyrical.model.integration.system;
 
+import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
-@Ignore
+@Slf4j
 public class macOSTest {
     private macOS macOSInstance;
 
@@ -40,10 +40,10 @@ public class macOSTest {
 
     @Test
     public void runApplescript() throws Exception {
-        if (System.getProperty("os.name").toLowerCase().contains("mac")) {
-            macOSInstance.runAppleScriptNew("say \"Hello from Java\"");
+        if (SystemUtilities.CURRENT_PLATFORM instanceof macOS) {
+            macOSInstance.runAppleScriptNew("say \"AppleScript test.\"");
         } else {
-            System.out.println("Not on OS X. No need to test for AppleScript");
+            log.debug("Not on OS X. No need to test for AppleScript");
         }
     }
 

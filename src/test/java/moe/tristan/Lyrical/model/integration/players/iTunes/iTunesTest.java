@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.model.integration.players.iTunes;
 
+import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.integration.players.playersimpl.iTunes;
 import moe.tristan.Lyrical.model.integration.system.SystemUtilities;
 import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
@@ -26,11 +27,12 @@ import org.junit.Test;
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
+@Slf4j
 public class iTunesTest {
     @Test
     public void getSong_macOS() throws Exception {
         if (SystemUtilities.CURRENT_PLATFORM instanceof macOS) {
-            System.out.println(iTunes.getSong_macOS());
+            log.debug(iTunes.getSong_macOS().toString());
         }
     }
 
