@@ -34,9 +34,9 @@ public class WindowsNT implements OperatingSystem {
     public static final WindowsNT INSTANCE = new WindowsNT();
     private final String name = "Windows";
 
-    public static DispatchEvents initJacobEvents(String identifier, Object sink) {
+    public static void initJacobEvents(String identifier, Object sink) {
         ActiveXComponent activeXComponent = new ActiveXComponent(identifier);
         Dispatch controller = activeXComponent.getObject();
-        return new DispatchEvents(controller, sink);
+        DispatchEvents COMDispatchEvents  = new DispatchEvents(controller, sink);
     }
 }

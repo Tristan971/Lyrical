@@ -18,7 +18,6 @@
 
 package moe.tristan.Lyrical.model.configuration;
 
-import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.configuration.ApplicationConfiguration.ConfigurationKey;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +29,6 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
-@Slf4j
 public class ApplicationConfigurationTest {
     private ApplicationConfiguration configuration;
 
@@ -45,7 +43,7 @@ public class ApplicationConfigurationTest {
                 .forEach(key -> ApplicationConfiguration.getINSTANCE().get(key));
         Arrays.stream(ConfigurationKey.values())
                 .map(key -> "{ " +key.value+" : "+ApplicationConfiguration.getINSTANCE().get(key)+ " }")
-                .forEach(log::debug);
+                .forEach(System.out::println);
     }
 
     @Test

@@ -52,7 +52,8 @@ public final class iTunesCOMEvents {
             Dispatch event = args[0].getDispatch();
             String artist = Dispatch.get(event, "Artist").toString();
             String name = Dispatch.get(event, "Name").toString();
-
+            event.safeRelease();
+            log.debug("Song change detected!");
             return PlayerSong.builder()
                     .artist(artist)
                     .title(name)
