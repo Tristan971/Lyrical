@@ -22,7 +22,7 @@ import lombok.Data;
 
 /**
  * Represents an unsupported platform.
- * The name fiels will always have the value passed in argument.
+ * The name fields will always have the value passed in argument.
  * It will be equivalent to System.getProperty("os.name")
  */
 @Data

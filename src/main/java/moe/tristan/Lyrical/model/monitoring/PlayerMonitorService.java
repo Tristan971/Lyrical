@@ -48,7 +48,8 @@ public final class PlayerMonitorService {
 
     public static void startMonitoringPlayer(@NotNull Class<? extends Player> playerClass) {
         try {
-            boolean alreadyMonitoringPlayer = instance.trackedPlayer != null && instance.trackedPlayer.getClass().equals(playerClass);
+            boolean alreadyMonitoringPlayer = instance.trackedPlayer != null &&
+                    instance.trackedPlayer.getCurrentClass().equals(playerClass);
             if (!alreadyMonitoringPlayer) {
                 Player playerToTrack = playerClass.newInstance();
                 if (playerToTrack.getSupportedOperatingSystems().contains(SystemUtilities.CURRENT_PLATFORM)) {

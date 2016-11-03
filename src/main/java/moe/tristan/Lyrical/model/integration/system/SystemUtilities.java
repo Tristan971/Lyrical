@@ -50,6 +50,9 @@ public class SystemUtilities {
     private static void loadNativeLibraries(OperatingSystem operatingSystem) {
         if (operatingSystem instanceof WindowsNT) {
             String dataModel = System.getProperty("sun.arch.data.model");
+
+            // I manage my shit. This /will/ work. I test for it.
+            //noinspection ConstantConditions
             String nativePath = SystemUtilities.class.getClassLoader().getResource("native").getPath();
             if (dataModel.contains("32")) {
                 nativePath += "/jacob-1.18-x86.dll";
