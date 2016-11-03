@@ -22,7 +22,6 @@ import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.Dispatch;
 import com.jacob.com.DispatchEvents;
 import lombok.Data;
-import moe.tristan.Lyrical.model.integration.players.playersimpl.iTunesCOMEvents;
 import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
 
 /**
@@ -37,6 +36,6 @@ public class WindowsNT implements OperatingSystem {
     public static void initJacobEvents(String identifier, Object sink) {
         ActiveXComponent activeXComponent = new ActiveXComponent(identifier);
         Dispatch controller = activeXComponent.getObject();
-        DispatchEvents COMDispatchEvents  = new DispatchEvents(controller, sink);
+        DispatchEvents COMDispatchEvents = new DispatchEvents(controller, sink);
     }
 }

@@ -51,7 +51,8 @@ public final class ApplicationConfigurationReader {
                 .getResourceAsStream("DefaultProfile.json");
 
         TypeToken<HashMap<String, String>> hashMapTypeToken =
-                new TypeToken<HashMap<String, String>>() {};
+                new TypeToken<HashMap<String, String>>() {
+                };
 
         log.debug("Reading the default configuration profile.");
         final HashMap<String, String> configMap =
@@ -60,7 +61,7 @@ public final class ApplicationConfigurationReader {
         Arrays.stream(ConfigurationKey.values())
                 .forEach(key -> configMap.putIfAbsent(key.value, ""));
 
-        log.debug("Read configuration is : "+configMap);
+        log.debug("Read configuration is : " + configMap);
         return ApplicationConfiguration.builder()
                 .configMap(configMap)
                 .build();

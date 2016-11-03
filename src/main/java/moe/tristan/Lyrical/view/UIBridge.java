@@ -28,16 +28,16 @@ import org.jetbrains.annotations.NotNull;
  */
 public class UIBridge {
     private static final UIBridge INSTANCE = new UIBridge();
+    public final StringProperty title = new SimpleStringProperty("");
+    public final StringProperty artist = new SimpleStringProperty("");
+    public final StringProperty lyrics = new SimpleStringProperty("");
+    private UIBridge() {
+    }
+
     @NotNull
     public static UIBridge getInstance() {
         return INSTANCE;
     }
-
-    public final StringProperty title = new SimpleStringProperty("");
-    public final StringProperty artist = new SimpleStringProperty("");
-    public final StringProperty lyrics = new SimpleStringProperty("");
-
-    private UIBridge() {}
 
     public void songChanged(@NotNull Song newSong) {
         title.setValue(newSong.getTitle());

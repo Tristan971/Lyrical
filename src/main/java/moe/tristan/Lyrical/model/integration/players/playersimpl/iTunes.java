@@ -19,9 +19,6 @@
 package moe.tristan.Lyrical.model.integration.players.playersimpl;
 
 import com.jacob.com.ComThread;
-import com.jacob.com.DispatchEvents;
-import com.jacob.com.ROT;
-import javafx.application.Platform;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.integration.players.Player;
@@ -34,7 +31,6 @@ import moe.tristan.Lyrical.model.monitoring.PlayerMonitorService;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -46,7 +42,6 @@ import java.util.Set;
 @Slf4j
 @Data
 public final class iTunes implements Player {
-    private boolean isMonitoring = false;
     private final String name = "iTunes";
     private final Set<OperatingSystem> supportedOperatingSystems =
             new HashSet<>(
@@ -55,17 +50,7 @@ public final class iTunes implements Player {
                             WindowsNT.INSTANCE
                     )
             );
-
-    @Override
-    public PlayerSong getCurrentlyPlayedSong() {
-        if (SystemUtilities.CURRENT_PLATFORM instanceof macOS) {
-            return getSong_macOS();
-        } else if (SystemUtilities.CURRENT_PLATFORM instanceof WindowsNT) {
-            return getSong_WindowsNT();
-        } else {
-            return getSong_Unsupported();
-        }
-    }
+    private boolean isMonitoring = false;
 
     @NotNull
     public static PlayerSong getSong_macOS() {
@@ -121,6 +106,17 @@ public final class iTunes implements Player {
                 .title("Unknown Song")
                 .artist("Unknown artist")
                 .build();
+    }
+
+    @Override
+    public PlayerSong getCurrentlyPlayedSong() {
+        if (SystemUtilities.CURRENT_PLATFORM instanceof macOS) {
+            return getSong_macOS();
+        } else if (SystemUtilities.CURRENT_PLATFORM instanceof WindowsNT) {
+            return getSong_WindowsNT();
+        } else {
+            return getSong_Unsupported();
+        }
     }
 
     @Override

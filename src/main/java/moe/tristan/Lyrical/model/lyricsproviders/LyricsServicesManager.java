@@ -38,14 +38,15 @@ public final class LyricsServicesManager {
 
     private final Set<Service> registeredServices = new HashSet<>();
 
-    private LyricsServicesManager() {}
+    private LyricsServicesManager() {
+    }
 
     public static void registerService(@NotNull Class<? extends Service> serviceClass) {
         try {
             Optional<? extends Service> possibleDuplicate = instance.registeredServices.stream().filter(service -> service.getClass() == serviceClass).findAny();
             if (!possibleDuplicate.isPresent()) {
                 instance.registeredServices.add(serviceClass.newInstance());
-                log.info("Correctly registered the "+serviceClass.getSimpleName()+" service.");
+                log.info("Correctly registered the " + serviceClass.getSimpleName() + " service.");
             } else {
                 log.error(
                         "A " + serviceClass.getName() + " service is already "
@@ -65,15 +66,15 @@ public final class LyricsServicesManager {
         final String serviceClassToUnregister = serviceClass.getCanonicalName();
         boolean unregistered = instance.registeredServices.removeIf(service -> service.getClass().getCanonicalName().equals(serviceClassToUnregister));
         if (unregistered) {
-            log.info("Correctly unregistered the "+serviceClass.getSimpleName()+" service.");
+            log.info("Correctly unregistered the " + serviceClass.getSimpleName() + " service.");
         } else {
             log.error(
                     "There was no "
-                    +serviceClass.getSimpleName()
-                    +" service registered. "
-                    + "Therefore no service could be unregistered. "
-                    + "The currently registered services are : "
-                    + instance.registeredServices
+                            + serviceClass.getSimpleName()
+                            + " service registered. "
+                            + "Therefore no service could be unregistered. "
+                            + "The currently registered services are : "
+                            + instance.registeredServices
             );
         }
     }

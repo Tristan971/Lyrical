@@ -34,17 +34,7 @@ public final class iTunesCOMEvents {
 
 
     private iTunesCOMEvents() {
-        log.info("Created the instance of "+this.getClass().getSimpleName());
-    }
-
-    public void OnPlayerPlayEvent(Variant[] args) {
-        log.debug("OnPlayerPlayEvent");
-        lastComEventSong = extractArtistAndTrackName(args);
-    }
-
-    public void OnPlayerPlayingTrackChangedEvent(Variant[] args) {
-        log.debug("OnPlayerPlayingTrackChangedEvent");
-        lastComEventSong = extractArtistAndTrackName(args);
+        log.info("Created the instance of " + this.getClass().getSimpleName());
     }
 
     private static PlayerSong extractArtistAndTrackName(Variant[] args) {
@@ -61,9 +51,19 @@ public final class iTunesCOMEvents {
         }
 
         log.error("Grave COM interface error. "
-                + "The variant received was not of type VT_DISPATCH : "+
+                + "The variant received was not of type VT_DISPATCH : " +
                 args[0].toString()
         );
         return PlayerSong.dummyPlayerSong();
+    }
+
+    public void OnPlayerPlayEvent(Variant[] args) {
+        log.debug("OnPlayerPlayEvent");
+        lastComEventSong = extractArtistAndTrackName(args);
+    }
+
+    public void OnPlayerPlayingTrackChangedEvent(Variant[] args) {
+        log.debug("OnPlayerPlayingTrackChangedEvent");
+        lastComEventSong = extractArtistAndTrackName(args);
     }
 }

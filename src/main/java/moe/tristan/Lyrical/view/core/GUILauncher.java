@@ -45,13 +45,6 @@ public class GUILauncher extends Application {
         launch(args);
     }
 
-    @Override
-    public void start(@NotNull Stage primaryStage) throws Exception {
-        LyricsServicesManager.registerService(MusixMatchService.class);
-        PlayerMonitorService.startMonitoringPlayer(iTunes.class);
-        genericStart(primaryStage);
-    }
-
     private static void initAWT() {
         System.setProperty("apple.awt.UIElement", "true");
         java.awt.Toolkit.getDefaultToolkit();
@@ -84,5 +77,12 @@ public class GUILauncher extends Application {
         if (java.awt.SystemTray.isSupported()) {
             SystemTrayUtils.initTrayIconWithStage(primaryStage);
         }
+    }
+
+    @Override
+    public void start(@NotNull Stage primaryStage) throws Exception {
+        LyricsServicesManager.registerService(MusixMatchService.class);
+        PlayerMonitorService.startMonitoringPlayer(iTunes.class);
+        genericStart(primaryStage);
     }
 }

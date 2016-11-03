@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.model.monitoring;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.entity.Song;
 import moe.tristan.Lyrical.model.integration.players.Player;
@@ -34,14 +35,16 @@ import java.util.TimerTask;
  */
 @Slf4j
 public final class Monitor<T extends Player> {
-    private boolean shouldMonitor = false;
-
+    @Getter
+    private final Class<? extends Player> currentClass;
     private final T monitoredPlayer;
+    private boolean shouldMonitor = false;
     @Nullable
     private PlayerSong lastKnownSong = null;
 
     public Monitor(T playerToMonitor) {
         this.monitoredPlayer = playerToMonitor;
+        currentClass = this.monitoredPlayer.getClass();
         Runtime.getRuntime().addShutdownHook(new Thread(this::stopMonitoring));
     }
 
@@ -81,11 +84,11 @@ public final class Monitor<T extends Player> {
                 0,
                 1000
         );
-        log.info("Correctly spawned a Monitor for "+monitoredPlayer.getClass().getSimpleName());
+        log.info("Correctly spawned a Monitor for " + monitoredPlayer.getClass().getSimpleName());
     }
 
     public void stopMonitoring() {
-        log.info("Correctly killed the monitor for "+monitoredPlayer.getClass().getSimpleName());
+        log.info("Correctly killed the monitor for " + monitoredPlayer.getClass().getSimpleName());
         this.monitoredPlayer.stopMonitoring();
         shouldMonitor = false;
     }

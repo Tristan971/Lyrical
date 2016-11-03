@@ -18,6 +18,7 @@
 
 package moe.tristan.Lyrical.model.lyricsproviders.services;
 
+import com.google.gson.JsonSyntaxException;
 import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.configuration.ApplicationConfiguration;
 import moe.tristan.Lyrical.model.configuration.ApplicationConfiguration.ConfigurationKey;
@@ -61,7 +62,9 @@ public final class MusixMatchService implements Service {
         try {
             bestGuess = musixMatch.getMatchingTrack(title, artist).getTrack();
         } catch (MusixMatchException e) {
-            log.debug("Song not found : ["+title+","+artist+"]");
+            log.debug("Song not found : [" + title + "," + artist + "]");
+        } catch (JsonSyntaxException e) {
+            log.error("A json answer could not be parsed. Logging error.", e);
         }
 
         if (!(bestGuess == null) && bestGuess.getHas_lyrics() == 1) {

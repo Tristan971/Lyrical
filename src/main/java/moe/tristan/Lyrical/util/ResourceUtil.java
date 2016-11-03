@@ -35,6 +35,6 @@ public class ResourceUtil {
 
     @Nullable
     public static URL getImageResource(@SuppressWarnings("SameParameterValue") String image) {
-        return getResource("images/"+image);
+        return getResource("images/" + image);
     }
 }

@@ -24,17 +24,16 @@ import moe.tristan.Lyrical.util.ResourceUtil;
 import org.jetbrains.annotations.NotNull;
 
 import javax.imageio.ImageIO;
-import java.awt.AWTException;
-import java.awt.TrayIcon;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 
 /**
  * Created by Tristan Deloche on 10/07/2016.
- *
+ * <p>
  * Credits to Jewelsea for the SystemTray JavaFX usage skeleton
- *  {@link : https://gist.github.com/jewelsea/e231e89e8d36ef4e5d8a}
+ * {@link : https://gist.github.com/jewelsea/e231e89e8d36ef4e5d8a}
  */
 public class SystemTrayUtils {
     public static void initTrayIconWithStage(@NotNull Stage stage) {
@@ -68,10 +67,17 @@ public class SystemTrayUtils {
             private double posX = 200.0;
             private double posY = 200.0;
 
-            public void mouseClicked(MouseEvent e) {}
-            public void mousePressed(MouseEvent e) {}
-            public void mouseEntered(MouseEvent e) {}
-            public void mouseExited(MouseEvent e) {}
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            public void mousePressed(MouseEvent e) {
+            }
+
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            public void mouseExited(MouseEvent e) {
+            }
 
             @Override
             public void mouseReleased(MouseEvent e) {

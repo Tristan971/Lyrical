@@ -34,6 +34,7 @@ public final class ApplicationConfiguration {
     @NotNull
     @Getter
     private static final ApplicationConfiguration INSTANCE;
+
     static {
         INSTANCE = readConfiguration();
     }
@@ -42,23 +43,6 @@ public final class ApplicationConfiguration {
 
     private ApplicationConfiguration(HashMap<String, String> configMap) {
         this.configMap = configMap;
-    }
-
-    @NotNull
-    public String get(@NotNull ConfigurationKey key) {
-        return getImpl(key.value);
-    }
-
-    @NotNull
-    private String getImpl(String key) {
-        String a = configMap.get(key);
-
-        if (a == null) {
-            log.error("A key "+key+" was not found in the configuration : "+configMap.toString());
-            return "NULL";
-        } else {
-            return a;
-        }
     }
 
     @NotNull
@@ -71,10 +55,28 @@ public final class ApplicationConfiguration {
         return ApplicationConfigurationReader.readDefaultConfiguration();
     }
 
+    @NotNull
+    public String get(@NotNull ConfigurationKey key) {
+        return getImpl(key.value);
+    }
+
+    @NotNull
+    private String getImpl(String key) {
+        String a = configMap.get(key);
+
+        if (a == null) {
+            log.error("A key " + key + " was not found in the configuration : " + configMap.toString());
+            return "NULL";
+        } else {
+            return a;
+        }
+    }
+
     public enum ConfigurationKey {
         MUSIXMATCH_API_KEY("MUSIXMATCH_API_KEY");
 
         public final String value;
+
         ConfigurationKey(String s) {
             value = s;
         }

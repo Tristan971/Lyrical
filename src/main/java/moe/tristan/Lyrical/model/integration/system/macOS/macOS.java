@@ -19,9 +19,9 @@
 package moe.tristan.Lyrical.model.integration.system.macOS;
 
 import lombok.Data;
-import lombok.Getter;
 import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
 import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -40,7 +40,7 @@ public final class macOS implements OperatingSystem {
     @NotNull
     public String runAppleScriptNew(String script) {
         Runtime runtime = Runtime.getRuntime();
-        String[] args = { "osascript", "-e", script };
+        String[] args = {"osascript", "-e", script};
         try {
             Process process = runtime.exec(args);
             InputStream stdout = process.getInputStream();

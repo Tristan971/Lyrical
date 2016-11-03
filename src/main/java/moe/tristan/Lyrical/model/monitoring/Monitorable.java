@@ -23,6 +23,8 @@ package moe.tristan.Lyrical.model.monitoring;
  */
 public interface Monitorable {
     void startMonitoring();
+
     void stopMonitoring();
+
     boolean isMonitoring();
 }

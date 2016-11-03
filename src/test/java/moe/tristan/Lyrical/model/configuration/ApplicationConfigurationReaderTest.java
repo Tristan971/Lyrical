@@ -31,7 +31,7 @@ public class ApplicationConfigurationReaderTest {
     public void dummy() throws Exception {
         final ApplicationConfiguration configuration = ApplicationConfigurationReader.dummy();
         Arrays.stream(ConfigurationKey.values())
-                .map(key -> key.value +" : "+  configuration.get(key))
+                .map(key -> key.value + " : " + configuration.get(key))
                 .forEach(System.out::println);
     }
 
@@ -39,7 +39,7 @@ public class ApplicationConfigurationReaderTest {
     public void readDefaultConfiguration() throws Exception {
         final ApplicationConfiguration configuration = ApplicationConfiguration.getINSTANCE();
         Arrays.stream(ConfigurationKey.values())
-                .map(key -> key.value +" : "+  configuration.get(key))
+                .map(key -> key.value + " : " + configuration.get(key))
                 .forEach(System.out::println);
     }
 

@@ -33,11 +33,11 @@ public class SystemUtilities {
             getCurrentOperatingSystem(System.getProperty("os.name"));
 
     private static OperatingSystem getCurrentOperatingSystem(@NotNull String platformName) {
-        log.info("Current platform is : "+platformName);
+        log.info("Current platform is : " + platformName);
         if (isOSX(platformName)) {
             log.info("Platform detected as macOS");
             return macOS.INSTANCE;
-        } else if(isWindows(platformName)) {
+        } else if (isWindows(platformName)) {
             loadNativeLibraries(WindowsNT.INSTANCE);
             log.info("Platform detected as Windows");
             return WindowsNT.INSTANCE;
@@ -50,21 +50,24 @@ public class SystemUtilities {
     private static void loadNativeLibraries(OperatingSystem operatingSystem) {
         if (operatingSystem instanceof WindowsNT) {
             String dataModel = System.getProperty("sun.arch.data.model");
+
+            // I manage my shit. This /will/ work. I test for it.
+            //noinspection ConstantConditions
             String nativePath = SystemUtilities.class.getClassLoader().getResource("native").getPath();
             if (dataModel.contains("32")) {
                 nativePath += "/jacob-1.18-x86.dll";
                 System.load(nativePath);
-                log.info("Loaded JACOB 1.18 32 bits at : "+nativePath);
+                log.info("Loaded JACOB 1.18 32 bits at : " + nativePath);
             } else {
                 nativePath += "/jacob-1.18-x64.dll";
                 System.load(nativePath);
-                log.info("Loaded JACOB 1.18 64 bits at : "+nativePath);
+                log.info("Loaded JACOB 1.18 64 bits at : " + nativePath);
             }
         }
     }
 
     private static boolean isOSX(@NotNull String platformName) {
-        return  platformName.toLowerCase().contains("mac") ||
+        return platformName.toLowerCase().contains("mac") ||
                 platformName.toLowerCase().contains("darwin") ||
                 platformName.toLowerCase().contains("osx");
     }

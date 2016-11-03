@@ -38,28 +38,30 @@ public final class PlayerMonitorService {
     @Getter
     private Song currentSong = Song.emptySong();
 
+    private PlayerMonitorService() {
+    }
+
     public static void setCurrentSong(@NotNull Song newSong) {
-        log.info("The song changed to : "+newSong.getTitle()+" - "+newSong.getArtist());
+        log.info("The song changed to : " + newSong.getTitle() + " - " + newSong.getArtist());
         instance.currentSong = newSong;
         UIBridge.getInstance().songChanged(instance.currentSong);
     }
 
-    private PlayerMonitorService() {}
-
     public static void startMonitoringPlayer(@NotNull Class<? extends Player> playerClass) {
         try {
-            boolean alreadyMonitoringPlayer = instance.trackedPlayer != null && instance.trackedPlayer.getClass().equals(playerClass);
+            boolean alreadyMonitoringPlayer = instance.trackedPlayer != null &&
+                    instance.trackedPlayer.getCurrentClass().equals(playerClass);
             if (!alreadyMonitoringPlayer) {
                 Player playerToTrack = playerClass.newInstance();
                 if (playerToTrack.getSupportedOperatingSystems().contains(SystemUtilities.CURRENT_PLATFORM)) {
                     instance.trackedPlayer = new Monitor<>(playerToTrack);
                     instance.trackedPlayer.beginMonitoring();
-                    log.info("Correctly started monitoring "+playerClass.getSimpleName());
+                    log.info("Correctly started monitoring " + playerClass.getSimpleName());
                 } else {
-                    log.error(playerToTrack.getName()+" is not supported on "+SystemUtilities.CURRENT_PLATFORM);
+                    log.error(playerToTrack.getName() + " is not supported on " + SystemUtilities.CURRENT_PLATFORM);
                 }
             } else {
-                log.error("Already monitoring "+playerClass.getSimpleName()+". Will switch now.");
+                log.error("Already monitoring " + playerClass.getSimpleName() + ". Will switch now.");
                 instance.trackedPlayer.stopMonitoring();
                 startMonitoringPlayer(playerClass);
             }
@@ -73,9 +75,9 @@ public final class PlayerMonitorService {
             instance.trackedPlayer.stopMonitoring();
         } else {
             log.error(
-                    "No player of class "+playerClass+" is currently being "
-                            + "monitored. Monitoring "+
-                            instance.trackedPlayer.getMonitoredPlayer()+
+                    "No player of class " + playerClass + " is currently being "
+                            + "monitored. Monitoring " +
+                            instance.trackedPlayer.getMonitoredPlayer() +
                             " right now."
             );
         }

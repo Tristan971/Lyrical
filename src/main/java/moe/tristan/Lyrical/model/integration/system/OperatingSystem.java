@@ -27,15 +27,15 @@ import org.jetbrains.annotations.NotNull;
  * player-agnostic functionnalities.
  */
 public interface OperatingSystem {
-    String getName();
-
-    default void updateSystemDisplay() {
-        throw new UnsupportedOperationException();
-    }
-
     @NotNull
     @Contract(pure = true)
     static String ERROR_MESSAGE() {
         return "NOT_FOUND";
+    }
+
+    String getName();
+
+    default void updateSystemDisplay() {
+        throw new UnsupportedOperationException();
     }
 }

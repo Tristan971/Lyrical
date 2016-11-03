@@ -42,7 +42,7 @@ public class ApplicationConfigurationTest {
         Arrays.stream(ConfigurationKey.values())
                 .forEach(key -> ApplicationConfiguration.getINSTANCE().get(key));
         Arrays.stream(ConfigurationKey.values())
-                .map(key -> "{ " +key.value+" : "+ApplicationConfiguration.getINSTANCE().get(key)+ " }")
+                .map(key -> "{ " + key.value + " : " + ApplicationConfiguration.getINSTANCE().get(key) + " }")
                 .forEach(System.out::println);
     }
 

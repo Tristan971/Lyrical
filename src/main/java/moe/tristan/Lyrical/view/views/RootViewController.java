@@ -37,55 +37,19 @@ import java.lang.reflect.Method;
  * Created by Tristan Deloche on 09/07/2016.
  */
 public class RootViewController {
+    private static final double MAXWIDTH = 230;
+    // Smaller is faster
+    private static final double MARQUEE_LENGTH_FACTOR = 40;
+    private static RootViewController instance = null;
     @FXML
     private Text titleText;
-
     @FXML
     private Text artistText;
-
     @FXML
     private Label lyricsLabel;
 
-    private static RootViewController instance = null;
-    private static final double MAXWIDTH = 230;
-
-    // Smaller is faster
-    private static final double MARQUEE_LENGTH_FACTOR = 40;
-
     public RootViewController() {
         instance = this;
-    }
-
-
-    // It is called by JavaFX
-    @SuppressWarnings("unused")
-    public void initialize() {
-        titleText.setText(UIBridge.getInstance().title.get());
-        UIBridge.getInstance().title.addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> {
-                titleText.setText(newValue);
-                if (isTextClipped(titleText)) {
-                    marqueeLongTexe(titleText);
-                }
-            });
-        });
-        artistText.setText(UIBridge.getInstance().artist.get());
-        UIBridge.getInstance().artist.addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> {
-                artistText.setText(newValue);
-                if (isTextClipped(artistText)) {
-                    marqueeLongTexe(artistText);
-                }
-            });
-        });
-        lyricsLabel.setText(UIBridge.getInstance().lyrics.get());
-        UIBridge.getInstance().lyrics.addListener((observable, oldValue, newValue) -> {
-            Platform.runLater(() -> lyricsLabel.setText(newValue));
-        });
-    }
-
-    private boolean isTextClipped(@NotNull Text text) {
-        return text.getBoundsInParent().getWidth() > MAXWIDTH;
     }
 
     private static String computeClippedText(Text text) {
@@ -147,5 +111,36 @@ public class RootViewController {
             returnTransition.setOnFinished(e -> text.setText(computeClippedText(text)));
             marquee.playFromStart();
         };
+    }
+
+    // It is called by JavaFX
+    @SuppressWarnings("unused")
+    public void initialize() {
+        titleText.setText(UIBridge.getInstance().title.get());
+        UIBridge.getInstance().title.addListener((observable, oldValue, newValue) -> {
+            Platform.runLater(() -> {
+                titleText.setText(newValue);
+                if (isTextClipped(titleText)) {
+                    marqueeLongTexe(titleText);
+                }
+            });
+        });
+        artistText.setText(UIBridge.getInstance().artist.get());
+        UIBridge.getInstance().artist.addListener((observable, oldValue, newValue) -> {
+            Platform.runLater(() -> {
+                artistText.setText(newValue);
+                if (isTextClipped(artistText)) {
+                    marqueeLongTexe(artistText);
+                }
+            });
+        });
+        lyricsLabel.setText(UIBridge.getInstance().lyrics.get());
+        UIBridge.getInstance().lyrics.addListener((observable, oldValue, newValue) -> {
+            Platform.runLater(() -> lyricsLabel.setText(newValue));
+        });
+    }
+
+    private boolean isTextClipped(@NotNull Text text) {
+        return text.getBoundsInParent().getWidth() > MAXWIDTH;
     }
 }

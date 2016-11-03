@@ -28,7 +28,7 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
- *
+ * <p>
  * Ignore these tests for now since the IoC is making them a bit tough to
  * implement decently. Oh well, we'll see later.
  */
@@ -39,7 +39,7 @@ public class MainTest {
         appThread.start();
         new ScheduledThreadPoolExecutor(1).schedule(
                 () -> {
-                        assertThat(Main.DEV_MODE, is(true));
+                    assertThat(Main.DEV_MODE, is(true));
                     //noinspection deprecation
                     appThread.stop();
                 },
