@@ -25,12 +25,16 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.Main;
 import moe.tristan.Lyrical.model.integration.players.playersimpl.iTunes;
+import moe.tristan.Lyrical.model.integration.system.DummySystem;
+import moe.tristan.Lyrical.model.integration.system.SystemUtilities;
 import moe.tristan.Lyrical.model.lyricsproviders.LyricsServicesManager;
 import moe.tristan.Lyrical.model.lyricsproviders.services.MusixMatchService;
 import moe.tristan.Lyrical.model.monitoring.PlayerMonitorService;
 import moe.tristan.Lyrical.view.system.SystemTrayUtils;
+import moe.tristan.Lyrical.view.views.Errors;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -38,6 +42,8 @@ import java.io.IOException;
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
+
+@Slf4j
 public class GUILauncher extends Application {
 
     public static void main(String... args) {
@@ -48,6 +54,31 @@ public class GUILauncher extends Application {
     private static void initAWT() {
         System.setProperty("apple.awt.UIElement", "true");
         java.awt.Toolkit.getDefaultToolkit();
+    }
+
+    private static void initHighDPISupport() {
+        String[] version = System.getProperty("java.version").split("\\.");
+        String formatted = version[0] + "." + version[1];
+        double runtimeVersion = Double.parseDouble(formatted);
+
+        if (SystemUtilities.CURRENT_PLATFORM instanceof DummySystem) {
+            if (runtimeVersion < 1.9) {
+                Errors.highDpiOutdatedLinux(runtimeVersion);
+            }
+        } else {
+            log.debug(
+                    "HighDPI supported on this platform and version of the runtime :"
+                    + " Java "+runtimeVersion
+                    + ", "+SystemUtilities.CURRENT_PLATFORM.getName()
+            );
+        }
+
+        System.setProperty("prism.allowhidpi", "true");
+    }
+
+    @SuppressWarnings("unused")
+    private static void initVerbosePrism() {
+        System.setProperty("prism.verbose", "true");
     }
 
     private static void genericStart(@NotNull Stage primaryStage) {
@@ -66,9 +97,9 @@ public class GUILauncher extends Application {
             mainScene = new Scene(new AnchorPane(new Label("Could not find FXML.")));
         }
         primaryStage.setScene(mainScene);
-        primaryStage.setResizable(false);
-        primaryStage.setMaxHeight(500);
-        primaryStage.setMaxWidth(250);
+        //primaryStage.setResizable(false);
+        //primaryStage.setMaxHeight(500);
+        //primaryStage.setMaxWidth(250);
         primaryStage.initStyle(StageStyle.DECORATED);
         primaryStage.setTitle("Lyrical - v0.3 beta");
         primaryStage.show();
@@ -81,6 +112,7 @@ public class GUILauncher extends Application {
 
     @Override
     public void start(@NotNull Stage primaryStage) throws Exception {
+        initHighDPISupport();
         LyricsServicesManager.registerService(MusixMatchService.class);
         PlayerMonitorService.startMonitoringPlayer(iTunes.class);
         genericStart(primaryStage);

@@ -16,30 +16,30 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical;
+package moe.tristan.Lyrical.view.views;
 
-import lombok.extern.slf4j.Slf4j;
-import moe.tristan.Lyrical.view.core.GUILauncher;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Arrays;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 
 /**
- * Created by Tristan Deloche on 05/07/2016.
+ * This is a bit of a hack for now sadly
  */
-@Slf4j
-public final class Main {
-    public static boolean DEV_MODE = false;
+public class ErrorPane extends AnchorPane {
+    public ErrorPane(String cause, String message) {
+        super();
+        final Label title = new Label(cause);
+        final Label errorMsg = new Label(message);
 
-    public static void main(@NotNull String... args) {
-        DEV_MODE = Arrays.stream(args)
-                .filter(s -> s.equals("DEV"))
-                .findAny()
-                .isPresent();
-        if (DEV_MODE) {
-            log.debug("Developer mode enabled.");
-        }
+        title.setLayoutX(20);
+        title.setLayoutY(20);
+        title.setFont(Font.font("sans", 50));
+        errorMsg.setLayoutX(20);
+        errorMsg.setLayoutY(80);
+        errorMsg.setFont(Font.font("sans", 35));
+        errorMsg.setWrapText(true);
 
-        GUILauncher.main(args);
+        this.getChildren().add(title);
+        this.getChildren().add(errorMsg);
     }
 }
