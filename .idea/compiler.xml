@@ -27,7 +27,7 @@
         <module name="Lyrical" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8">
+    <bytecodeTargetLevel target="1.9">
       <module name="Lyrical" target="1.8" />
     </bytecodeTargetLevel>
   </component>

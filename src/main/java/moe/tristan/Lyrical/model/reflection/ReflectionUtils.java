@@ -27,7 +27,7 @@ import java.lang.reflect.InvocationTargetException;
  */
 
 @Slf4j
-public class ReflectionUtils {
+public final class ReflectionUtils {
 
     public static <S extends Reflectable> S newInstanceOfService(Class<S> serviceClass) {
         try {
@@ -50,5 +50,4 @@ public class ReflectionUtils {
         throw new RuntimeException("The "+serviceClass.getName()+" could not be initialized. " +
                 "This is a grave error and must be fixed.");
     }
-
 }
