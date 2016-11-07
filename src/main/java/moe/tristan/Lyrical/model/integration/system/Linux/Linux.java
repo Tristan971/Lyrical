@@ -38,10 +38,7 @@ public class Linux implements OperatingSystem {
         } catch (IOException e) {
             log.error("Error reading the output stream of the getName process impl.", e);
         }
-
-        log.debug("Detected Linux distribution : "+raw);
-
-        return "Linux" + raw;
+        return "Linux " + raw;
     }
 
 }

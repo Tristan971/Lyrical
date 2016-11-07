@@ -38,6 +38,7 @@ import moe.tristan.Lyrical.view.views.Errors;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
@@ -58,13 +59,21 @@ public class GUILauncher extends Application {
 
     private static void initHighDPILinuxCheck() {
         String[] version = System.getProperty("java.version").split("\\.");
-        String formatted = version[0] + "." + version[1];
+        boolean isDecNotation =
+                !Arrays.stream(version)
+                        .filter(s -> !s.matches("[0-9]"))
+                        .findAny()
+                        .isPresent();
+
+        String formatted =
+                isDecNotation ?
+                        version[0] + "." + version[1] :
+                        "1."+version[0].substring(0,1);
+
         double runtimeVersion = Double.parseDouble(formatted);
 
-        if (SystemUtilities.CURRENT_PLATFORM instanceof Linux) {
-            if (runtimeVersion < 1.9) {
-                Errors.highDpiOutdatedLinux(runtimeVersion);
-            }
+        if (SystemUtilities.CURRENT_PLATFORM instanceof Linux && runtimeVersion < 1.9) {
+            Errors.highDpiOutdatedLinux(runtimeVersion);
         } else {
             log.debug(
                     "HighDPI supported on this platform and version of the runtime :"

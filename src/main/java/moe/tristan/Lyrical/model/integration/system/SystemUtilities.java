@@ -34,7 +34,7 @@ public class SystemUtilities {
             getCurrentOperatingSystem(System.getProperty("os.name"));
 
     private static OperatingSystem getCurrentOperatingSystem(@NotNull String platformName) {
-        log.info("Current platform is : " + platformName);
+        log.info("Current platform raw name : " + platformName);
         if (isOSX(platformName)) {
             log.info("Platform detected as macOS");
             return macOS.getInstance();

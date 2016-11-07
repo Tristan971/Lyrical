@@ -31,17 +31,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Errors {
     public static void alertWarning(String cause, String message) {
-        ScalingTools scalingTools = ScalingTools.getScalingTools();
         final ErrorPane errorPane = new ErrorPane(cause, message);
         final Stage stage = new Stage(StageStyle.UTILITY);
         final Scene scene = new Scene(errorPane);
         stage.setScene(scene);
 
-        Platform.runLater(() -> {
-            stage.show();
-            stage.setWidth(stage.getWidth()*1.5);
-            stage.setHeight(stage.getHeight()*1.5);
-        });
+        Platform.runLater(stage::show);
     }
 
     public static void highDpiOutdatedLinux(double runtimeVersion) {
@@ -53,7 +48,7 @@ public class Errors {
                 "You are running the Java runtime version : "+runtimeVersion
                         + ".\n"
                         + "Unfortunately, HighDPI scaling isn't available in Java "
-                        + "versions prior to 9 (1.9) on the linux platform."
+                        + "versions prior to 9 (1.9) on the linux platform.\n"
                         + "Please update your version to "
                         + "9 (1.9) if you need HighDPI support."
         );
