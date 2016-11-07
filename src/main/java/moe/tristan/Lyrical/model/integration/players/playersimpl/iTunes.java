@@ -46,8 +46,8 @@ public final class iTunes implements Player {
     private final Set<OperatingSystem> supportedOperatingSystems =
             new HashSet<>(
                     Arrays.asList(
-                            macOS.INSTANCE,
-                            WindowsNT.INSTANCE
+                            macOS.getInstance(),
+                            WindowsNT.getInstance()
                     )
             );
     private boolean isMonitoring = false;
@@ -68,7 +68,7 @@ public final class iTunes implements Player {
                         + "  return trackname\n"
                         + "end run";
 
-        String name = macOS.INSTANCE.runAppleScriptNew(scriptForName);
+        String name = macOS.getInstance().runAppleScriptNew(scriptForName);
 
         final String scriptForArtist =
                 "on run\n"
@@ -84,7 +84,7 @@ public final class iTunes implements Player {
                         + "  return artistname\n"
                         + "end run";
 
-        String artist = macOS.INSTANCE.runAppleScriptNew(scriptForArtist);
+        String artist = macOS.getInstance().runAppleScriptNew(scriptForArtist);
 
         return PlayerSong.builder()
                 .title(name)

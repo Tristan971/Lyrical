@@ -33,7 +33,15 @@ import java.io.InputStreamReader;
  */
 @Data
 public final class macOS implements OperatingSystem {
-    public static final macOS INSTANCE = new macOS();
+    private static macOS INSTANCE = null;
+
+    public static macOS getInstance() {
+        return INSTANCE == null ? new macOS() : INSTANCE;
+    }
+
+    private macOS() {
+        INSTANCE = this;
+    }
 
     private final String name = "macOS";
 

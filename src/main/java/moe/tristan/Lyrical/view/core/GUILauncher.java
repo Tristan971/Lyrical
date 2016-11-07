@@ -28,7 +28,7 @@ import javafx.stage.StageStyle;
 import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.Main;
 import moe.tristan.Lyrical.model.integration.players.playersimpl.iTunes;
-import moe.tristan.Lyrical.model.integration.system.DummySystem;
+import moe.tristan.Lyrical.model.integration.system.Linux.Linux;
 import moe.tristan.Lyrical.model.integration.system.SystemUtilities;
 import moe.tristan.Lyrical.model.lyricsproviders.LyricsServicesManager;
 import moe.tristan.Lyrical.model.lyricsproviders.services.MusixMatchService;
@@ -56,12 +56,12 @@ public class GUILauncher extends Application {
         java.awt.Toolkit.getDefaultToolkit();
     }
 
-    private static void initHighDPISupport() {
+    private static void initHighDPILinuxCheck() {
         String[] version = System.getProperty("java.version").split("\\.");
         String formatted = version[0] + "." + version[1];
         double runtimeVersion = Double.parseDouble(formatted);
 
-        if (SystemUtilities.CURRENT_PLATFORM instanceof DummySystem) {
+        if (SystemUtilities.CURRENT_PLATFORM instanceof Linux) {
             if (runtimeVersion < 1.9) {
                 Errors.highDpiOutdatedLinux(runtimeVersion);
             }
@@ -112,7 +112,7 @@ public class GUILauncher extends Application {
 
     @Override
     public void start(@NotNull Stage primaryStage) throws Exception {
-        initHighDPISupport();
+        initHighDPILinuxCheck();
         LyricsServicesManager.registerService(MusixMatchService.class);
         PlayerMonitorService.startMonitoringPlayer(iTunes.class);
         genericStart(primaryStage);

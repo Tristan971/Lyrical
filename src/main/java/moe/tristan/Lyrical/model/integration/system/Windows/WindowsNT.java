@@ -30,7 +30,16 @@ import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
  */
 @Data
 public class WindowsNT implements OperatingSystem {
-    public static final WindowsNT INSTANCE = new WindowsNT();
+    private static WindowsNT INSTANCE = null;
+
+    public static WindowsNT getInstance() {
+        return INSTANCE == null ? new WindowsNT() : INSTANCE;
+    }
+
+    private WindowsNT() {
+        INSTANCE = this;
+    }
+
     private final String name = "Windows";
 
     public static void initJacobEvents(String identifier, Object sink) {

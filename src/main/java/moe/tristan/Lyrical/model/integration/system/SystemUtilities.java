@@ -19,6 +19,7 @@
 package moe.tristan.Lyrical.model.integration.system;
 
 import lombok.extern.slf4j.Slf4j;
+import moe.tristan.Lyrical.model.integration.system.Linux.Linux;
 import moe.tristan.Lyrical.model.integration.system.Windows.WindowsNT;
 import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
 import org.jetbrains.annotations.NotNull;
@@ -36,11 +37,14 @@ public class SystemUtilities {
         log.info("Current platform is : " + platformName);
         if (isOSX(platformName)) {
             log.info("Platform detected as macOS");
-            return macOS.INSTANCE;
+            return macOS.getInstance();
         } else if (isWindows(platformName)) {
-            loadNativeLibraries(WindowsNT.INSTANCE);
+            loadNativeLibraries(WindowsNT.getInstance());
             log.info("Platform detected as Windows");
-            return WindowsNT.INSTANCE;
+            return WindowsNT.getInstance();
+        } else if (isLinux(platformName)) {
+            log.info("Platform detected as Linux : " + Linux.getInstance().getName());
+            return Linux.getInstance();
         } else {
             log.error("Platform unsupported as of right now => " + platformName);
             return new DummySystem(platformName);
@@ -53,7 +57,10 @@ public class SystemUtilities {
 
             // I manage my shit. This /will/ work. I test for it.
             //noinspection ConstantConditions
-            String nativePath = SystemUtilities.class.getClassLoader().getResource("native").getPath();
+            String nativePath = SystemUtilities.class.getClassLoader()
+                    .getResource("native")
+                    .getPath();
+
             if (dataModel.contains("32")) {
                 nativePath += "/jacob-1.18-x86.dll";
                 System.load(nativePath);

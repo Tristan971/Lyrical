@@ -19,13 +19,23 @@
 package moe.tristan.Lyrical.model.integration.system;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Represents an unsupported platform.
  * The name fields will always have the value passed in argument.
  * It will be equivalent to System.getProperty("os.name")
  */
+
 @Data
+@Slf4j
 public class DummySystem implements OperatingSystem {
+
     private final String name;
+
+    @Override
+    public String getName() {
+        log.warn("Unknown operating system! Report this : "+System.getProperty("os.name"));
+        return System.getProperty("os.name");
+    }
 }

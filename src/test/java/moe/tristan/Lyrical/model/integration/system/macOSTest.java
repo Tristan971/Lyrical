@@ -34,8 +34,8 @@ public class macOSTest {
 
     @Before
     public void setup() {
-        macOSInstance = macOS.INSTANCE;
-        assertNotNull(macOS.INSTANCE);
+        macOSInstance = macOS.getInstance();
+        assertNotNull(macOS.getInstance());
     }
 
     @Test
