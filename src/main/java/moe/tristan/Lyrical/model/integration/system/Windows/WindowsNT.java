@@ -45,6 +45,8 @@ public class WindowsNT implements OperatingSystem {
     public static void initJacobEvents(String identifier, Object sink) {
         ActiveXComponent activeXComponent = new ActiveXComponent(identifier);
         Dispatch controller = activeXComponent.getObject();
+        //The controller automagically binds to this somehow idk
+        //noinspection unused,UnusedAssignment
         DispatchEvents COMDispatchEvents = new DispatchEvents(controller, sink);
     }
 }

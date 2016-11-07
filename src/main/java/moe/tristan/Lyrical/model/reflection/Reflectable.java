@@ -16,14 +16,10 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package moe.tristan.Lyrical.model.lyricsproviders;
-
-import moe.tristan.Lyrical.model.entity.Song;
-import moe.tristan.Lyrical.model.reflection.Reflectable;
+package moe.tristan.Lyrical.model.reflection;
 
 /**
- * Created by Tristan Deloche on 05/07/2016.
+ * Created by tristan9 on 11/7/16.
  */
-public interface Service extends Reflectable {
-    Song identifySong(String title, String artist);
+public interface Reflectable {
 }

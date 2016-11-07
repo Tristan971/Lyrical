@@ -29,8 +29,6 @@ import java.util.Set;
  */
 public interface Player extends Monitorable {
     String getName();
-
     Set<OperatingSystem> getSupportedOperatingSystems();
-
     PlayerSong getCurrentlyPlayedSong();
 }

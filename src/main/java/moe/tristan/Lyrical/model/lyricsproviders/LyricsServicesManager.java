@@ -21,6 +21,7 @@ package moe.tristan.Lyrical.model.lyricsproviders;
 import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.entity.Song;
 import moe.tristan.Lyrical.model.lyricsproviders.services.DummyService;
+import moe.tristan.Lyrical.model.reflection.ReflectionUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -42,23 +43,22 @@ public final class LyricsServicesManager {
     }
 
     public static void registerService(@NotNull Class<? extends Service> serviceClass) {
-        try {
-            Optional<? extends Service> possibleDuplicate = instance.registeredServices.stream().filter(service -> service.getClass() == serviceClass).findAny();
-            if (!possibleDuplicate.isPresent()) {
-                instance.registeredServices.add(serviceClass.newInstance());
-                log.info("Correctly registered the " + serviceClass.getSimpleName() + " service.");
-            } else {
-                log.error(
-                        "A " + serviceClass.getName() + " service is already "
-                                + "registered. Unregister it first.\n"
-                                + "Registered services are : " +
-                                instance.registeredServices.stream()
-                                        .map(service -> service.getClass().getName())
-                                        .collect(Collectors.toList())
-                );
-            }
-        } catch (@NotNull IllegalAccessException | InstantiationException e) {
-            log.error("An exception was thrown while trying to instantiate a " + serviceClass.getName() + " service", e);
+        Optional<? extends Service> possibleDuplicate =
+                instance.registeredServices.stream()
+                        .filter(service -> service.getClass() == serviceClass)
+                        .findAny();
+        if (!possibleDuplicate.isPresent()) {
+            instance.registeredServices.add(ReflectionUtils.newInstanceOfService(serviceClass));
+            log.info("Correctly registered the " + serviceClass.getSimpleName() + " service.");
+        } else {
+            log.error(
+                    "A " + serviceClass.getName() + " service is already "
+                            + "registered. Unregister it first.\n"
+                            + "Registered services are : " +
+                            instance.registeredServices.stream()
+                                    .map(service -> service.getClass().getName())
+                                    .collect(Collectors.toList())
+            );
         }
     }
 

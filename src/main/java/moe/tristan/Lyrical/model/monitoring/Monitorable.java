@@ -18,10 +18,12 @@
 
 package moe.tristan.Lyrical.model.monitoring;
 
+import moe.tristan.Lyrical.model.reflection.Reflectable;
+
 /**
  * Created by tdelo on 12/09/2016.
  */
-public interface Monitorable {
+public interface Monitorable extends Reflectable {
     void startMonitoring();
 
     void stopMonitoring();

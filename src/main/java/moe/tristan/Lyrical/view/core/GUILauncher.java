@@ -58,19 +58,7 @@ public class GUILauncher extends Application {
     }
 
     private static void initHighDPILinuxCheck() {
-        String[] version = System.getProperty("java.version").split("\\.");
-        boolean isDecNotation =
-                !Arrays.stream(version)
-                        .filter(s -> !s.matches("[0-9]"))
-                        .findAny()
-                        .isPresent();
-
-        String formatted =
-                isDecNotation ?
-                        version[0] + "." + version[1] :
-                        "1."+version[0].substring(0,1);
-
-        double runtimeVersion = Double.parseDouble(formatted);
+        double runtimeVersion = getRuntimeVersion();
 
         if (SystemUtilities.CURRENT_PLATFORM instanceof Linux && runtimeVersion < 1.9) {
             Errors.highDpiOutdatedLinux(runtimeVersion);
@@ -83,6 +71,22 @@ public class GUILauncher extends Application {
         }
 
         System.setProperty("prism.allowhidpi", "true");
+    }
+
+    private static double getRuntimeVersion() {
+        String[] version = System.getProperty("java.version").split("\\.");
+        boolean isDecNotation =
+                !Arrays.stream(version)
+                        .filter(s -> !s.matches("[0-9]"))
+                        .findAny()
+                        .isPresent();
+
+        String formatted =
+                isDecNotation ?
+                        version[0] + "." + version[1] :
+                        "1."+version[0].substring(0,1);
+
+        return Double.parseDouble(formatted);
     }
 
     @SuppressWarnings("unused")

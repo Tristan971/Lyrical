@@ -23,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.entity.Song;
 import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.model.integration.system.SystemUtilities;
+import moe.tristan.Lyrical.model.reflection.ReflectionUtils;
 import moe.tristan.Lyrical.view.UIBridge;
 import org.jetbrains.annotations.NotNull;
 
@@ -48,25 +49,21 @@ public final class PlayerMonitorService {
     }
 
     public static void startMonitoringPlayer(@NotNull Class<? extends Player> playerClass) {
-        try {
-            boolean alreadyMonitoringPlayer = instance.trackedPlayer != null &&
-                    instance.trackedPlayer.getCurrentClass().equals(playerClass);
-            if (!alreadyMonitoringPlayer) {
-                Player playerToTrack = playerClass.newInstance();
-                if (playerToTrack.getSupportedOperatingSystems().contains(SystemUtilities.CURRENT_PLATFORM)) {
-                    instance.trackedPlayer = new Monitor<>(playerToTrack);
-                    instance.trackedPlayer.beginMonitoring();
-                    log.info("Correctly started monitoring " + playerClass.getSimpleName());
-                } else {
-                    log.error(playerToTrack.getName() + " is not supported on " + SystemUtilities.CURRENT_PLATFORM);
-                }
+        boolean alreadyMonitoringPlayer = instance.trackedPlayer != null &&
+                instance.trackedPlayer.getCurrentClass().equals(playerClass);
+        if (!alreadyMonitoringPlayer) {
+            Player playerToTrack = ReflectionUtils.newInstanceOfService(playerClass);
+            if (playerToTrack.getSupportedOperatingSystems().contains(SystemUtilities.CURRENT_PLATFORM)) {
+                instance.trackedPlayer = new Monitor<>(playerToTrack);
+                instance.trackedPlayer.beginMonitoring();
+                log.info("Correctly started monitoring " + playerClass.getSimpleName());
             } else {
-                log.error("Already monitoring " + playerClass.getSimpleName() + ". Will switch now.");
-                instance.trackedPlayer.stopMonitoring();
-                startMonitoringPlayer(playerClass);
+                log.error(playerToTrack.getName() + " is not supported on " + SystemUtilities.CURRENT_PLATFORM);
             }
-        } catch (@NotNull IllegalAccessException | InstantiationException e) {
-            log.error("An exception was thrown while trying to instantiate a " + playerClass.getName() + " player monitor", e);
+        } else {
+            log.error("Already monitoring " + playerClass.getSimpleName() + ". Will switch now.");
+            instance.trackedPlayer.stopMonitoring();
+            startMonitoringPlayer(playerClass);
         }
     }
 
