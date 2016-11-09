@@ -18,7 +18,6 @@
 
 package moe.tristan.Lyrical.model.integration.system.macOS;
 
-import lombok.Data;
 import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,19 +30,17 @@ import java.io.InputStreamReader;
  * Class representing the macOS system implementation.
  * It offers some platform-dependant functionnalities.
  */
-@Data
 public final class macOS implements OperatingSystem {
     private static macOS INSTANCE = null;
-
-    public static macOS getInstance() {
-        return INSTANCE == null ? new macOS() : INSTANCE;
-    }
+    private final String name = "macOS";
 
     private macOS() {
         INSTANCE = this;
     }
 
-    private final String name = "macOS";
+    public static macOS getInstance() {
+        return INSTANCE == null ? new macOS() : INSTANCE;
+    }
 
     @NotNull
     public String runAppleScriptNew(String script) {
@@ -62,5 +59,30 @@ public final class macOS implements OperatingSystem {
         }
 
         return OperatingSystem.ERROR_MESSAGE();
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof macOS)) return false;
+        final macOS other = (macOS) o;
+        final Object this$name = this.getName();
+        final Object other$name = other.getName();
+        return this$name == null ? other$name == null : this$name.equals(other$name);
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $name = this.getName();
+        result = result * PRIME + ($name == null ? 43 : $name.hashCode());
+        return result;
+    }
+
+    public String toString() {
+        return "moe.tristan.Lyrical.model.integration.system.macOS.macOS(name=" + this.getName() + ")";
     }
 }

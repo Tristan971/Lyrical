@@ -18,22 +18,24 @@
 
 package moe.tristan.Lyrical.model.integration.system;
 
-import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.integration.system.Linux.Linux;
 import moe.tristan.Lyrical.model.integration.system.Windows.WindowsNT;
 import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
 /**
  * Class providing utilities for platform detections
  */
-@Slf4j
 public class SystemUtilities {
 
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(SystemUtilities.class);
+    @NotNull
     public static final OperatingSystem CURRENT_PLATFORM =
             getCurrentOperatingSystem(System.getProperty("os.name"));
 
-    private static OperatingSystem getCurrentOperatingSystem(@NotNull String platformName) {
+    private static @NotNull OperatingSystem getCurrentOperatingSystem(@NotNull String platformName) {
+        log.debug("Detecting current operating system" + platformName);
         log.info("Current platform raw name : " + platformName);
         if (isOSX(platformName)) {
             log.info("Platform detected as macOS");

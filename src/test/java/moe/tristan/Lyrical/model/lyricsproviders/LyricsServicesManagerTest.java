@@ -18,9 +18,9 @@
 
 package moe.tristan.Lyrical.model.lyricsproviders;
 
-import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.lyricsproviders.services.MusixMatchService;
 import org.junit.Test;
+import org.slf4j.Logger;
 
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -29,9 +29,10 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
-@Slf4j
 public class LyricsServicesManagerTest {
 
+
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(LyricsServicesManagerTest.class);
 
     @Test
     public void registerService() throws Exception {

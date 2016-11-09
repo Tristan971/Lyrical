@@ -19,7 +19,6 @@
 package moe.tristan.Lyrical.model.lyricsproviders.services;
 
 import com.google.gson.JsonSyntaxException;
-import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.configuration.ApplicationConfiguration;
 import moe.tristan.Lyrical.model.configuration.ApplicationConfiguration.ConfigurationKey;
 import moe.tristan.Lyrical.model.entity.Song;
@@ -29,13 +28,14 @@ import org.jmusixmatch.MusixMatch;
 import org.jmusixmatch.MusixMatchException;
 import org.jmusixmatch.entity.lyrics.Lyrics;
 import org.jmusixmatch.entity.track.TrackData;
+import org.slf4j.Logger;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-@Slf4j
 public final class MusixMatchService implements Service {
 
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(MusixMatchService.class);
     @NotNull
     private final MusixMatch musixMatch;
 

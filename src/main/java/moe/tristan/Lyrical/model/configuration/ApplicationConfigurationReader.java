@@ -20,8 +20,9 @@ package moe.tristan.Lyrical.model.configuration;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.configuration.ApplicationConfiguration.ConfigurationKey;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,9 +32,11 @@ import java.util.HashMap;
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
-@Slf4j
 public final class ApplicationConfigurationReader {
+    @NotNull
     private static final Gson gson = new Gson();
+    @NotNull
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(ApplicationConfigurationReader.class);
 
     public static ApplicationConfiguration dummy() {
         HashMap<String, String> config = new HashMap<>();
@@ -51,7 +54,7 @@ public final class ApplicationConfigurationReader {
                 .getResourceAsStream("DefaultProfile.json");
 
         TypeToken<HashMap<String, String>> hashMapTypeToken =
-                new TypeToken<HashMap<String, String>>() {
+                new TypeToken<>() {
                 };
 
         log.debug("Reading the default configuration profile.");

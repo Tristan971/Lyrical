@@ -20,16 +20,16 @@ package moe.tristan.Lyrical.model.integration.players.playersimpl;
 
 import com.jacob.com.Dispatch;
 import com.jacob.com.Variant;
-import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.integration.players.PlayerSong;
+import org.slf4j.Logger;
 
 /**
  * Listener class to iTunes COM events
  */
 @SuppressWarnings("unused")
-@Slf4j
 public final class iTunesCOMEvents {
     public static final iTunesCOMEvents instance = new iTunesCOMEvents();
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(iTunesCOMEvents.class);
     public static PlayerSong lastComEventSong = PlayerSong.dummyPlayerSong();
 
 

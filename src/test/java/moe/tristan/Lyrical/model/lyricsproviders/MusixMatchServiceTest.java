@@ -18,20 +18,20 @@
 
 package moe.tristan.Lyrical.model.lyricsproviders;
 
-import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.entity.Song;
 import moe.tristan.Lyrical.model.lyricsproviders.services.MusixMatchService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
 
 import static org.hamcrest.CoreMatchers.containsString;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
-@Slf4j
 public class MusixMatchServiceTest {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(MusixMatchServiceTest.class);
     private MusixMatchService service;
 
     @Before

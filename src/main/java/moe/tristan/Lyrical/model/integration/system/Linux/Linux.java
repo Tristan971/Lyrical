@@ -1,7 +1,7 @@
 package moe.tristan.Lyrical.model.integration.system.Linux;
 
-import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
+import org.slf4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,16 +11,16 @@ import java.io.InputStreamReader;
  * Created by tristan9 on 11/7/16.
  */
 
-@Slf4j
 public class Linux implements OperatingSystem {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Linux.class);
     private static Linux INSTANCE = null;
-
-    public static Linux getInstance() {
-        return INSTANCE == null ? new Linux() : INSTANCE;
-    }
 
     private Linux() {
         INSTANCE = this;
+    }
+
+    public static Linux getInstance() {
+        return INSTANCE == null ? new Linux() : INSTANCE;
     }
 
     @Override

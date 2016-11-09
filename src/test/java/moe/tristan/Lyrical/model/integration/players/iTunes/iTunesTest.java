@@ -18,17 +18,18 @@
 
 package moe.tristan.Lyrical.model.integration.players.iTunes;
 
-import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.integration.players.playersimpl.iTunes;
 import moe.tristan.Lyrical.model.integration.system.SystemUtilities;
 import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
 import org.junit.Test;
+import org.slf4j.Logger;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
-@Slf4j
 public class iTunesTest {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(iTunesTest.class);
+
     @Test
     public void getSong_macOS() throws Exception {
         if (SystemUtilities.CURRENT_PLATFORM instanceof macOS) {

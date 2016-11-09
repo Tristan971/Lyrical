@@ -18,11 +18,11 @@
 
 package moe.tristan.Lyrical.model.lyricsproviders;
 
-import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.entity.Song;
 import moe.tristan.Lyrical.model.lyricsproviders.services.DummyService;
 import moe.tristan.Lyrical.model.reflection.ReflectionUtils;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -33,9 +33,9 @@ import java.util.stream.Collectors;
 /**
  * Created by Tristan Deloche on 08/07/2016.
  */
-@Slf4j
 public final class LyricsServicesManager {
     private static final LyricsServicesManager instance = new LyricsServicesManager();
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(LyricsServicesManager.class);
 
     private final Set<Service> registeredServices = new HashSet<>();
 

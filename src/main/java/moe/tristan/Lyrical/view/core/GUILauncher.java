@@ -25,7 +25,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.Main;
 import moe.tristan.Lyrical.model.integration.players.playersimpl.iTunes;
 import moe.tristan.Lyrical.model.integration.system.Linux.Linux;
@@ -36,6 +35,7 @@ import moe.tristan.Lyrical.model.monitoring.PlayerMonitorService;
 import moe.tristan.Lyrical.view.system.SystemTrayUtils;
 import moe.tristan.Lyrical.view.views.Errors;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -44,8 +44,9 @@ import java.util.Arrays;
  * Created by Tristan Deloche on 09/07/2016.
  */
 
-@Slf4j
 public class GUILauncher extends Application {
+
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(GUILauncher.class);
 
     public static void main(String... args) {
         initAWT();
@@ -76,10 +77,8 @@ public class GUILauncher extends Application {
     private static double getRuntimeVersion() {
         String[] version = System.getProperty("java.version").split("\\.");
         boolean isDecNotation =
-                !Arrays.stream(version)
-                        .filter(s -> !s.matches("[0-9]"))
-                        .findAny()
-                        .isPresent();
+                Arrays.stream(version)
+                        .allMatch(s -> s.matches("[0-9]"));
 
         String formatted =
                 isDecNotation ?
@@ -125,7 +124,7 @@ public class GUILauncher extends Application {
 
     @Override
     public void start(@NotNull Stage primaryStage) throws Exception {
-        initHighDPILinuxCheck();
+        //initHighDPILinuxCheck();
         LyricsServicesManager.registerService(MusixMatchService.class);
         PlayerMonitorService.startMonitoringPlayer(iTunes.class);
         genericStart(primaryStage);

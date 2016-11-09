@@ -19,8 +19,6 @@
 package moe.tristan.Lyrical.model.integration.players.playersimpl;
 
 import com.jacob.com.ComThread;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.model.integration.players.PlayerSong;
 import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
@@ -30,6 +28,7 @@ import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
 import moe.tristan.Lyrical.model.monitoring.PlayerMonitorService;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -39,9 +38,8 @@ import java.util.Set;
  * Service class managing the iTunes player
  */
 @SuppressWarnings("WeakerAccess")
-@Slf4j
-@Data
 public final class iTunes implements Player {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(iTunes.class);
     private final String name = "iTunes";
     private final Set<OperatingSystem> supportedOperatingSystems =
             new HashSet<>(
@@ -51,6 +49,9 @@ public final class iTunes implements Player {
                     )
             );
     private boolean isMonitoring = false;
+
+    public iTunes() {
+    }
 
     @NotNull
     public static PlayerSong getSong_macOS() {
@@ -144,6 +145,48 @@ public final class iTunes implements Player {
     @Override
     public boolean isMonitoring() {
         return isMonitoring;
+    }
+
+    public void setMonitoring(boolean isMonitoring) {
+        this.isMonitoring = isMonitoring;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Set<OperatingSystem> getSupportedOperatingSystems() {
+        return this.supportedOperatingSystems;
+    }
+
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof iTunes)) return false;
+        final iTunes other = (iTunes) o;
+        final Object this$name = this.getName();
+        final Object other$name = other.getName();
+        if (this$name == null ? other$name != null : !this$name.equals(other$name)) return false;
+        final Object this$supportedOperatingSystems = this.getSupportedOperatingSystems();
+        final Object other$supportedOperatingSystems = other.getSupportedOperatingSystems();
+        return (this$supportedOperatingSystems == null ?
+                other$supportedOperatingSystems == null :
+                this$supportedOperatingSystems.equals(other$supportedOperatingSystems))
+                && this.isMonitoring() == other.isMonitoring();
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $name = this.getName();
+        result = result * PRIME + ($name == null ? 43 : $name.hashCode());
+        final Object $supportedOperatingSystems = this.getSupportedOperatingSystems();
+        result = result * PRIME + ($supportedOperatingSystems == null ? 43 : $supportedOperatingSystems.hashCode());
+        result = result * PRIME + (this.isMonitoring() ? 79 : 97);
+        return result;
+    }
+
+    public String toString() {
+        return "moe.tristan.Lyrical.model.integration.players.playersimpl.iTunes(name=" + this.getName() + ", supportedOperatingSystems=" + this.getSupportedOperatingSystems() + ", isMonitoring=" + this.isMonitoring() + ")";
     }
 }
 

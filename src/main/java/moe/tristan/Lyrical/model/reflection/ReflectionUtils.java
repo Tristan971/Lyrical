@@ -18,7 +18,7 @@
 
 package moe.tristan.Lyrical.model.reflection;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -26,8 +26,9 @@ import java.lang.reflect.InvocationTargetException;
  * Created by tristan9 on 11/7/16.
  */
 
-@Slf4j
 public final class ReflectionUtils {
+
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(ReflectionUtils.class);
 
     public static <S extends Reflectable> S newInstanceOfService(Class<S> serviceClass) {
         try {

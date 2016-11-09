@@ -18,16 +18,12 @@
 
 package moe.tristan.Lyrical.model.entity;
 
-import lombok.Builder;
-import lombok.Data;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by Tristan Deloche on 05/07/2016.
  */
-@Builder
-@Data
 public final class Song {
     @NotNull
     private final String title;
@@ -39,6 +35,13 @@ public final class Song {
     @NotNull
     private final String lyrics;
 
+    Song(@NotNull String title, @NotNull String artist, @NotNull String album, @NotNull String lyrics) {
+        this.title = title;
+        this.artist = artist;
+        this.album = album;
+        this.lyrics = lyrics;
+    }
+
     @Contract(" -> !null")
     public static Song emptySong() {
         return Song.builder()
@@ -47,5 +50,100 @@ public final class Song {
                 .album("")
                 .lyrics("")
                 .build();
+    }
+
+    public static SongBuilder builder() {
+        return new SongBuilder();
+    }
+
+    public @NotNull String getTitle() {
+        return this.title;
+    }
+
+    public @NotNull String getArtist() {
+        return this.artist;
+    }
+
+    @NotNull
+    private String getAlbum() {
+        return this.album;
+    }
+
+    public @NotNull String getLyrics() {
+        return this.lyrics;
+    }
+
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Song)) return false;
+        final Song other = (Song) o;
+        final Object this$title = this.getTitle();
+        final Object other$title = other.getTitle();
+        if (!this$title.equals(other$title)) return false;
+        final Object this$artist = this.getArtist();
+        final Object other$artist = other.getArtist();
+        if (!this$artist.equals(other$artist)) return false;
+        final Object this$album = this.getAlbum();
+        final Object other$album = other.getAlbum();
+        if (!this$album.equals(other$album)) return false;
+        final Object this$lyrics = this.getLyrics();
+        final Object other$lyrics = other.getLyrics();
+        return this$lyrics.equals(other$lyrics);
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $title = this.getTitle();
+        result = result * PRIME + $title.hashCode();
+        final Object $artist = this.getArtist();
+        result = result * PRIME + $artist.hashCode();
+        final Object $album = this.getAlbum();
+        result = result * PRIME + $album.hashCode();
+        final Object $lyrics = this.getLyrics();
+        result = result * PRIME + $lyrics.hashCode();
+        return result;
+    }
+
+    public String toString() {
+        return "moe.tristan.Lyrical.model.entity.Song(title=" + this.getTitle() + ", artist=" + this.getArtist() + ", album=" + this.getAlbum() + ", lyrics=" + this.getLyrics() + ")";
+    }
+
+    public static class SongBuilder {
+        private @NotNull String title = "";
+        private @NotNull String artist = "";
+        private @NotNull String album = "";
+        private @NotNull String lyrics = "";
+
+        SongBuilder() {
+        }
+
+        public Song.SongBuilder title(@NotNull String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Song.SongBuilder artist(@NotNull String artist) {
+            this.artist = artist;
+            return this;
+        }
+
+        public Song.SongBuilder album(@NotNull String album) {
+            this.album = album;
+            return this;
+        }
+
+        public Song.SongBuilder lyrics(@NotNull String lyrics) {
+            this.lyrics = lyrics;
+            return this;
+        }
+
+        public Song build() {
+            return new Song(title, artist, album, lyrics);
+        }
+
+        public String toString() {
+            return "moe.tristan.Lyrical.model.entity.Song.SongBuilder(title=" + this.title + ", artist=" + this.artist + ", album=" + this.album + ", lyrics=" + this.lyrics + ")";
+        }
     }
 }

@@ -18,24 +18,22 @@
 
 package moe.tristan.Lyrical;
 
-import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.view.core.GUILauncher;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
 import java.util.Arrays;
 
 /**
- * Created by Tristan Deloche on 05/07/2016.
+ * Main class
  */
-@Slf4j
 public final class Main {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Main.class);
     public static boolean DEV_MODE = false;
 
     public static void main(@NotNull String... args) {
         DEV_MODE = Arrays.stream(args)
-                .filter(s -> s.equals("DEV"))
-                .findAny()
-                .isPresent();
+                .anyMatch(s -> s.equals("DEV"));
         if (DEV_MODE) {
             log.debug("Developer mode enabled.");
         }

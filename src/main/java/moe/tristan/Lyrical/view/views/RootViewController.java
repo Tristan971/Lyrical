@@ -18,20 +18,15 @@
 
 package moe.tristan.Lyrical.view.views;
 
-import com.sun.javafx.scene.control.skin.Utils;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.OverrunStyle;
-import javafx.scene.text.Font;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import moe.tristan.Lyrical.view.UIBridge;
 import org.jetbrains.annotations.NotNull;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
@@ -53,28 +48,30 @@ public class RootViewController {
     }
 
     private static String computeClippedText(Text text) {
-        try {
-            Method computeClippedTextImpl = Utils.class.getDeclaredMethod(
-                    "computeClippedText",
-                    Font.class,
-                    String.class,
-                    double.class,
-                    OverrunStyle.class,
-                    String.class
-            );
-            computeClippedTextImpl.setAccessible(true);
-            return (String) computeClippedTextImpl.invoke(
-                    instance,
-                    text.getFont(),
-                    text.getText(),
-                    MAXWIDTH,
-                    OverrunStyle.ELLIPSIS,
-                    "..."
-            );
-        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        text.setWrappingWidth(((Pane) text.getParent()).getMaxWidth());
         return text.getText();
+        //try {
+        //    Method computeClippedTextImpl = Utils.class.getDeclaredMethod(
+        //            "computeClippedText",
+        //            Font.class,
+        //            String.class,
+        //            double.class,
+        //            OverrunStyle.class,
+        //            String.class
+        //    );
+        //    computeClippedTextImpl.setAccessible(true);
+        //    return (String) computeClippedTextImpl.invoke(
+        //            instance,
+        //            text.getFont(),
+        //            text.getText(),
+        //            MAXWIDTH,
+        //            OverrunStyle.ELLIPSIS,
+        //            "..."
+        //    );
+        //} catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+        //    e.printStackTrace();
+        //}
+        //return text.getText();
     }
 
     private static void marqueeLongTexe(Text text) {
@@ -117,6 +114,7 @@ public class RootViewController {
     @SuppressWarnings("unused")
     public void initialize() {
         titleText.setText(UIBridge.getInstance().title.get());
+        //noinspection CodeBlock2Expr
         UIBridge.getInstance().title.addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> {
                 titleText.setText(newValue);
@@ -126,6 +124,7 @@ public class RootViewController {
             });
         });
         artistText.setText(UIBridge.getInstance().artist.get());
+        //noinspection CodeBlock2Expr
         UIBridge.getInstance().artist.addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> {
                 artistText.setText(newValue);
@@ -135,6 +134,7 @@ public class RootViewController {
             });
         });
         lyricsLabel.setText(UIBridge.getInstance().lyrics.get());
+        //noinspection CodeBlock2Expr
         UIBridge.getInstance().lyrics.addListener((observable, oldValue, newValue) -> {
             Platform.runLater(() -> lyricsLabel.setText(newValue));
         });

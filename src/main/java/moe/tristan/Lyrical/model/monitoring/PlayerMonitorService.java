@@ -18,34 +18,26 @@
 
 package moe.tristan.Lyrical.model.monitoring;
 
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.entity.Song;
 import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.model.integration.system.SystemUtilities;
 import moe.tristan.Lyrical.model.reflection.ReflectionUtils;
 import moe.tristan.Lyrical.view.UIBridge;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
 /**
  * Service class used to manage currently listened-to player.
  */
-@Slf4j
 public final class PlayerMonitorService {
     private static final PlayerMonitorService instance = new PlayerMonitorService();
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(PlayerMonitorService.class);
 
     private Monitor<Player> trackedPlayer;
 
-    @Getter
     private Song currentSong = Song.emptySong();
 
     private PlayerMonitorService() {
-    }
-
-    public static void setCurrentSong(@NotNull Song newSong) {
-        log.info("The song changed to : " + newSong.getTitle() + " - " + newSong.getArtist());
-        instance.currentSong = newSong;
-        UIBridge.getInstance().songChanged(instance.currentSong);
     }
 
     public static void startMonitoringPlayer(@NotNull Class<? extends Player> playerClass) {
@@ -78,5 +70,15 @@ public final class PlayerMonitorService {
                             " right now."
             );
         }
+    }
+
+    public Song getCurrentSong() {
+        return this.currentSong;
+    }
+
+    public static void setCurrentSong(@NotNull Song newSong) {
+        log.info("The song changed to : " + newSong.getTitle() + " - " + newSong.getArtist());
+        instance.currentSong = newSong;
+        UIBridge.getInstance().songChanged(instance.currentSong);
     }
 }

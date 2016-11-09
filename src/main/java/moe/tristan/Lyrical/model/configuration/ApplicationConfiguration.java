@@ -18,22 +18,18 @@
 
 package moe.tristan.Lyrical.model.configuration;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
 import java.util.HashMap;
 
 /**
  * Created by Tristan Deloche on 08/07/2016.
  */
-@Builder
-@Slf4j
 public final class ApplicationConfiguration {
     @NotNull
-    @Getter
     private static final ApplicationConfiguration INSTANCE;
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(ApplicationConfiguration.class);
 
     static {
         INSTANCE = readConfiguration();
@@ -53,6 +49,17 @@ public final class ApplicationConfiguration {
     @NotNull
     private static ApplicationConfiguration defaultConfiguration() {
         return ApplicationConfigurationReader.readDefaultConfiguration();
+    }
+
+    public
+    @NotNull
+    static ApplicationConfiguration getINSTANCE() {
+        return ApplicationConfiguration.INSTANCE;
+    }
+
+    @NotNull
+    public static ApplicationConfigurationBuilder builder() {
+        return new ApplicationConfigurationBuilder();
     }
 
     @NotNull
@@ -83,4 +90,27 @@ public final class ApplicationConfiguration {
     }
 
 
+    public static class ApplicationConfigurationBuilder {
+        private HashMap<String, String> configMap;
+
+        ApplicationConfigurationBuilder() {
+        }
+
+        @NotNull
+        public ApplicationConfiguration.ApplicationConfigurationBuilder configMap(HashMap<String, String> configMap) {
+            this.configMap = configMap;
+            return this;
+        }
+
+        @NotNull
+        public ApplicationConfiguration build() {
+            return new ApplicationConfiguration(configMap);
+        }
+
+        @NotNull
+        @Override
+        public String toString() {
+            return "moe.tristan.Lyrical.model.configuration.ApplicationConfiguration.ApplicationConfigurationBuilder(configMap=" + this.configMap + ")";
+        }
+    }
 }

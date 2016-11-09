@@ -18,18 +18,18 @@
 
 package moe.tristan.Lyrical.model.integration.system;
 
-import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.integration.system.macOS.macOS;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
 
 import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by Tristan Deloche on 09/07/2016.
  */
-@Slf4j
 public class macOSTest {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(macOSTest.class);
     private macOS macOSInstance;
 
     @Before

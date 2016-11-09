@@ -21,32 +21,60 @@ package moe.tristan.Lyrical.model.integration.system.Windows;
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.Dispatch;
 import com.jacob.com.DispatchEvents;
-import lombok.Data;
 import moe.tristan.Lyrical.model.integration.system.OperatingSystem;
 
 /**
  * Class modeling a Windows NT platform.
  * It provides platform-dependant functionnalities.
  */
-@Data
 public class WindowsNT implements OperatingSystem {
     private static WindowsNT INSTANCE = null;
-
-    public static WindowsNT getInstance() {
-        return INSTANCE == null ? new WindowsNT() : INSTANCE;
-    }
+    private final String name = "Windows";
 
     private WindowsNT() {
         INSTANCE = this;
     }
 
-    private final String name = "Windows";
+    public static WindowsNT getInstance() {
+        return INSTANCE == null ? new WindowsNT() : INSTANCE;
+    }
 
-    public static void initJacobEvents(String identifier, Object sink) {
+    public static void initJacobEvents(@SuppressWarnings("SameParameterValue") String identifier, Object sink) {
         ActiveXComponent activeXComponent = new ActiveXComponent(identifier);
         Dispatch controller = activeXComponent.getObject();
+
         //The controller automagically binds to this somehow idk
-        //noinspection unused,UnusedAssignment
+        @SuppressWarnings("unused")
         DispatchEvents COMDispatchEvents = new DispatchEvents(controller, sink);
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof WindowsNT)) return false;
+        final WindowsNT other = (WindowsNT) o;
+        if (!other.canEqual(this)) return false;
+        final Object this$name = this.getName();
+        final Object other$name = other.getName();
+        return this$name == null ? other$name == null : this$name.equals(other$name);
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $name = this.getName();
+        result = result * PRIME + ($name == null ? 43 : $name.hashCode());
+        return result;
+    }
+
+    private boolean canEqual(Object other) {
+        return other instanceof WindowsNT;
+    }
+
+    public String toString() {
+        return "moe.tristan.Lyrical.model.integration.system.Windows.WindowsNT(name=" + this.getName() + ")";
     }
 }

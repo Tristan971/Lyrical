@@ -18,14 +18,13 @@
 
 package moe.tristan.Lyrical.model.monitoring;
 
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import moe.tristan.Lyrical.model.entity.Song;
 import moe.tristan.Lyrical.model.integration.players.Player;
 import moe.tristan.Lyrical.model.integration.players.PlayerSong;
 import moe.tristan.Lyrical.model.lyricsproviders.LyricsServicesManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -33,9 +32,8 @@ import java.util.TimerTask;
 /**
  * This class acts as a decorator for Player monitoring
  */
-@Slf4j
 public final class Monitor<T extends Player> {
-    @Getter
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Monitor.class);
     private final Class<? extends Player> currentClass;
     private final T monitoredPlayer;
     private boolean shouldMonitor = false;
@@ -95,5 +93,9 @@ public final class Monitor<T extends Player> {
 
     public Class<? extends Player> getMonitoredPlayer() {
         return monitoredPlayer.getClass();
+    }
+
+    public Class<? extends Player> getCurrentClass() {
+        return this.currentClass;
     }
 }

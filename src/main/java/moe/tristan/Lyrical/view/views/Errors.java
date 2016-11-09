@@ -22,15 +22,17 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 
 /**
  * Created by tristan9 on 11/6/16.
  */
 
-@Slf4j
 public class Errors {
-    public static void alertWarning(String cause, String message) {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Errors.class);
+
+    @SuppressWarnings("WeakerAccess")
+    public static void alertWarning(@SuppressWarnings("SameParameterValue") String cause, String message) {
         final ErrorPane errorPane = new ErrorPane(cause, message);
         final Stage stage = new Stage(StageStyle.UTILITY);
         final Scene scene = new Scene(errorPane);

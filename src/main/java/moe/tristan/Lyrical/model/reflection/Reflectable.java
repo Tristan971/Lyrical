@@ -22,4 +22,5 @@ package moe.tristan.Lyrical.model.reflection;
  * Created by tristan9 on 11/7/16.
  */
 public interface Reflectable {
+
 }

@@ -18,15 +18,12 @@
 
 package moe.tristan.Lyrical.view.views;
 
-import lombok.Data;
-
 import java.awt.*;
 
 /**
  * Created by tristan9 on 11/7/16.
  */
 
-@Data
 public class ScalingTools {
     private static ScalingTools instance = null;
 
@@ -51,5 +48,35 @@ public class ScalingTools {
 
     public double getPercentHeigth(double percentage) {
         return gd.getDisplayMode().getHeight() * percentage;
+    }
+
+    private GraphicsDevice getGd() {
+        return this.gd;
+    }
+
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof ScalingTools)) return false;
+        final ScalingTools other = (ScalingTools) o;
+        if (!other.canEqual(this)) return false;
+        final Object this$gd = this.getGd();
+        final Object other$gd = other.getGd();
+        return this$gd == null ? other$gd == null : this$gd.equals(other$gd);
+    }
+
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final Object $gd = this.getGd();
+        result = result * PRIME + ($gd == null ? 43 : $gd.hashCode());
+        return result;
+    }
+
+    private boolean canEqual(Object other) {
+        return other instanceof ScalingTools;
+    }
+
+    public String toString() {
+        return "moe.tristan.Lyrical.view.views.ScalingTools(gd=" + this.getGd() + ")";
     }
 }
