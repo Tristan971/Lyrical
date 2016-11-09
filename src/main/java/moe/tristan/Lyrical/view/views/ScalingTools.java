@@ -27,12 +27,17 @@ import org.slf4j.Logger;
  */
 @SuppressWarnings("WeakerAccess")
 public class ScalingTools {
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(ScalingTools.class);
+    private static final Logger log;
     private static double scalingMultiplier = 0;
+
+    static {
+        log = org.slf4j.LoggerFactory.getLogger(ScalingTools.class);
+    }
 
     public static double getScalingMultiplier() {
         if (scalingMultiplier == 0) {
             scalingMultiplier = Screen.getPrimary().getDpi() / 96.0;
+            log.debug("Detected mainScreen with : " + scalingMultiplier * 96.0 + " DPI. Scaling factor : " + scalingMultiplier);
         }
         return scalingMultiplier;
     }

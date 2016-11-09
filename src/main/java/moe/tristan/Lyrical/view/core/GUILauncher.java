@@ -34,6 +34,7 @@ import moe.tristan.Lyrical.model.lyricsproviders.services.MusixMatchService;
 import moe.tristan.Lyrical.model.monitoring.PlayerMonitorService;
 import moe.tristan.Lyrical.view.system.SystemTrayUtils;
 import moe.tristan.Lyrical.view.views.Errors;
+import moe.tristan.Lyrical.view.views.ScalingTools;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
@@ -120,11 +121,15 @@ public class GUILauncher extends Application {
         if (java.awt.SystemTray.isSupported()) {
             SystemTrayUtils.initTrayIconWithStage(primaryStage);
         }
+
+        ScalingTools.getScalingMultiplier();
+
     }
 
     @Override
     public void start(@NotNull Stage primaryStage) throws Exception {
         //initHighDPILinuxCheck();
+
         LyricsServicesManager.registerService(MusixMatchService.class);
         PlayerMonitorService.startMonitoringPlayer(iTunes.class);
         genericStart(primaryStage);
