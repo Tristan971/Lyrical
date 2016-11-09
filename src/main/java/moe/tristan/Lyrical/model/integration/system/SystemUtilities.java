@@ -29,10 +29,13 @@ import org.slf4j.Logger;
  */
 public class SystemUtilities {
 
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(SystemUtilities.class);
-    @NotNull
-    public static final OperatingSystem CURRENT_PLATFORM =
-            getCurrentOperatingSystem(System.getProperty("os.name"));
+    public static final OperatingSystem CURRENT_PLATFORM;
+    private static final Logger log;
+
+    static {
+        log = org.slf4j.LoggerFactory.getLogger(SystemUtilities.class);
+        CURRENT_PLATFORM = getCurrentOperatingSystem(System.getProperty("os.name"));
+    }
 
     private static @NotNull OperatingSystem getCurrentOperatingSystem(@NotNull String platformName) {
         log.debug("Detecting current operating system" + platformName);

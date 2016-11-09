@@ -60,11 +60,11 @@ public class DummySystem implements OperatingSystem {
         return result;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public boolean canEqual(Object other) {
+    private boolean canEqual(Object other) {
         return other instanceof DummySystem;
     }
 
+    @Override
     public String toString() {
         return "moe.tristan.Lyrical.model.integration.system.DummySystem(name=" + this.getName() + ")";
     }

@@ -53,8 +53,9 @@ public final class ApplicationConfigurationReader {
                 .getClassLoader()
                 .getResourceAsStream("DefaultProfile.json");
 
+        //noinspection Convert2Diamond
         TypeToken<HashMap<String, String>> hashMapTypeToken =
-                new TypeToken<>() {
+                new TypeToken<HashMap<String, String>>() {
                 };
 
         log.debug("Reading the default configuration profile.");
