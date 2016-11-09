@@ -60,8 +60,7 @@ public class DummySystem implements OperatingSystem {
         return result;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public boolean canEqual(Object other) {
+    private boolean canEqual(Object other) {
         return other instanceof DummySystem;
     }
 
