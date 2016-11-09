@@ -18,71 +18,30 @@
 
 package moe.tristan.Lyrical.view.views;
 
-import java.awt.*;
+import javafx.stage.Screen;
+import org.slf4j.Logger;
 
 /**
- * Created by tristan9 on 11/7/16.
+ * This is intended as a utility class. Will be used once I refactor the static
+ * sizes in the code.
  */
-
+@SuppressWarnings("WeakerAccess")
 public class ScalingTools {
-    private static ScalingTools instance = null;
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(ScalingTools.class);
+    private static double scalingMultiplier = 0;
 
-    private final GraphicsDevice gd;
-
-    private ScalingTools() {
-        java.awt.Toolkit.getDefaultToolkit();
-        this.gd = GraphicsEnvironment.getLocalGraphicsEnvironment()
-                .getDefaultScreenDevice();
-    }
-
-    public static ScalingTools getScalingTools() {
-        if (instance == null) {
-            instance = new ScalingTools();
+    public static double getScalingMultiplier() {
+        if (scalingMultiplier == 0) {
+            scalingMultiplier = Screen.getPrimary().getDpi() / 96.0;
         }
-        return instance;
+        return scalingMultiplier;
     }
 
-    @SuppressWarnings("unused")
-    // For now
-    public double getScalingFactor() {
-        return 1.0;
+    public static double getScaledLength(double lengthPixels) {
+        return getScalingMultiplier() * lengthPixels;
     }
 
-    public double getPercentWidth(double percentage) {
-        return gd.getDisplayMode().getWidth() * percentage;
-    }
-
-    public double getPercentHeigth(double percentage) {
-        return gd.getDisplayMode().getHeight() * percentage;
-    }
-
-    private GraphicsDevice getGd() {
-        return this.gd;
-    }
-
-    public boolean equals(Object o) {
-        if (o == this) return true;
-        if (!(o instanceof ScalingTools)) return false;
-        final ScalingTools other = (ScalingTools) o;
-        if (!other.canEqual(this)) return false;
-        final Object this$gd = this.getGd();
-        final Object other$gd = other.getGd();
-        return this$gd == null ? other$gd == null : this$gd.equals(other$gd);
-    }
-
-    public int hashCode() {
-        final int PRIME = 59;
-        int result = 1;
-        final Object $gd = this.getGd();
-        result = result * PRIME + ($gd == null ? 43 : $gd.hashCode());
-        return result;
-    }
-
-    private boolean canEqual(Object other) {
-        return other instanceof ScalingTools;
-    }
-
-    public String toString() {
-        return "moe.tristan.Lyrical.view.views.ScalingTools(gd=" + this.getGd() + ")";
+    public static double getScaledFontSize(double fontSize) {
+        return fontSize * getScalingMultiplier();
     }
 }
