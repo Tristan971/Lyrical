@@ -42,6 +42,12 @@ public class ScalingTools {
         return instance;
     }
 
+    @SuppressWarnings("unused")
+    // For now
+    public double getScalingFactor() {
+        return 1.0;
+    }
+
     public double getPercentWidth(double percentage) {
         return gd.getDisplayMode().getWidth() * percentage;
     }
